@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   styleUrl: './login.css'
 })
 export class Login {
+  //uso de formularios reactivos
   loginForm!: FormGroup;
 
   constructor(private fb: FormBuilder, private router:Router) {
@@ -29,8 +30,8 @@ export class Login {
 
   login(){//valida que tenga datos los campos
     if(this.loginForm.valid){
-      console.log("Llamar al servicio de login");
-      this.router.navigateByUrl('/estado-cuenta')
+      //console.log("Llamar al servicio de login");
+      this.router.navigateByUrl('/dashboard') //ruta a la que se dirige el btn con la accion login()
       this.loginForm.reset();
     }else{
       this.loginForm.markAllAsTouched();

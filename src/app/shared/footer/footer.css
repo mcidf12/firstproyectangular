@@ -1,7 +1,8 @@
-footer{
-    background: gainsboro;
-    color:#333;
-    border-top:1px solid #e0e0e0;
-    box-shadow:0 -2px 8px rgba(0,0,0,.05);
+.footer {
+  font-size: 1rem;
 }
 
+.footer-link:hover {
+  text-decoration: underline;
+  color: #000 !important;
+}

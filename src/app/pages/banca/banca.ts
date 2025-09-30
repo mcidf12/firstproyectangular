@@ -1,11 +1,21 @@
 import { Component } from '@angular/core';
+import { Dashboard } from '../dashboard/dashboard';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-banca',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './banca.html',
   styleUrl: './banca.css'
 })
 export class Banca {
+
+  constructor( private router:Router) {
+    
+  }
+
+  back(){
+      this.router.navigateByUrl('/dashboard');
+  }
 
 }
