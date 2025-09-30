@@ -1,0 +1,40 @@
+import { Component } from '@angular/core';
+import { NgIf } from '@angular/common'; 
+import { FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+@Component({
+  selector: 'app-login',
+  imports: [ReactiveFormsModule, NgIf],
+  templateUrl: './login.html',
+  styleUrl: './login.css'
+})
+export class Login {
+  loginForm!: FormGroup;
+
+  constructor(private fb: FormBuilder, private router:Router) {
+    this.loginForm = this.fb.group({
+      email: ['',[Validators.required, Validators.email]],
+      password: ['', Validators.required],
+    })
+  }
+
+  get email(){
+    return this.loginForm.controls['email'];
+  }
+
+  get password(){
+    return this.loginForm.controls['password'];
+  }
+
+
+  login(){//valida que tenga datos los campos
+    if(this.loginForm.valid){
+      console.log("Llamar al servicio de login");
+      this.router.navigateByUrl('/estado-cuenta')
+      this.loginForm.reset();
+    }else{
+      this.loginForm.markAllAsTouched();
+      alert("error al ingresar los datos");
+    }
+  }
+}
