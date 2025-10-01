@@ -2,10 +2,25 @@
   <img src="https://emenet.mx/assets/emenetLogoN.png" alt="Logo" height="100" class="mb-3 opacity-75">
 
   <div class="auth-card shadow-lg p-4 p-sm-5">
-    <h3 class="text-center fw-bold mb-1">¡Bienvenido!</h3>
-    <p class="text-center text-muted mb-4">Inicia sesión para continuar</p>
+    <h4 class="text-center fw-bold mb-1">¡Bienvenido!</h4>
+    <p class="text-center text-muted mb-4">Crear Cuenta</p>
 
         <form [formGroup]="loginForm" >
+
+            <div class="mb-3">
+            <label for="exampleInputName1" class="form-label fw-semibold">Nombre</label>
+            <input formControlName="name" type="text" class="form-control" id="exampleInputName1" placeholder="Nombre" >
+
+            <div *ngIf="name.invalid && (name.dirty || name.touched)"
+                 class="mt-2 small text-danger">
+
+                <div *ngIf="name.errors?.['required']">
+                  Nombre requerido
+                </div>            
+            </div>
+
+          </div>
+
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label fw-semibold">Email</label>
             <input formControlName="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="correo@dominio.com" aria-describedby="emailHelp">
@@ -20,7 +35,7 @@
                   Email debe tener formato valido 
                 </div>
               </div>
-          </div>
+          </div>          
 
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label fw-semibold">Password</label>
@@ -35,13 +50,11 @@
             </div>
 
             <div class="d-flex justify-content-between mb-4">
-              <a routerLink="/crear-cuenta" class="text-muted text-decoration-none">Crear cuenta</a>
-              <a href="#" class="text-muted text-decoration-none">¿Olvidaste tu contraseña?</a>
+              <a routerLink="/iniciar-sesion" class="text-muted text-decoration-none">¿Ya tienes cuenta?</a>
             </div>
 
-
           </div>
-          <button type="submit" (click)="login()" class="btn btn-secondary btn-lg w-100">Iniciar</button>
+          <button type="submit" (click)="register()" class="btn btn-primary btn-lg w-100">registrarse</button>
         </form>
   </div>
 </div>

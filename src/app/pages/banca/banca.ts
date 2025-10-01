@@ -10,12 +10,5 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class Banca {
 
-  constructor( private router:Router) {
-    
-  }
-
-  back(){
-      this.router.navigateByUrl('/dashboard');
-  }
 
 }

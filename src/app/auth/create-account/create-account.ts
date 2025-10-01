@@ -2,21 +2,26 @@ import { Component } from '@angular/core';
 import { NgIf } from '@angular/common'; 
 import { FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+
 @Component({
-  selector: 'app-login',
+  selector: 'app-create-account',
   imports: [ReactiveFormsModule, NgIf, RouterLink],
-  templateUrl: './login.html',
-  styleUrl: './login.css'
+  templateUrl: './create-account.html',
+  styleUrl: './create-account.css'
 })
-export class Login {
-  //uso de formularios reactivos
+export class CreateAccount {
   loginForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private router:Router) {
+   constructor(private fb: FormBuilder, private router:Router) {
     this.loginForm = this.fb.group({
+      name: [' ',[Validators.required, Validators.minLength(3)]],
       email: ['',[Validators.required, Validators.email]],
       password: ['', Validators.required],
     })
+  }
+
+  get name(){
+    return this.loginForm.controls['name'];
   }
 
   get email(){
@@ -27,10 +32,9 @@ export class Login {
     return this.loginForm.controls['password'];
   }
 
-
-  login(){//valida que tenga datos los campos
+  register(){//valida que tenga datos los campos
     if(this.loginForm.valid){
-      //console.log("Llamar al servicio de login");
+      console.log("Llamar al servicio de register");
       this.router.navigateByUrl('/dashboard') //ruta a la que se dirige el btn con la accion login()
       this.loginForm.reset();
     }else{
@@ -38,4 +42,6 @@ export class Login {
       alert("error al ingresar los datos");
     }
   }
+
+
 }
