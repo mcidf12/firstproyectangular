@@ -2,17 +2,23 @@ import { Component } from '@angular/core';
 import { NgIf } from '@angular/common'; 
 import { FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { LoginS } from '../../services/auth/login';
+
 @Component({
   selector: 'app-login',
+  standalone: true,
   imports: [ReactiveFormsModule, NgIf, RouterLink],
   templateUrl: './login.html',
   styleUrl: './login.css'
 })
+
+
 export class Login {
   //uso de formularios reactivos
   loginForm!: FormGroup;
+   error = '';
 
-  constructor(private fb: FormBuilder, private router:Router) {
+  constructor(private fb: FormBuilder, private router:Router, private api:LoginS) {
     this.loginForm = this.fb.group({
       email: ['',[Validators.required, Validators.email]],
       password: ['',[Validators.required, Validators.minLength(8)]],
@@ -28,14 +34,17 @@ export class Login {
   }
 
 
-  login(){//valida que tenga datos los campos
-    if(this.loginForm.valid){
-      //console.log("Llamar al servicio de login");
-      this.router.navigateByUrl('/dashboard') //ruta a la que se dirige el btn con la accion login()
-      this.loginForm.reset();
-    }else{
-      this.loginForm.markAllAsTouched();
-      alert("error al ingresar los datos");
-    }
+  login(){
+    if (this.loginForm.invalid) { this.loginForm.markAllAsTouched(); return; }
+
+    this.api.login(this.loginForm.value).subscribe({
+      next: (res) => {
+        this.router.navigateByUrl('/dashboard');
+        this.loginForm.reset();
+      },
+      error: (e) => {
+        this.error = e?.error?.message ?? 'Error al iniciar sesión';
+      }
+    });
   }
 }

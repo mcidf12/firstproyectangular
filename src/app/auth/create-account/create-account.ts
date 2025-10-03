@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { NgIf } from '@angular/common'; 
 import { FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { LoginS } from '../../services/auth/login';
+
+
 
 @Component({
   selector: 'app-create-account',
@@ -9,10 +12,13 @@ import { Router, RouterLink } from '@angular/router';
   templateUrl: './create-account.html',
   styleUrl: './create-account.css'
 })
+
+
 export class CreateAccount {
   createForm!: FormGroup;
+  error = '';
 
-   constructor(private fb: FormBuilder, private router:Router) {
+   constructor(private fb: FormBuilder, private router:Router, private api: LoginS) {
     this.createForm = this.fb.group({
       name: ['',[Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-Z ]*')]],
       lastName: ['',[Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-Z ]*')]],
@@ -21,12 +27,13 @@ export class CreateAccount {
     })
   }
 
-  get lastName(){
-    return this.createForm.controls['lastName'];
-  }
 
   get name(){
     return this.createForm.controls['name'];
+  }
+
+    get lastName(){
+    return this.createForm.controls['lastName'];
   }
 
   get email(){
@@ -37,16 +44,26 @@ export class CreateAccount {
     return this.createForm.controls['password'];
   }
 
-  register(){//valida que tenga datos los campos
-    if(this.createForm.valid){
-      console.log("Llamar al servicio de register");
-      this.router.navigateByUrl('/dashboard') //ruta a la que se dirige el btn con la accion login()
-      this.createForm.reset();
-    }else{
-      this.createForm.markAllAsTouched();
-      alert("error al ingresar los datos");
-    }
-  }
+  register(){
+    if (this.createForm.invalid) { this.createForm.markAllAsTouched(); return; }
 
+    // Mapear lastName -> last_name (Laravel)
+    const payload = {
+      name: this.createForm.value.name,
+      last_name: this.createForm.value.lastName,
+      email: this.createForm.value.email,
+      password: this.createForm.value.password,
+    };
+
+    this.api.register(payload as any).subscribe({
+      next: () => {
+        this.router.navigateByUrl('/dashboard');
+        this.createForm.reset();
+      },
+      error: (e) => {
+        this.error = e?.error?.message ?? 'No se pudo crear la cuenta';
+      }
+    });
+  }
 
 }

@@ -5,7 +5,7 @@
     <h3 class="text-center fw-bold mb-1">¡Bienvenido!</h3>
     <p class="text-center text-muted mb-4">Inicia sesión para continuar</p>
 
-        <form [formGroup]="loginForm" >
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label fw-semibold">Email</label>
             <input formControlName="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="correo@dominio.com" aria-describedby="emailHelp">
@@ -44,7 +44,7 @@
 
 
           </div>
-          <button type="submit" (click)="login()" class="btn btn-secondary btn-lg w-100">Iniciar</button>
+          <button type="submit" class="btn btn-secondary btn-lg w-100">Iniciar sesion</button>
         </form>
   </div>
 </div>

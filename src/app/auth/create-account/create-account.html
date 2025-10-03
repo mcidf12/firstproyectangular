@@ -5,7 +5,7 @@
     <h4 class="text-center fw-bold mb-1">¡Bienvenido!</h4>
     <p class="text-center text-muted mb-4">Crear Cuenta</p>
 
-        <form [formGroup]="createForm" >
+        <form [formGroup]="createForm" (ngSubmit)="register()" >
 
           <div class="mb-3">
             <label for="exampleInputName1" class="form-label fw-semibold">Nombre</label>
@@ -75,7 +75,7 @@
             </div>
 
           </div>
-          <button type="submit" (click)="register()" class="btn btn-primary btn-lg w-100">registrarse</button>
+          <button type="submit" class="btn btn-primary btn-lg w-100">registrarse</button>
         </form>
   </div>
 </div>

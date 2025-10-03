@@ -5,6 +5,7 @@ import { Dashboard } from './pages/dashboard/dashboard';
 import { Header } from './shared/header/header';
 import { ReactiveFormsModule } from '@angular/forms';
 
+
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, Footer, Header, ReactiveFormsModule],
