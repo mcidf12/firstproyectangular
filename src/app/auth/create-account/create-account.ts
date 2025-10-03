@@ -47,7 +47,7 @@ export class CreateAccount {
   register(){
     if (this.createForm.invalid) { this.createForm.markAllAsTouched(); return; }
 
-    // Mapear lastName -> last_name (Laravel)
+    //Formulario
     const payload = {
       name: this.createForm.value.name,
       last_name: this.createForm.value.lastName,
@@ -57,7 +57,7 @@ export class CreateAccount {
 
     this.api.register(payload as any).subscribe({
       next: () => {
-        this.router.navigateByUrl('/dashboard');
+        this.router.navigateByUrl('/iniciar-sesion');
         this.createForm.reset();
       },
       error: (e) => {

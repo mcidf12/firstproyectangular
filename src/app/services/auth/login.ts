@@ -17,7 +17,7 @@ export class LoginS {
   //Login post
   login(credentials:LoginRequest):Observable<any>{
     //console.log(credentials);
-    return this.http.post<any>('http://localhost:8000/api/login', credentials);
+    return this.http.post<any>('http://localhost:8000/api/auth/login', credentials);
     //return this.http.get('././assets/data.json')
   }
 
