@@ -39,6 +39,12 @@ export class Login {
 
     this.api.login(this.loginForm.value).subscribe({
       next: (res) => {
+        const token = res?.token;
+        if (token) {
+          localStorage.setItem('authToken', token);
+          console.log('Token usado en la request:', token);
+
+        }
         this.router.navigateByUrl('/dashboard');
         this.loginForm.reset();
       },
