@@ -10,34 +10,35 @@ import { LoginS } from '../../services/auth/login';
   styleUrl: './dashboard.css'
 })
 export class Dashboard {
-  isLogin=false;
+  isLogin = false;
   username = 'Marcos'
-  error='';
+  error = '';
 
-  constructor( private router:Router, private api:LoginS) {
-   
+  constructor(private router: Router, private api: LoginS) {
+
   }
 
- logout(): void {
-  console.log('Token actual antes de logout:', localStorage.getItem('authToken'));
-  this.api.logout().subscribe({
-  next: res => {
-    console.log('Logout exitoso');
-    this.api.clearToken();
-    this.router.navigate(['/iniciar-sesion']);
-  },
-  error: err => {
-    if (err.status === 401) {
-      console.warn('Token inválido o expirado');
-      this.api.clearToken();
-      this.router.navigate(['/iniciar-sesion']);
-    }
+  logout() {
+    //console.log('Tokeantes logout:', localStorage.getItem('authToken'));
+    this.api.logout().subscribe({
+      next: () => {
+        console.log('Logout exitoso');
+        this.api.clearToken();
+        //this.router.navigateByUrl('/iniciar-sesion')
+        this.router.navigate(['/iniciar-sesion']);
+      },
+      error: err => {
+        if (err.status === 401) {
+          console.warn('Token inválido o expirado');
+          this.api.clearToken();
+          //this.router.navigateByUrl('/iniciar-sesion')
+          this.router.navigate(['/iniciar-sesion']);
+        }else {
+          console.error('Error en logout:', err);
+          this.api.clearToken();
+          this.router.navigate(['/iniciar-sesion']);
+        }
+      }
+    });
   }
-});
-}
-
-
-
-
-
 }
