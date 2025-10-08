@@ -5,11 +5,22 @@ import { Banca } from './pages/banca/banca';
 import { CreateAccount } from './auth/create-account/create-account';
 import { Recover } from './auth/recover/recover';
 
+import { requireAuthGuard } from './auth/require-auth-guard';
+import { onlyGuestsGuard } from './auth/only-guests-guard';
+
+
 export const routes: Routes = [
     {path:'',redirectTo:'/iniciar-sesion', pathMatch:'full' },    //si no coinicide con ninguna ruta regresa al inicio de sesion
-    {path:'iniciar-sesion', component:Login},
-    {path:'estado-cuenta', component:Banca},
-    {path:'dashboard', component:Dashboard},
-    {path:'crear-cuenta', component:CreateAccount},
-    {path:'recuperar-password', component:Recover},
+    
+  { path: 'iniciar-sesion', component: Login, canActivate: [onlyGuestsGuard] },
+  { path: 'crear-cuenta', component: CreateAccount, canActivate: [onlyGuestsGuard] },
+  { path: 'recuperar-password', component: Recover, canActivate: [onlyGuestsGuard] },
+
+  // Requieren login
+  { path: 'dashboard', component: Dashboard, canActivate: [requireAuthGuard] },
+  { path: 'estado-cuenta', component: Banca, canActivate: [requireAuthGuard] },
+
+  
+  { path: '**', redirectTo: '/iniciar-sesion' }
+    
 ];

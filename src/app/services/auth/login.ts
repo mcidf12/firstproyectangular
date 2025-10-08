@@ -15,13 +15,6 @@ export class LoginS {
   private getToken(): string | null {
     return localStorage.getItem('authToken');
   }
-
-  /*getHeaders(): HttpHeaders {
-    const token = this.getToken();
-    return new HttpHeaders()
-      .set('Authorization', `Bearer ${token}`)
-      .set('Accept', 'application/json')
-  }*/
   getHeaders(): HttpHeaders {
     const token = this.getToken();
     let headers = new HttpHeaders().set('Accept', 'application/json');

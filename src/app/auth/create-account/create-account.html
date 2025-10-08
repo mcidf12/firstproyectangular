@@ -8,8 +8,8 @@
         <form [formGroup]="createForm" (ngSubmit)="register()" >
 
           <div class="mb-3">
-            <label for="exampleInputName1" class="form-label fw-semibold">Nombre</label>
-            <input formControlName="name" type="text" class="form-control" id="exampleInputName1" placeholder="Nombre" >
+            <label for="InputName1" class="form-label fw-semibold">Nombre</label>
+            <input formControlName="name" type="text" class="form-control" id="InputName1" placeholder="Nombre" >
 
             <div *ngIf="name.invalid && (name.dirty || name.touched)"
                  class="mt-2 small text-danger">
@@ -24,8 +24,8 @@
           </div>
 
           <div class="mb-3">
-            <label for="exampleInputLastName1" class="form-label fw-semibold">Apellidos</label>
-            <input formControlName="lastName" type="text" class="form-control" id="exampleInputName1" placeholder="Apellidos" >
+            <label for="InputLastName1" class="form-label fw-semibold">Apellidos</label>
+            <input formControlName="lastName" type="text" class="form-control" id="InputLastName1" placeholder="Apellidos" >
    
                 <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)"
                  class="mt-2 small text-danger">
@@ -40,8 +40,8 @@
           </div>
 
           <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label fw-semibold">Email</label>
-            <input formControlName="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="correo@dominio.com" aria-describedby="emailHelp">
+            <label for="InputEmail1" class="form-label fw-semibold">Email</label>
+            <input formControlName="email" type="email" class="form-control" id="InputEmail1" placeholder="correo@dominio.com" aria-describedby="emailHelp">
               
               <div *ngIf="email.invalid && (email.dirty || email.touched)"
                 class="mt-2 small text-danger">
@@ -56,8 +56,8 @@
           </div>          
 
           <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label fw-semibold">Password</label>
-            <input formControlName="password" type="password" class="form-control" placeholder="••••••••" id="exampleInputPassword1">
+            <label for="InputPassword1" class="form-label fw-semibold">Password</label>
+            <input formControlName="password" type="password" class="form-control" placeholder="••••••••" id="InputPassword1">
             
             <div *ngIf="password.invalid && (password.dirty || password.touched)"
                  class="mt-2 small text-danger">
