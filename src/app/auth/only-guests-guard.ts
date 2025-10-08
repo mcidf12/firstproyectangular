@@ -4,14 +4,7 @@ import { Router } from '@angular/router';
 
 export const onlyGuestsGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
-  if (!hasToken()) return true;
-  router.navigate(['/dashboard']);
-  return false;
-};
-
-export const onlyGuestsMatch: CanMatchFn = () => {
-  const router = inject(Router);
-  if (!hasToken()) return true;
+  if (!hasToken()) return true;  
   router.navigate(['/dashboard']);
   return false;
 };

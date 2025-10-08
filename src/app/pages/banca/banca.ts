@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
-import { Dashboard } from '../dashboard/dashboard';
 import { Router, RouterLink } from '@angular/router';
+import { NavComponent } from '../../shared/nav/nav';
 
 @Component({
   selector: 'app-banca',
-  imports: [RouterLink],
+  imports: [NavComponent],
   templateUrl: './banca.html',
   styleUrl: './banca.css'
 })
 export class Banca {
-
-
+  
 }

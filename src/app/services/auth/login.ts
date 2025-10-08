@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { LoginRequest, RegisterRequest } from './loginRequest';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
-import { HttpInterceptorFn } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +10,13 @@ import { HttpInterceptorFn } from '@angular/common/http';
 
 //servicio crea un observable que escucha la api rest
 export class LoginS {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   private getToken(): string | null {
     return localStorage.getItem('authToken');
   }
   getHeaders(): HttpHeaders {
-    const token = this.getToken();
+    const token = this.getToken(); 
     let headers = new HttpHeaders().set('Accept', 'application/json');
     if (token) headers = headers.set('Authorization', `Bearer ${token}`);
     return headers;
@@ -45,8 +45,25 @@ export class LoginS {
   }
 
 
-  getUser(): Observable<any[]> {
+  /*getUser(): Observable<any[]> {
     return this.http.get<any[]>('http://localhost:8000/api/usuarios')
+  }*/
+
+  logoutAndRedirect() {
+    this.logout().subscribe({
+      next: () => {
+        console.log('Logout exitoso');
+        this.clearToken();
+        this.router.navigate(['/iniciar-sesion']);
+      },
+      error: (err) => {
+        this.clearToken();
+        this.router.navigate(['/iniciar-sesion']);
+        if (err?.status !== 401) {
+          console.error('Error en logout:', err);
+        }
+      }
+    });
   }
 }
 

@@ -1,23 +1,8 @@
 <div class="container-fluid">
   <div class="row min-vh-100">
 
-    <!-- Barra lateral -->
     <aside class="col-12 col-md-3 col-lg-2 border-end bg-light p-0">
-      <div class="px-3 py-3 border-bottom">
-        <div class="d-flex align-items-center gap-2">
-          <!--<img src="https://emenet.mx/assets/emenetLogoN.png" alt="emenet" height="28">-->
-          <strong>Menu</strong>
-        </div>
-      </div>
-
-      <nav class="list-group list-group-flush">
-        <button routerLink="/dashboard" class="list-group-item list-group-item-action">🏠 Inicio</button>
-        <button routerLink="/estado-cuenta" class="list-group-item list-group-item-action">💳 Estado de cuenta</button>
-        <button href="#" class="list-group-item list-group-item-action">📄 Facturas</button>
-        <button href="#" class="list-group-item list-group-item-action">🛠 Soporte técnico</button>
-        <button href="#" class="list-group-item list-group-item-action">📧 Contacto</button>
-        <button (click)="logout()" class="list-group-item list-group-item-action">⏻ Cerrar Sesión</button>
-      </nav>
+      <app-nav />
     </aside>
 
     <main class="col-12 col-md-9 col-lg-10 px-3 px-lg-4 py-4">     

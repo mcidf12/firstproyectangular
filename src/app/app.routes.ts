@@ -7,6 +7,7 @@ import { Recover } from './auth/recover/recover';
 
 import { requireAuthGuard } from './auth/require-auth-guard';
 import { onlyGuestsGuard } from './auth/only-guests-guard';
+import { Client } from './pages/client/client';
 
 
 export const routes: Routes = [
@@ -19,6 +20,7 @@ export const routes: Routes = [
   // Requieren login
   { path: 'dashboard', component: Dashboard, canActivate: [requireAuthGuard] },
   { path: 'estado-cuenta', component: Banca, canActivate: [requireAuthGuard] },
+  { path: 'cliente', component: Client, canActivate: [requireAuthGuard] },
 
   
   { path: '**', redirectTo: '/iniciar-sesion' }

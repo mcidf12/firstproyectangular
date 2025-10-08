@@ -1,27 +1,16 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
-  <div class="container-fluid">
-    <a class="navbar-brand fw-bold text-uppercase" routerLink="/inicio">Portal</a>
-    
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
-            data-bs-target="#navbarNav" aria-controls="navbarNav" 
-            aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" routerLink="/inicio">Inicio</a>
-        </li>
-        @if (!isLogin) {
-          <li class="nav-item">
-              <a class="nav-link" routerLink="/iniciar-sesion" routerLinkActive="active">Iniciar sesión</a>
-        } @else {
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/inicio">Cerrar sesión</a>
-          </li>
-        }
-      </ul>
+
+  <div class="px-3 py-3 border-bottom">
+    <div class="d-flex align-items-center gap-2">
+      <!--<img src="https://emenet.mx/assets/emenetLogoN.png" alt="emenet" height="28">-->
+      <strong>Menu</strong>
     </div>
   </div>
-</nav>
+
+  <nav class="list-group list-group-flush">
+    <button routerLink="/dashboard" class="list-group-item list-group-item-action">🏠 Inicio</button>
+    <button routerLink="/estado-cuenta" class="list-group-item list-group-item-action">💳 Estado de cuenta</button>
+    <button routerLink="/cliente" class="list-group-item list-group-item-action">📄 Perfil</button>
+    <!--<button routerLink="/dashboard" class="list-group-item list-group-item-action">🛠 Soporte técnico</button>
+    <button routerLink="/dashboard" class="list-group-item list-group-item-action">📧 Contacto</button>-->
+    <button (click)="logout()" class="list-group-item list-group-item-action">⏻ Cerrar Sesión</button>
+  </nav>

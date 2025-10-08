@@ -1,116 +1,98 @@
-
-
-
 <div class="container-fluid">
   <div class="row min-vh-100">
 
-    <!-- Barra lateral -->
     <aside class="col-12 col-md-3 col-lg-2 border-end bg-light p-0">
-      <div class="px-3 py-3 border-bottom">
-        <div class="d-flex align-items-center gap-2">
-          <!--<img src="https://emenet.mx/assets/emenetLogoN.png" alt="emenet" height="28">-->
-          <strong>Menu</strong>
-        </div>
-      </div>
-
-      <nav class="list-group list-group-flush">
-        <a routerLink="/dashboard" class="list-group-item list-group-item-action">🏠 Inicio</a>
-        <a routerLink="/estado-cuenta" class="list-group-item list-group-item-action">💳 Estado de cuenta</a>
-        <a href="#" class="list-group-item list-group-item-action">📄 Facturas</a>
-        <a href="#" class="list-group-item list-group-item-action">🛠 Soporte técnico</a>
-        <a href="#" class="list-group-item list-group-item-action">📧 Contacto</a>
-        <a routerLink="/iniciar-sesion" class="list-group-item list-group-item-action">⏻ Cerrar Sesion</a>
-      </nav>
+      <app-nav />
     </aside>
 
     <main class="col-12 col-md-9 col-lg-10 px-3 px-lg-4 py-4">
       <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
         <div>
           <h2 class="fw-bold">Estado de Cuenta</h2>
-      <p class="text-muted">Consulta el resumen y movimientos de tu cuenta</p>
+          <p class="text-muted">Consulta el resumen y movimientos de tu cuenta</p>
         </div>
       </div>
 
       <div class="row g-3">
         <div class="row justify-content-center mb-5">
-    <div class="col-md-8">
-      <div class="card shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title">Resumen de la Cuenta</h5>
-          <div class="row mt-3">
-            <div class="col-md-6 mb-3">
-              <p class="mb-1 text-muted">Titular</p>
-              <h6 class="fw-semibold">Marcos</h6>
-            </div>
-            <div class="col-md-6 mb-3">
-              <p class="mb-1 text-muted">Número de cuenta</p>
-              <h6 class="fw-semibold">CP-2025-00123</h6>
-            </div>
-            <div class="col-md-6 mb-3">
-              <p class="mb-1 text-muted">Saldo actual</p>
-              <h6 class="fw-semibold text-success">$ 12,530.75</h6>
-            </div>
-            <div class="col-md-6 mb-3">
-              <p class="mb-1 text-muted">Último movimiento</p>
-              <h6 class="fw-semibold">28/09/2025</h6>
+          <div class="col-md-8">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title">Resumen de la Cuenta</h5>
+                <div class="row mt-3">
+                  <div class="col-md-6 mb-3">
+                    <p class="mb-1 text-muted">Titular</p>
+                    <h6 class="fw-semibold">Marcos</h6>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <p class="mb-1 text-muted">Número de cuenta</p>
+                    <h6 class="fw-semibold">CP-2025-00123</h6>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <p class="mb-1 text-muted">Saldo actual</p>
+                    <h6 class="fw-semibold text-success">$ 12,530.75</h6>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <p class="mb-1 text-muted">Último movimiento</p>
+                    <h6 class="fw-semibold">28/09/2025</h6>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
 
         <div class="row justify-content-center">
-    <div class="col-md-10">
-      <div class="card shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title mb-3">Movimientos recientes</h5>
-          <div class="table-responsive">
-            <table class="table table-striped align-middle">
-              <thead class="table-light">
-                <tr>
-                  <th>Fecha</th>
-                  <th>Descripción</th>
-                  <th class="text-end">Monto</th>
-                  <th>Estado</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>28/09/2025</td>
-                  <td>Pago en línea</td>
-                  <td class="text-end text-danger">- $250.00</td>
-                  <td><span class="badge bg-success">Completado</span></td>
-                </tr>
-                <tr>
-                  <td>27/09/2025</td>
-                  <td>Depósito</td>
-                  <td class="text-end text-success">+ $1,500.00</td>
-                  <td><span class="badge bg-success">Completado</span></td>
-                </tr>
-                <tr>
-                  <td>25/09/2025</td>
-                  <td>Transferencia</td>
-                  <td class="text-end text-danger">- $750.00</td>
-                  <td><span class="badge bg-warning text-dark">Pendiente</span></td>
-                </tr>
-                <tr>
-                  <td>22/09/2025</td>
-                  <td>Compra en tienda</td>
-                  <td class="text-end text-danger">- $120.50</td>
-                  <td><span class="badge bg-success">Completado</span></td>
-                </tr>
-              </tbody>
-            </table>
-            <button class="btn btn-primary">Descargar PDF</button>
-          </div>
-          <div class="text-end">
+          <div class="col-md-10">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title mb-3">Movimientos recientes</h5>
+                <div class="table-responsive">
+                  <table class="table table-striped align-middle">
+                    <thead class="table-light">
+                      <tr>
+                        <th>Fecha</th>
+                        <th>Descripción</th>
+                        <th class="text-end">Monto</th>
+                        <th>Estado</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>28/09/2025</td>
+                        <td>Pago en línea</td>
+                        <td class="text-end text-danger">- $250.00</td>
+                        <td><span class="badge bg-success">Completado</span></td>
+                      </tr>
+                      <tr>
+                        <td>27/09/2025</td>
+                        <td>Depósito</td>
+                        <td class="text-end text-success">+ $1,500.00</td>
+                        <td><span class="badge bg-success">Completado</span></td>
+                      </tr>
+                      <tr>
+                        <td>25/09/2025</td>
+                        <td>Transferencia</td>
+                        <td class="text-end text-danger">- $750.00</td>
+                        <td><span class="badge bg-warning text-dark">Pendiente</span></td>
+                      </tr>
+                      <tr>
+                        <td>22/09/2025</td>
+                        <td>Compra en tienda</td>
+                        <td class="text-end text-danger">- $120.50</td>
+                        <td><span class="badge bg-success">Completado</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <button class="btn btn-primary">Descargar PDF</button>
+                </div>
+                <div class="text-end">
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-    </div>        
     </main>
   </div>
 </div>
