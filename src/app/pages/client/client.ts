@@ -2,13 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { NavComponent } from '../../shared/nav/nav';
 import { CurrencyPipe } from '@angular/common';
 import { NgIf } from '@angular/common';
-import { NgFor } from '@angular/common';
 import { ClientService } from '../../services/user/clientService';
 
 
 @Component({
   selector: 'app-client',
-  imports: [NavComponent, CurrencyPipe, NgIf, NgFor],
+  imports: [NavComponent, CurrencyPipe, NgIf],
   templateUrl: './client.html',
   styleUrl: './client.css'
 })

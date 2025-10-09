@@ -13,85 +13,60 @@
         </div>
       </div>
 
-      <div class="row g-3">
-        <div class="row justify-content-center mb-5">
-          <div class="col-md-8">
-            <div class="card shadow-sm">
-              <div class="card-body">
-                <h5 class="card-title">Resumen de la Cuenta</h5>
-                <div class="row mt-3">
-                  <div class="col-md-6 mb-3">
-                    <p class="mb-1 text-muted">Titular</p>
-                    <h6 class="fw-semibold">Marcos</h6>
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <p class="mb-1 text-muted">Número de cuenta</p>
-                    <h6 class="fw-semibold">CP-2025-00123</h6>
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <p class="mb-1 text-muted">Saldo actual</p>
-                    <h6 class="fw-semibold text-success">$ 12,530.75</h6>
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <p class="mb-1 text-muted">Último movimiento</p>
-                    <h6 class="fw-semibold">28/09/2025</h6>
-                  </div>
-                </div>
-              </div>
+      <!-- Estado de cuenta -->
+      <div class="col-12">
+        <div class="card shadow-sm">
+          <div class="card-header bg-white d-flex justify-content-between align-items-center">
+            <strong>💳 Estado de cuenta</strong>
+            <span class="small text-muted">Pendiente total: {{ (data?.cliente?.deuda || 0) |
+              currency:'MXN':'symbol':'1.0-0' }}</span>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                  <tr>
+                    <th style="width: 120px;">Venta</th>
+                    <th style="width: 140px;">Emisión</th>
+                    <th>Mensualidad</th>
+                    <th class="text-end" style="width: 160px;">Importe</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of data?.servicios?.estadoCuenta">
+                    <td><code>{{ item?.VENTA }}</code></td>
+                    <!-- Ojo: el backend manda dd-mm-aaaa como string; lo mostramos tal cual -->
+                    <td>{{ item?.fechaEmision }}</td>
+                    <td>{{ item?.mensualidad }}</td>
+                    <td class="text-end fw-semibold">
+                      {{ item?.importe || 0 | currency:'MXN':'symbol':'1.0-0' }}
+                    </td>
+                  </tr>
+                  <tr *ngIf="!data?.servicios?.estadoCuenta?.length">
+                    <td colspan="4" class="text-center text-muted py-4">Sin
+                      movimientos</td>
+                  </tr>
+                </tbody>
+                <tfoot class="table-light">
+                  <tr>
+                    <th colspan="3" class="text-end">Total pendiente</th>
+                    <th class="text-end">
+                      {{ data?.cliente?.deuda || 0 |
+                      currency:'MXN':'symbol':'1.0-0' }}
+                    </th>
+                  </tr>
+                </tfoot>
+              </table>
             </div>
           </div>
+          <!--<div class="card-footer bg-white small text-muted">            
+            Los importes se muestran en MXN.
+          </div>-->
+        </div>
+        <div class="p-2 text-end d-flex justify-content-end">
+          <button routerLink="/dashboard" class="btn btn-success">Regresar</button>
         </div>
 
-        <div class="row justify-content-center">
-          <div class="col-md-10">
-            <div class="card shadow-sm">
-              <div class="card-body">
-                <h5 class="card-title mb-3">Movimientos recientes</h5>
-                <div class="table-responsive">
-                  <table class="table table-striped align-middle">
-                    <thead class="table-light">
-                      <tr>
-                        <th>Fecha</th>
-                        <th>Descripción</th>
-                        <th class="text-end">Monto</th>
-                        <th>Estado</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>28/09/2025</td>
-                        <td>Pago en línea</td>
-                        <td class="text-end text-danger">- $250.00</td>
-                        <td><span class="badge bg-success">Completado</span></td>
-                      </tr>
-                      <tr>
-                        <td>27/09/2025</td>
-                        <td>Depósito</td>
-                        <td class="text-end text-success">+ $1,500.00</td>
-                        <td><span class="badge bg-success">Completado</span></td>
-                      </tr>
-                      <tr>
-                        <td>25/09/2025</td>
-                        <td>Transferencia</td>
-                        <td class="text-end text-danger">- $750.00</td>
-                        <td><span class="badge bg-warning text-dark">Pendiente</span></td>
-                      </tr>
-                      <tr>
-                        <td>22/09/2025</td>
-                        <td>Compra en tienda</td>
-                        <td class="text-end text-danger">- $120.50</td>
-                        <td><span class="badge bg-success">Completado</span></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <button class="btn btn-primary">Descargar PDF</button>
-                </div>
-                <div class="text-end">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </main>
   </div>
