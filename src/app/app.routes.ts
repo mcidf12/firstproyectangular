@@ -8,6 +8,8 @@ import { Recover } from './auth/recover/recover';
 import { requireAuthGuard } from './auth/require-auth-guard';
 import { onlyGuestsGuard } from './auth/only-guests-guard';
 import { Client } from './pages/client/client';
+import { Payment } from './pages/payment/payment';
+import { Profile } from './pages/profile/profile';
 
 
 export const routes: Routes = [
@@ -21,6 +23,8 @@ export const routes: Routes = [
   { path: 'dashboard', component: Dashboard, canActivate: [requireAuthGuard] },
   { path: 'estado-cuenta', component: Banca, canActivate: [requireAuthGuard] },
   { path: 'cliente', component: Client, canActivate: [requireAuthGuard] },
+  { path: 'formas-de-pago', component: Payment, canActivate: [requireAuthGuard] },
+  { path: 'perfil', component: Profile, canActivate: [requireAuthGuard] },
 
   
   { path: '**', redirectTo: '/iniciar-sesion' }

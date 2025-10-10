@@ -4,11 +4,10 @@ import { NgIf } from '@angular/common';
 import { NgFor } from '@angular/common';
 import { ClientService } from '../../services/user/clientService';
 import { CurrencyPipe } from '@angular/common';
-import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-banca',
-  imports: [NavComponent, CurrencyPipe, NgIf, NgFor, RouterLink],
+  imports: [NavComponent, CurrencyPipe, NgIf, NgFor],
   templateUrl: './banca.html',
   styleUrl: './banca.css'
 })

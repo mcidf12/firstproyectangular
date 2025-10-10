@@ -4,11 +4,10 @@ import { RouterLink } from '@angular/router';
 import { NavComponent } from '../../shared/nav/nav';
 import { NgIf } from '@angular/common';
 import { ClientService } from '../../services/user/clientService';
-import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [RouterLink, NavComponent, CurrencyPipe, NgIf],
+  imports: [RouterLink, NavComponent, NgIf],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css'
 })
