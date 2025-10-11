@@ -93,7 +93,7 @@
                 </div>
 
                 <div class="d-grid mt-3">
-                  <button class="btn btn-primary btn-sm" *ngIf="(data.cliente?.deuda ?? 0) > 0">
+                  <button routerLink="/formas-de-pago" class="btn btn-primary btn-sm" *ngIf="(data.cliente?.deuda ?? 0) > 0">
                     Pagar ahora
                   </button>
                 </div>

@@ -1,0 +1,49 @@
+/* Card base */
+.payment-card {
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.payment-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(16,24,40,0.08); }
+
+/* Header variants */
+.card-head {
+  padding: 18px;
+  color: #fff;
+}
+.head-blue { background: linear-gradient(90deg,#2D9CDB,#2F80ED); }
+.head-green { background: linear-gradient(90deg,#00C853,#00E676); }
+.head-gold { background: linear-gradient(90deg,#FFB64D,#FF8A65); }
+
+/* Icon circle */
+.icon-circle {
+  width:58px;
+  height:58px;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: rgba(255,255,255,0.12);
+  font-size:1.45rem;
+}
+
+/* Card body */
+.card-body { padding: 20px; }
+.label { font-size: .75rem; color: #6b7280; }
+.value { font-weight: 700; font-size: 1rem; }
+.mono { font-family: SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace; }
+
+/* info-row layout */
+.info-row { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+
+/* Buttons */
+.btn-primary { background: linear-gradient(90deg,#2D9CDB,#2F80ED); border: none; }
+.btn-outline-secondary { border-radius: 8px; }
+
+/* Small responsive tweak */
+@media (max-width: 767.98px) {
+  .icon-circle { width:48px; height:48px; font-size:1.1rem; }
+  .card-head { padding: 14px; }
+  .card-body { padding: 16px; }
+}

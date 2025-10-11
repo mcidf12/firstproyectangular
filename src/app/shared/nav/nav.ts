@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { LoginS } from '../../services/auth/login';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-nav',
@@ -12,9 +11,9 @@ import { LoginS } from '../../services/auth/login';
   styleUrl: './nav.css'
 })
 export class NavComponent {
-   constructor(private auth: LoginS) {}
+  constructor(private auth: LoginS) { }
 
   logout() {
     this.auth.logoutAndRedirect();
   }
-  }
+}
