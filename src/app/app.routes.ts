@@ -10,6 +10,8 @@ import { onlyGuestsGuard } from './auth/only-guests-guard';
 import { Client } from './pages/client/client';
 import { Payment } from './pages/payment/payment';
 import { Profile } from './pages/profile/profile';
+import { Visits } from './pages/visits/visits';
+import { EditProfile } from './pages/edit-profile/edit-profile';
 
 
 export const routes: Routes = [
@@ -25,6 +27,8 @@ export const routes: Routes = [
   { path: 'cliente', component: Client, canActivate: [requireAuthGuard] },
   { path: 'formas-de-pago', component: Payment, canActivate: [requireAuthGuard] },
   { path: 'perfil', component: Profile, canActivate: [requireAuthGuard] },
+  { path: 'visitas', component: Visits, canActivate: [requireAuthGuard] },
+  { path: 'edit-perfil', component: EditProfile, canActivate: [requireAuthGuard] },
 
   
   { path: '**', redirectTo: '/iniciar-sesion' }

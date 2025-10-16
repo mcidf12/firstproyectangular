@@ -16,7 +16,7 @@ export class LoginS {
     return localStorage.getItem('authToken');
   }
   getHeaders(): HttpHeaders {
-    const token = this.getToken(); 
+    const token = this.getToken();
     let headers = new HttpHeaders().set('Accept', 'application/json');
     if (token) headers = headers.set('Authorization', `Bearer ${token}`);
     return headers;
@@ -33,7 +33,7 @@ export class LoginS {
     //console.log('Token enviado (localStorage):', this.getToken());
     console.log('Headers que se enviarán:', headers.keys().map(k => `${k}: ${headers.get(k)}`));
 
-    return this.http.post('http://localhost:8000/api/auth/logout', {}, { headers });
+    return this.http.get('http://localhost:8000/api/auth/logout', { headers });
   }
 
   clearToken() {
@@ -44,11 +44,20 @@ export class LoginS {
     return this.http.post<any>('http://localhost:8000/api/usuarios', data);
   }
 
+  getProfile(): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.get<any>('http://localhost:8000/api/usuarios', { headers });
+  }
 
-  /*getUser(): Observable<any[]> {
-    return this.http.get<any[]>('http://localhost:8000/api/usuarios')
-  }*/
+  updateUser(data: any): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.put<any>('http://localhost:8000/api/usuarios/update', data, { headers });
+  }
 
+
+
+
+  
   logoutAndRedirect() {
     this.logout().subscribe({
       next: () => {

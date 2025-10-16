@@ -3,10 +3,11 @@ import { NavComponent } from '../../shared/nav/nav';
 
 import { ClientService } from '../../services/user/clientService';
 import { NgIf } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
-  imports: [NavComponent,NgIf],
+  imports: [NavComponent, NgIf, RouterLink],
   templateUrl: './profile.html',
   styleUrl: './profile.css'
 })

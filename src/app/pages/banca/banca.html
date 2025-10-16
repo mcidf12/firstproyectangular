@@ -24,58 +24,65 @@
                 <div class="mb-2">
                   <div class="small text-muted">Estado</div>
                   <div>
-                    <span class="badge"
-                          [class]="(data.cliente?.deuda ?? 0) > 0 ? 'bg-danger' : 'bg-success'">
+                    <span class="badge" [class]="(data.cliente?.deuda ?? 0) > 0 ? 'bg-danger' : 'bg-success'">
                       {{ (data.cliente?.deuda ?? 0) > 0 ? 'Suspendido' : 'Activo' }}
                     </span>
                   </div>
                 </div>
 
-                <div>
+                <!--<div>
                   <div class="small text-muted">Velocidad / paquete</div>
                   <div>{{ data.cliente?.planInternet || '—' }}</div>
-                </div>
+                </div>-->
               </div>
             </div>
           </div>
 
           <!-- Servicios -->
+
           <div class="col-12 col-lg-4">
+
             <div class="card h-100 shadow-sm">
               <div class="card-header bg-white">
                 <strong>Servicios</strong>
               </div>
               <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center mb-3">
+
+                <div
+                  *ngIf="(data.servicios?.camaras?.canServicios ?? 0) === 0 && (data.servicios?.telefonia.lineas ?? 0) === 0"
+                  class="text-center text-muted py-3">
+                  <em>Sin servicios extra</em>
+                </div>
+
+                <div *ngIf="(data.servicios?.camaras?.canServicios ?? 0) > 0"
+                  class="d-flex justify-content-between align-items-center mb-3">
                   <div>
                     <div class="small text-muted">Cámaras</div>
                     <div class="fw-semibold">{{ data.servicios?.camaras?.canServicios || 0 }} servicio(s)</div>
                   </div>
                   <div>
-                    <span class="badge"
-                          [class]="(data.servicios?.camaras?.canServicios || 0) > 0 ? 'bg-success' : 'bg-secondary'">
-                      {{ (data.servicios?.camaras?.canServicios || 0) > 0 ? 'Activo' : 'No' }}
-                    </span>
+                    <span class="badge bg-success">Activo</span>
                   </div>
                 </div>
 
-                <hr class="my-3">
+                  <hr
+                    *ngIf="(data.servicios?.camaras?.canServicios ?? 0) > 0 && (data.servicios?.telefonia?.lineas ?? 0) > 0"
+                    class="my-3">
 
-                <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <div class="small text-muted">Telefonía</div>
-                    <div class="fw-semibold">{{ data.servicios?.telefonia?.lineas || '—' }} línea(s)</div>
+                  <div *ngIf="(data.servicios?.telefonia?.lineas ?? 0) > 0"
+                    class="d-flex justify-content-between align-items-center">
+                    <div>
+                      <div class="small text-muted">Telefonía</div>
+                      <div class="fw-semibold">{{ data.servicios?.telefonia?.lineas || '—' }} línea(s)</div>
+                    </div>
+                    <div>
+                      <span class="badge bg-success">Activo</span>
+                    </div>
                   </div>
-                  <div>
-                    <span class="badge"
-                          [class]="(data.servicios?.telefonia?.lineas || 0) > 0 ? 'bg-success' : 'bg-secondary'">
-                      {{ (data.servicios?.telefonia?.lineas || 0) > 0 ? 'Activo' : 'No' }}
-                    </span>
-                  </div>
+
                 </div>
               </div>
             </div>
-          </div>
 
           <!-- Saldo pendiente -->
           <div class="col-12 col-lg-4">
@@ -93,7 +100,8 @@
                 </div>
 
                 <div class="d-grid mt-3">
-                  <button routerLink="/formas-de-pago" class="btn btn-primary btn-sm" *ngIf="(data.cliente?.deuda ?? 0) > 0">
+                  <button routerLink="/formas-de-pago" class="btn btn-primary btn-sm"
+                    *ngIf="(data.cliente?.deuda ?? 0) > 0">
                     Pagar ahora
                   </button>
                 </div>
@@ -165,81 +173,3 @@
     </main>
   </div>
 </div>
-
-
-<!-- 
-<div class="container-fluid">
-  <div class="row min-vh-100">
-
-    <aside class="col-12 col-md-3 col-lg-2 border-end bg-light p-0">
-      <app-nav />
-    </aside>
-
-    <main class="col-12 col-md-9 col-lg-10 px-3 px-lg-4 py-4">
-      <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
-        <div>
-          <h2 class="fw-bold">Estado de Cuenta</h2>
-          <p class="text-muted">Consulta el resumen y movimientos de tu cuenta</p>
-        </div>
-      </div>
-
-      <!-- Estado de cuenta -- >
-      <div class="col-12">
-        <div class="card shadow-sm">
-          <div class="card-header bg-white d-flex justify-content-between align-items-center">
-            <strong>💳 Estado de cuenta</strong>
-            <span class="small text-muted">Pendiente total: {{ (data?.cliente?.deuda || 0) |
-              currency:'MXN':'symbol':'1.0-0' }}</span>
-          </div>
-          <div class="card-body p-0">
-            <div class="table-responsive">
-              <table class="table table-hover align-middle mb-0">
-                <thead class="table-light">
-                  <tr>
-                    <th style="width: 120px;">Venta</th>
-                    <th style="width: 140px;">Emisión</th>
-                    <th>Mensualidad</th>
-                    <th class="text-end" style="width: 160px;">Importe</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let item of data?.servicios?.estadoCuenta">
-                    <td><code>{{ item?.VENTA }}</code></td>
-                    <td>{{ item?.fechaEmision }}</td>
-                    <td>{{ item?.mensualidad }}</td>
-                    <td class="text-end fw-semibold">
-                      {{ item?.importe || 0 | currency:'MXN':'symbol':'1.0-0' }}
-                    </td>
-                  </tr>
-                  <tr *ngIf="!data?.servicios?.estadoCuenta?.length">
-                    <td colspan="4" class="text-center text-muted py-4">Sin
-                      movimientos</td>
-                  </tr>
-                </tbody>
-                <tfoot class="table-light">
-                  <tr>
-                    <th colspan="3" class="text-end">Total pendiente</th>
-                    <th class="text-end">
-                      {{ data?.cliente?.deuda || 0 |
-                      currency:'MXN':'symbol':'1.0-0' }}
-                    </th>
-                  </tr>
-                </tfoot>
-              </table>
-            </div>
-          </div>
-          <!--<div class="card-footer bg-white small text-muted">            
-            Los importes se muestran en MXN.
-          </div>- ->
-        </div>
-        <div class="p-2 text-end d-flex justify-content-end">
-          <button routerLink="/dashboard" class="btn btn-success">Regresar</button>
-        </div>
-
-      </div>
-    </main>
-  </div>
-</div>
-
-
--->

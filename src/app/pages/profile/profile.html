@@ -6,56 +6,69 @@
     </aside>
 
     <main class="col-12 col-md-9 col-lg-10 px-3 px-lg-4 py-5">
-      <div class="profile-header mb-4">
-        <h2 class="mb-1 text-center text-md-start">Perfil</h2>
-        <!--<p class="text-muted mb-0 text-center text-md-start">Información básica de la cuenta y contacto</p>-->
-      </div>
+      <div *ngIf="data" class="mb-4">
+        <div class="profile-header mb-4">
+          <h2 class="mb-1 text-center text-md-start">Perfil</h2>
+          <!--<p class="text-muted mb-0 text-center text-md-start">Información básica de la cuenta y contacto</p>-->
+        </div>
 
-      <div class="row g-4">
-        <!-- Tarjeta principal: avatar + info -->
-        <div class="col-12 col-lg-12">
-          <div class="card shadow-sm profile-card h-100">
-            <div class="card-body d-flex flex-column flex-md-row align-items-center gap-4">
+        <div class="row g-4">
+          <!-- Tarjeta principal: avatar + info -->
+          <div class="col-12 col-lg-12">
+            <div >
+              <div class="card-body d-flex flex-column flex-md-row align-items-center gap-4">
 
-              <!-- Info -->
-              <div class="flex-grow-1 w-100">
-                <div class="d-flex justify-content-between align-items-start flex-column flex-sm-row gap-3">
-                  <div>
-                    <h4 class="mb-1 profile-name">{{ data.cliente?.nombre || '—' }}</h4>
-                    <div class="text-muted small">
-                      Cliente: <strong>{{ data.cliente?.cliente || '—' }}</strong>
+                <!-- Info -->
+                <div class="flex-grow-1 w-100">
+                  <div class="d-flex justify-content-between flex-column flex-sm-row align-items-start gap-3">
+                    
+                    <div class="flex-fill">
+                      <h4 class="mb-1 profile-name">{{ data?.cliente?.nombre || '—' }}</h4>
+                      <div class="text-muted small">
+                        Cliente: <strong>{{ data?.cliente?.cliente || '—' }}</strong>
+                      </div>
+                      <div class="mt-2">
+                        <span class="badge bg-primary me-1">{{ data?.cliente?.nombrePlan || '—' }}</span>
+                        <span class="badge bg-light text-dark" *ngIf="data.cliente?.planInternet">{{
+                          data.cliente?.planInternet }}</span>
+                      </div>
                     </div>
-                    <div class="mt-2">
-                      <span class="badge bg-primary me-1">{{ data.cliente?.nombrePlan || '—' }}</span>
-                      <span class="badge bg-light text-dark" *ngIf="data.cliente?.planInternet">{{
-                        data.cliente?.planInternet }}</span>
+
+                    <div class="flex-fill">
+                      <div class="fw-semibold">Dirección</div>
+                      <div class="text-muted">
+                        {{ data?.cliente?.direccion }}<br>
+                        {{ data?.cliente?.colonia }}, {{ data?.cliente?.municipio }}, {{ data.cliente?.estado }}<br>
+                        {{ data?.cliente?.pais }}
+                      </div>
+                    </div>
+                    <div class="flex-fill"></div>
+                    <div class="flex-fill"></div>
+                  </div>
+
+                  <hr class="my-3">
+
+                  <div class="row gy-2">
+                    <div class="col-12 col-sm-4">
+                      <div class="small text-muted">Correo</div>
+                      <div class="fw-semibold">{{ data.cliente?.correo || '—' }}</div>
+                    </div>
+                    <div class="col-12 col-sm-4">
+                      <div class="small text-muted">Teléfono</div>
+                      <div class="fw-semibold">{{ data.cliente?.telefono || '—' }}</div>
                     </div>
                   </div>
-                </div>
 
-                <hr class="my-3">
-
-                <div class="row gy-2">
-                  <div class="col-12 col-sm-4">
-                    <div class="small text-muted">Correo</div>
-                    <div class="fw-semibold">{{ data.cliente?.correo || '—' }}</div>
+                  <div class="mt-3 d-flex gap-2 flex-wrap">
+                    <button routerLink="/edit-perfil" class="btn btn-primary btn-sm">Editar perfil</button>
+                    <!--<button class="btn btn-outline-secondary btn-sm">Cambiar contraseña</button>-->
                   </div>
-                  <div class="col-12 col-sm-4">
-                    <div class="small text-muted">Teléfono</div>
-                    <div class="fw-semibold">{{ data.cliente?.telefono || '—' }}</div>
-                  </div>
-                </div>
-
-                <div class="mt-3 d-flex gap-2 flex-wrap">
-                  <button class="btn btn-primary btn-sm">Editar perfil</button>
-                  <button class="btn btn-outline-secondary btn-sm">Cambiar contraseña</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-      </div> 
+      </div>
     </main>
   </div>
 </div>
