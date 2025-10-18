@@ -11,3 +11,6 @@ export interface RegisterRequest {
   password: string;
 }
 
+export interface RecoverRequest {
+  email: string;
+}

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LoginRequest, RegisterRequest } from './loginRequest';
+import { LoginRequest, RegisterRequest, RecoverRequest } from './loginRequest';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
@@ -44,20 +44,11 @@ export class LoginS {
     return this.http.post<any>('http://localhost:8000/api/usuarios', data);
   }
 
-  getProfile(): Observable<any> {
-    const headers = this.getHeaders();
-    return this.http.get<any>('http://localhost:8000/api/usuarios', { headers });
-  }
-
-  updateUser(data: any): Observable<any> {
-    const headers = this.getHeaders();
-    return this.http.put<any>('http://localhost:8000/api/usuarios/update', data, { headers });
+  sendPasswordReset(data: RecoverRequest): Observable<any> {
+    return this.http.post<any>('http://localhost:8000/api/auth/recoverPassword', data);
   }
 
 
-
-
-  
   logoutAndRedirect() {
     this.logout().subscribe({
       next: () => {

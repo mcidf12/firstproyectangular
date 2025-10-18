@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ClientService {
-  constructor(private http: HttpClient){}
+  constructor(private http: HttpClient) { }
 
   getHeaders(): HttpHeaders {
     const token = localStorage.getItem('authToken');
@@ -17,12 +17,17 @@ export class ClientService {
 
   getclient(id: string): Observable<any> {
     const headers = this.getHeaders();
-      return this.http.get<any>(`http://localhost:8000/api/usuarios/${id}`, {headers})
-    }
+    return this.http.get<any>(`http://localhost:8000/api/usuarios/${id}`, { headers })
+  }
 
   getAuthenticatedUser(): Observable<any> {
-  const headers = this.getHeaders();
-  return this.http.get<any>('http://localhost:8000/api/user', { headers });
-}
-  
+    const headers = this.getHeaders();
+    return this.http.get<any>('http://localhost:8000/api/user', { headers });
+  }
+
+  updateUser(id: string, data: any): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.patch(`http://localhost:8000/api/usuarios/${id}`, data, { headers });
+  }
+
 }

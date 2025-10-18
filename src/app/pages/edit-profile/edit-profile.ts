@@ -1,8 +1,8 @@
 import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { LoginS } from '../../services/auth/login';
 import { Router } from '@angular/router';
+import { ClientService } from '../../services/user/clientService';
 
 @Component({
   selector: 'app-edit-profile',
@@ -18,7 +18,7 @@ export class EditProfile {
   error = '';
 
 
-  constructor(private fb: FormBuilder, private router: Router, private api: LoginS) {
+  constructor(private fb: FormBuilder, private router: Router, private clientS: ClientService) {
   }
 
   ngOnInit(): void {
@@ -51,20 +51,27 @@ export class EditProfile {
 
 
   loadUserData() {
-    this.api.getProfile().subscribe({
-      next: (user) => {
-        this.updateForm.patchValue({
-          name: user.name ?? '',
-          lastName: user.lastName ?? '',
-          email: user.email ?? ''
+    this.clientS.getAuthenticatedUser().subscribe({
+      next: user => {
+        const id = user.id;
+        this.clientS.getclient(id).subscribe({
+          next: (user) => {
+            this.updateForm.patchValue({
+              name: user.name ?? '',
+              lastName: user.lastName ?? '',
+              email: user.email ?? ''
+            });
+          },
+          error: (err) => {
+            console.log('Error al cargar datos del usuario', err);
+            console.error(err);
+          }
         });
-      },
-      error: (err) => {
-        console.log('Error al cargar datos del usuario', err);
-        console.error(err);
       }
     });
   }
+
+
 
   update() {
     if (this.updateForm.invalid) { this.updateForm.markAllAsTouched(); return; }
@@ -77,17 +84,30 @@ export class EditProfile {
       last_name: raw.lastName,
       email: raw.email
     };
+
     if (raw.password && raw.password.length >= 8) payload.password = raw.password;
 
-    this.api.updateUser(payload as any).subscribe({
-      next: (res) => {
-        this.loading = false;
-        console.log('Perfil actualizado', res);
-        this.loadUserData();
+    this.clientS.getAuthenticatedUser().subscribe({
+      next: user => {
+        const id = user.id;
+        this.clientS.updateUser(id, payload as any).subscribe({
+          next: (res) => {
+            this.loading = false;
+            console.log('Perfil actualizado', res);
+            this.loadUserData();
+            this.router.navigate(['/perfil']);
+          },
+          error: (e) => {
+            this.loading = false;
+            console.error('Error update:', e);
+            console.log('response body:', e?.error);
+            this.error = e?.error?.message ?? 'No se pudo crear la cuenta';
+          }
+        });
       },
-      error: (e) => {
+      error: err => {
         this.loading = false;
-        this.error = e?.error?.message ?? 'No se pudo crear la cuenta';
+        console.error('Nose pudo obtener usuarios', err);
       }
     });
   }

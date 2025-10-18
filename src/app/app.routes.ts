@@ -12,6 +12,7 @@ import { Payment } from './pages/payment/payment';
 import { Profile } from './pages/profile/profile';
 import { Visits } from './pages/visits/visits';
 import { EditProfile } from './pages/edit-profile/edit-profile';
+import { ResponseRecover } from './auth/response-recover/response-recover';
 
 
 export const routes: Routes = [
@@ -20,6 +21,7 @@ export const routes: Routes = [
   { path: 'iniciar-sesion', component: Login, canActivate: [onlyGuestsGuard] },
   { path: 'crear-cuenta', component: CreateAccount, canActivate: [onlyGuestsGuard] },
   { path: 'recuperar-password', component: Recover, canActivate: [onlyGuestsGuard] },
+  { path: 'response-password', component: ResponseRecover, canActivate: [onlyGuestsGuard] },
 
   // Requieren login
   { path: 'dashboard', component: Dashboard, canActivate: [requireAuthGuard] },
