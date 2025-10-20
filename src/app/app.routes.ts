@@ -1,18 +1,20 @@
 import { Routes } from '@angular/router';
-import { Dashboard } from './pages/dashboard/dashboard';
-import { Login } from './auth/login/login';
-import { Banca } from './pages/banca/banca';
-import { CreateAccount } from './auth/create-account/create-account';
-import { Recover } from './auth/recover/recover';
 
 import { requireAuthGuard } from './auth/require-auth-guard';
 import { onlyGuestsGuard } from './auth/only-guests-guard';
+
+import { Login } from './auth/login/login';
+import { CreateAccount } from './auth/create-account/create-account';
+import { Recover } from './auth/recover/recover';
+import { ResponseRecover } from './auth/responseRecover/response-recover';
+
+import { Dashboard } from './pages/dashboard/dashboard';
+import { Banca } from './pages/banca/banca';
 import { Client } from './pages/client/client';
 import { Payment } from './pages/payment/payment';
 import { Profile } from './pages/profile/profile';
 import { Visits } from './pages/visits/visits';
 import { EditProfile } from './pages/edit-profile/edit-profile';
-import { ResponseRecover } from './auth/response-recover/response-recover';
 
 
 export const routes: Routes = [
@@ -21,7 +23,7 @@ export const routes: Routes = [
   { path: 'iniciar-sesion', component: Login, canActivate: [onlyGuestsGuard] },
   { path: 'crear-cuenta', component: CreateAccount, canActivate: [onlyGuestsGuard] },
   { path: 'recuperar-password', component: Recover, canActivate: [onlyGuestsGuard] },
-  { path: 'response-password', component: ResponseRecover, canActivate: [onlyGuestsGuard] },
+  { path: 'response-password', component: ResponseRecover },
 
   // Requieren login
   { path: 'dashboard', component: Dashboard, canActivate: [requireAuthGuard] },

@@ -107,7 +107,7 @@ export class EditProfile {
       },
       error: err => {
         this.loading = false;
-        console.error('Nose pudo obtener usuarios', err);
+        console.error('No se pudo obtener usuarios', err);
       }
     });
   }

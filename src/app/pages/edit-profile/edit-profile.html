@@ -35,7 +35,7 @@
                                 class="mt-2 small text-danger">
 
                                 <div *ngIf="lastName.errors?.['required']">
-                                    Nombre requerido
+                                    Apellidos requerido
                                 </div>
                                 <div *ngIf="lastName.errors?.['pattern']">
                                     Solo se aceptan letras
@@ -63,29 +63,24 @@
 
                         <!-- Contraseña -->
                         <div class="mb-3">
-                            <label class="form-label">Contraseña (dejar en blanco para no cambiar)</label>
+                            <label class="form-label fw-semibold">Contraseña</label>
                             <div class="input-group">
-                                <input type="showPassword ? 'text' : 'password'" formControlName="password"
+                                <input [type]="showPassword ? 'text' : 'password'" formControlName="password"
                                     class="form-control" placeholder="Nueva contraseña (mín 8 caracteres)" />
 
                                 <div *ngIf="password.invalid && (password.dirty || password.touched)"
                                     class="mt-2 small text-danger">
-
-                                    <div *ngIf="password.errors?.['required']">
-                                        Password requerido
-                                    </div>
-                                    <div *ngIf="password.errors?.['minlength']">
-                                        Minimo 8 caracteres
-                                    </div>
                                 </div>
 
                                 <button type="button" class="btn btn-outline-secondary" (click)="viewPassword()">
-                                    {{ showPassword ? 'Ocultar' : 'Mostrar' }}
+                                    <img [src]="showPassword ? 'assets/img/invisible.png' : 'assets/img/ojo.png'" alt=""
+                                        width="24" height="24">
                                 </button>
                             </div>
                             <div class="invalid-feedback d-block" *ngIf="password?.errors && password?.touched">
                                 <div *ngIf="password?.errors?.['minlength']">La contraseña debe tener al menos 8
                                     caracteres.</div>
+                                <div *ngIf="password?.errors?.['required']">La contraseña es requerida.</div>
                             </div>
                             <div class="form-text">Deja vacío si no deseas cambiar la contraseña.</div>
                         </div>
@@ -103,6 +98,5 @@
                 </div>
             </div>
         </div>
-          
     </div>
 </div>

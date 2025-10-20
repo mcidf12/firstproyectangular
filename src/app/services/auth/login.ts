@@ -45,8 +45,12 @@ export class LoginS {
   }
 
   sendPasswordReset(data: RecoverRequest): Observable<any> {
-    return this.http.post<any>('http://localhost:8000/api/auth/recoverPassword', data);
+    return this.http.post<any>('http://localhost:8000/api/auth/recoverPassword',data);
   }
+  sendPasswordUpdate(data: any): Observable<any> {
+    return this.http.put<any>('http://localhost:8000/api/auth/updatePassword',data);
+  }
+
 
 
   logoutAndRedirect() {

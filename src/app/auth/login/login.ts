@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgIf } from '@angular/common'; 
+import { NgIf } from '@angular/common';
 import { FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { LoginS } from '../../services/auth/login';
@@ -16,25 +16,26 @@ import { LoginS } from '../../services/auth/login';
 export class Login {
   //uso de formularios reactivos
   loginForm!: FormGroup;
-   error = '';
+  error = '';
+  showPassword = false;
 
-  constructor(private fb: FormBuilder, private router:Router, private api:LoginS) {
+  constructor(private fb: FormBuilder, private router: Router, private api: LoginS) {
     this.loginForm = this.fb.group({
-      email: ['',[Validators.required, Validators.email]],
-      password: ['',[Validators.required, Validators.minLength(8)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
     })
   }
 
-  get email(){
+  get email() {
     return this.loginForm.controls['email'];
   }
 
-  get password(){
+  get password() {
     return this.loginForm.controls['password'];
   }
 
 
-  login(){
+  login() {
     if (this.loginForm.invalid) { this.loginForm.markAllAsTouched(); return; }
 
     this.api.login(this.loginForm.value).subscribe({
@@ -52,5 +53,9 @@ export class Login {
         this.error = e?.error?.message ?? 'Error al iniciar sesión';
       }
     });
+  }
+
+  viewPassword() {
+    this.showPassword = !this.showPassword;
   }
 }
