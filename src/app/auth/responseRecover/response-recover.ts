@@ -19,19 +19,31 @@ export class ResponseRecover {
   token: string | null = null;
 
 
-  constructor(private route: ActivatedRoute ,private fb: FormBuilder, private router: Router, private api: LoginS) {
+  constructor(private route: ActivatedRoute, private fb: FormBuilder, private router: Router, private api: LoginS) {
 
   }
 
   ngOnInit(): void {
     this.recoverForm = this.fb.group({
-      password: ['',[Validators.required, Validators.minLength(8)]],
-    });
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      password_confirmation: ['', [Validators.required, Validators.minLength(8)]],
+    }, { Validators: this.passwordMatchValidator });
+
     this.route.queryParamMap.subscribe(q => this.token = q.get('token'));
+  }
+
+  passwordMatchValidator(group: FormGroup) {
+    const pass = group.get('password')?.value;
+    const confirm = group.get('password_confirmation')?.value;
+    return pass === confirm ? null : { passwordMissMatch: true };
   }
 
   get password() {
     return this.recoverForm.controls['password']!;
+  }
+
+  get passwordConfirmation() {
+    return this.recoverForm.controls['password_confirmation']!;
   }
 
   recoverPassword() {
@@ -43,8 +55,10 @@ export class ResponseRecover {
 
     const payload: any = {
       token: this.token,
-      password: raw.password
+      password: raw.password,
+      password_confirmation: raw.password_confirmation
     };
+
     this.api.sendPasswordUpdate(payload as any).subscribe({
       next: (res) => {
         this.loading = false;
@@ -55,9 +69,9 @@ export class ResponseRecover {
         this.loading = false;
         this.error = e?.error?.message ?? 'No se pudo actualizar la contraseña';
       }
-    });  
+    });
   }
-  
+
 
   viewPassword() {
     this.showPassword = !this.showPassword;

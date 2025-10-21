@@ -5,44 +5,47 @@
     <h3 class="text-center fw-bold mb-1">¡Bienvenido!</h3>
     <p class="text-center text-muted mb-4">Inicia sesión para continuar</p>
 
-    <form [formGroup]="loginForm" (ngSubmit)="login()">
-      <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label fw-semibold">Email</label>
-        <input formControlName="email" type="email" class="form-control" id="exampleInputEmail1"
-          placeholder="correo@dominio.com" aria-describedby="emailHelp">
-
-        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="mt-2 small text-danger">
-
-          <div *ngIf="email.errors?.['required']">
-            Email requerido
-          </div>
-          <div *ngIf="email.errors?.['email']">
-            Email debe tener formato valido
-          </div>
-        </div>
-      </div>
-
-      <div class="mb-3">
-        <label class="form-label">Nueva Contraseña</label>
-        <div class="input-group">
-          <input [type]="showPassword ? 'text' : 'password'" formControlName="password" class="form-control"
-            placeholder="Nueva contraseña (mín 8 caracteres)" />
-
-          <div *ngIf="password.invalid && (password.dirty || password.touched)" class="mt-2 small text-danger">
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label fw-semibold">Email</label>
+            <input formControlName="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="correo@dominio.com" aria-describedby="emailHelp">
+              
+              <div *ngIf="email.invalid && (email.dirty || email.touched)"
+                class="mt-2 small text-danger">
+ 
+                <div *ngIf="email.errors?.['required']">
+                  Email requerido
+                </div>
+                <div *ngIf="email.errors?.['email']">
+                  Email debe tener formato valido 
+                </div>
+              </div>
           </div>
 
-          <button type="button" class="btn btn-outline-secondary" (click)="viewPassword()">
-            <img [src]="showPassword ? 'assets/img/invisible.png' : 'assets/img/ojo.png'" alt="" width="24" height="24">            
-          </button>
-        </div>
-        <div class="invalid-feedback d-block" *ngIf="password?.errors && password?.touched">
-          <div *ngIf="password?.errors?.['minlength']">La contraseña debe tener al menos 8
-            caracteres.</div>
-          <div *ngIf="password?.errors?.['required']">La contraseña es requerida.</div>
-        </div>
-      </div>
-      <button type="submit" class="btn btn-secondary btn-lg w-100">Iniciar sesion</button>
-      <p *ngIf="error" class="text-danger mb-4">{{ error }}</p>
-    </form>
-  </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label fw-semibold">Password</label>
+            <input formControlName="password" type="password" class="form-control" placeholder="••••••••" id="exampleInputPassword1">
+            
+            <div *ngIf="password.invalid && (password.dirty || password.touched)"
+                 class="mt-2 small text-danger">
+
+                <div *ngIf="password.errors?.['required']">
+                  Password requerido
+                </div>            
+                <div *ngIf="password.errors?.['minlength']">
+                  Minimo 8 caracteres
+                </div>      
+            </div>
+
+            <div class="d-flex justify-content-between mb-4">
+              <a routerLink="/crear-cuenta" class="text-muted text-decoration-none">Crear cuenta</a>
+              <a routerLink="/recuperar-password" class="text-muted text-decoration-none">¿Olvidaste tu contraseña?</a>
+            </div>
+
+
+          </div>
+          <button type="submit" class="btn btn-secondary btn-lg w-100">Iniciar sesion</button>
+          <p *ngIf="error" class="text-danger mb-4">{{ error }}</p>
+        </form>
+  </div>
 </div>
