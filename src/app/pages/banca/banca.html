@@ -107,7 +107,7 @@
                 <div>
                   <div class="small text-muted">Saldo actual</div>
                   <div class="fs-4 fw-bold">
-                    <!-- CORRECTO: paréntesis para aplicar pipe al resultado -->
+                    
                     {{ (data.cliente?.deuda?.total_due ?? 0) | currency:'MXN':'symbol':'1.0-0' }}
 
                   </div>
@@ -122,7 +122,7 @@
               </div>
             </div>
           </div>
-        </div> <!-- /fila superior -->
+        </div>
 
         <!-- Hisotorial de pagos -->
         <div class="row g-3">
@@ -147,7 +147,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <!-- asegúrate que data.servicios.estadoCuenta sea el array correcto -->
+
                       <tr *ngFor="let item of data?.servicios?.estadoCuenta">
                         <td><code>{{ item?.VENTA }}</code></td>
                         <td>{{ item?.fechaEmision }}</td>
@@ -176,7 +176,7 @@
 
             </div>
           </div>
-        </div> <!-- /historial row -->
+        </div> 
 
       </div>
 
