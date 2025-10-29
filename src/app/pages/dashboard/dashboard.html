@@ -1,11 +1,10 @@
 <div class="container-fluid">
-  <div class="row min-vh-100">
-
-    <aside class="col-12 col-md-3 col-lg-2 border-end bg-light p-0">
+  <div class="row g-0 min-vh-100">
+    <aside class="col-12 col-md-3 col-lg-2 p-0">
       <app-nav></app-nav>
     </aside>
 
-    <main class="col-12 col-md-9 col-lg-10 px-3 px-lg-4 py-4">
+    <main class="col-12 col-md-9 col-lg-10 px-3 px-lg-4 py-4 bg-light">
 
       <!-- header -->
       <div *ngIf="data; else cargando" classs="mb-4">
@@ -21,14 +20,14 @@
                 <h3 class="mb-1">{{ data.cliente?.nombre }}</h3>
                 <div class="text-muted">Cliente: <strong>{{ data.cliente?.cliente }}</strong></div>
 
-                <div class="mt-2 d-flex flex-wrap gap-2 align-items-center">
+                <!--<div class="mt-2 d-flex flex-wrap gap-2 align-items-center">
                   <span class="badge bg-primary">{{ data.cliente?.nombrePlan }}</span>
 
                   <span class="badge" [class.bg-success]="data.cliente?.infoRed?.estado === 'Activo'"
                     [class.bg-secondary]="data.cliente?.infoRed?.estado !== 'Activo'">
                     Red: {{ data.cliente?.infoRed?.estado || '—' }}
                   </span>
-                </div>
+                </div>-->
               </div>
             </div>
 
@@ -39,10 +38,8 @@
 
           </div>
         </div>
-        <hr class="my-2">
+        <br>
 
-
-        <!--  -->
         <div class="row g-3">
 
           <!-- Dirección & Contacto -->

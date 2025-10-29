@@ -1,11 +1,15 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from './routeApi';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientService {
+  private apiUrl = environment.apiUrl
+
   constructor(private http: HttpClient) { }
 
   getHeaders(): HttpHeaders {
@@ -17,17 +21,17 @@ export class ClientService {
 
   getclient(id: string): Observable<any> {
     const headers = this.getHeaders();
-    return this.http.get<any>(`http://localhost:8000/api/usuarios/${id}`, { headers })
+    return this.http.get<any>(`${this.apiUrl}/usuarios/${id}`, { headers })
   }
 
   getAuthenticatedUser(): Observable<any> {
     const headers = this.getHeaders();
-    return this.http.get<any>('http://localhost:8000/api/user', { headers });
+    return this.http.get<any>(`${this.apiUrl}/user`, { headers });
   }
 
   updateUser(id: string, data: any): Observable<any> {
     const headers = this.getHeaders();
-    return this.http.patch(`http://localhost:8000/api/usuarios/${id}`, data, { headers });
+    return this.http.patch(`${this.apiUrl}/usuarios/${id}`, data, { headers });
   }
 
 }

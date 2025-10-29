@@ -1,46 +1,58 @@
 /* SIDEBAR */
 .sidebar {
-  width: var(--sidebar-w);
-  background: var(--bg);
+
+
   box-shadow: 0 6px 18px rgba(202, 48, 9, 0.06);
-  border-radius: 12px; /* corregido */
+  border-radius: 12px;
   padding: 12px;
-  margin: 18px;
+  margin: 0; 
   flex-shrink: 0;
   transition: width .25s ease, transform .25s ease;
   display: flex;
   flex-direction: column;
   gap: 6px;
   position: sticky;
-  top: 18px;
-  height: calc(100vh - 36px);
-  overflow: auto;
+  top: 0; 
+  height: 100vh; 
+  overflow-y: auto;
 }
 
+/*ajuste en */
+@media (max-width: 768px) {
+  .sidebar {
+    position: relative;
+    height: auto;
+    box-shadow: none;
+    border-radius: 0;
+  }
+}
 
-/* Estilos generales de item (ya tenías) */
-.menu .item {
+/* Estilo general para items */
+.list-group-item {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 10px;
-  border-radius: 10px;
-  text-align: left;
-  color: #222;
-  font-weight: 600;
+  padding: 10px 14px;
   border: none;
+  border-radius: 10px;
+  color: #222;
+  font-weight: 500;
   background: transparent;
   cursor: pointer;
-  transition: all .18s ease;
-  white-space: nowrap;
-  overflow: hidden;
+  transition: all 0.2s ease-in-out;
 }
 
-.menu .item img {
+.list-group-item:hover {
+  background: rgba(0, 123, 255, 0.08);
+  transform: translateX(4px);
+}
+
+.list-group-item img {
   width: 24px;
   height: 24px;
   object-fit: contain;
-  flex-shrink: 0;
 }
 
-
+.logout {
+  color: #d9534f;
+}

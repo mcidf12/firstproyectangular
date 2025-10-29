@@ -1,0 +1,18 @@
+
+/* ---- Nav tabs: más moderno ---- */
+.nav-tabs {
+  border-bottom: none;
+  padding: .25rem;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(11,94,215,0.04);
+}
+
+.nav-tabs .nav-item {
+  margin-right: .25rem;
+}
+
+.nav-tabs .nav-link {
+  color: black
+}
+

@@ -3,6 +3,7 @@ import { LoginRequest, RegisterRequest, RecoverRequest } from './loginRequest';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { environment } from '../user/routeApi';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,10 @@ import { Router } from '@angular/router';
 
 //servicio crea un observable que escucha la api rest
 export class LoginS {
+
   constructor(private http: HttpClient, private router: Router) { }
+
+  private apiUrl = environment.apiUrl
 
   private getToken(): string | null {
     return localStorage.getItem('authToken');
@@ -25,7 +29,7 @@ export class LoginS {
   //Login post
   login(credentials: LoginRequest): Observable<any> {
     console.log(credentials);
-    return this.http.post<any>('http://localhost:8000/api/auth/login', credentials);
+    return this.http.post<any>(`${this.apiUrl}/auth/login`, credentials);
   }
 
   logout(): Observable<any> {
@@ -33,7 +37,7 @@ export class LoginS {
     //console.log('Token enviado (localStorage):', this.getToken());
     console.log('Headers que se enviarán:', headers.keys().map(k => `${k}: ${headers.get(k)}`));
 
-    return this.http.get('http://localhost:8000/api/auth/logout', { headers });
+    return this.http.get(`${this.apiUrl}/auth/logout`, { headers });
   }
 
   clearToken() {
@@ -41,14 +45,14 @@ export class LoginS {
   }
 
   register(data: RegisterRequest): Observable<any> {
-    return this.http.post<any>('http://localhost:8000/api/usuarios', data);
+    return this.http.post<any>(`${this.apiUrl}/usuarios`, data);
   }
 
   sendPasswordReset(data: RecoverRequest): Observable<any> {
-    return this.http.post<any>('http://localhost:8000/api/auth/recoverPassword',data);
+    return this.http.post<any>(`${this.apiUrl}/auth/recoverPassword`,data);
   }
   sendPasswordUpdate(data: any): Observable<any> {
-    return this.http.put<any>('http://localhost:8000/api/auth/updatePassword',data);
+    return this.http.put<any>(`${this.apiUrl}/auth/updatePassword`,data);
   }
 
 

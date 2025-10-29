@@ -1,14 +1,15 @@
 <div class="container-fluid">
-    <div class="row min-vh-100">
-        <aside class="col-12 col-md-3 col-lg-2 border-end bg-light p-0">
+    <div class="row g-0 min-vh-100">
+        <aside class="col-12 col-md-3 col-lg-2 p-0">
             <app-nav></app-nav>
         </aside>
 
-        <main class="col-12 col-md-9 col-lg-10 px-3 px-lg-4 py-4">
+        <main class="col-12 col-md-9 col-lg-10 px-3 px-lg-4 py-4 bg-light">
             <div class="container py-5">
                 <h2 class="mb-3"> Visitas tecnicas</h2>
 
-                <ul class="nav nav-tabs mb-4">
+
+                <ul class="nav nav-tabs mb-4 bg-light navbar-light">
                     <li class="nav-item">
                         <a class="nav-link" href="">Proximas</a>
                     </li>
@@ -22,14 +23,16 @@
 
                 <div class="mb-3">
                     <h4 class="h5">Historial de visitas</h4>
-                    <p class="text-muted small mb-0">Mostrar visitas</p>
+                    <!--<p class="text-muted small mb-0">Mostrar visitas</p>-->
                 </div>
 
-                <div class="list-visit">
-                    <div class="py-4 text-center text-muted">
-                        No hay vistas
-                    </div>
+                <div class="py-4 empty text-center">
+
+                    <div class="title">No hay visitas</div>
+                    <div class="desc">Aún no se han programado visitas técnicas para este cliente.</div>
+                    <!--<button class="btn btn-primary">Programar visita</button>-->
                 </div>
+
 
             </div>
         </main>
