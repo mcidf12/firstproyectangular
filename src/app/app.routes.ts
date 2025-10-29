@@ -15,6 +15,7 @@ import { Payment } from './pages/payment/payment';
 import { Profile } from './pages/profile/profile';
 import { Visits } from './pages/visits/visits';
 import { EditProfile } from './pages/edit-profile/edit-profile';
+import { EditPassword } from './pages/edit-password/edit-password';
 
 
 export const routes: Routes = [
@@ -33,6 +34,7 @@ export const routes: Routes = [
   { path: 'perfil', component: Profile, canActivate: [requireAuthGuard] },
   { path: 'visitas', component: Visits, canActivate: [requireAuthGuard] },
   { path: 'edit-perfil', component: EditProfile, canActivate: [requireAuthGuard] },
+  { path: 'edit-password', component: EditPassword, canActivate: [requireAuthGuard] },
 
   
   { path: '**', redirectTo: '/iniciar-sesion' }

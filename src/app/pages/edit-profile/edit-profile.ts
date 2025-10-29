@@ -25,52 +25,48 @@ export class EditProfile {
     this.updateForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-ZÁÉÍÓÚÑáéíóúñ ]*')]],
       lastName: ['', [Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-ZÁÉÍÓÚÑáéíóúñ ]*')]],
+      phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       email: ['', [Validators.required, Validators.email]],
-      // contraseña opcional: dejar vacío para no cambiar
-      password: ['', [Validators.minLength(8)]],
     });
 
     this.loadUserData();
   }
 
-  get name() {
-    return this.updateForm.controls['name']!;
-  }
-
-  get lastName() {
-    return this.updateForm.controls['lastName']!;
-  }
-
-  get email() {
-    return this.updateForm.controls['email']!;
-  }
-
-  get password() {
-    return this.updateForm.controls['password']!;
-  }
+  get name() { return this.updateForm.controls['name']!; }
+  get lastName() { return this.updateForm.controls['lastName']!; }
+  get phone() { return this.updateForm.controls['phone']!; }
+  get email() { return this.updateForm.controls['email']!; }
 
 
   loadUserData() {
+
     this.clientS.getAuthenticatedUser().subscribe({
       next: user => {
         const id = user.id;
         this.clientS.getclient(id).subscribe({
-          next: (user) => {
+          next: (userData) => {
+            const nombreCompleto = userData.cliente.nombre ?? '';
+            const partes = nombreCompleto.split(' ');
+            const nombre = partes[0] ?? '';
+            const apellido = partes.slice(1).join(' ') ?? '';
+
             this.updateForm.patchValue({
-              name: user.name ?? '',
-              lastName: user.lastName ?? '',
-              email: user.email ?? ''
+              name: userData.cliente.name ?? '',
+              lastName: userData.cliente.last_name ?? '',
+              phone: userData.cliente.telefono ?? '',
+              email: userData.cliente.correo ?? ''
             });
+            console.log(userData)
           },
           error: (err) => {
-            console.log('Error al cargar datos del usuario', err);
-            console.error(err);
+            console.error('Error al cargar datos del usuario', err);
           }
         });
-      }
+      },
+      error: err => console.error('No se pudo obtener usuario autenticado', err)
     });
   }
- 
+
 
 
   update() {
@@ -82,10 +78,9 @@ export class EditProfile {
     const payload: any = {
       name: raw.name,
       last_name: raw.lastName,
+      phone: raw.phone,
       email: raw.email
     };
-
-    if (raw.password && raw.password.length >= 8) payload.password = raw.password;
 
     this.clientS.getAuthenticatedUser().subscribe({
       next: user => {
@@ -100,7 +95,6 @@ export class EditProfile {
           error: (e) => {
             this.loading = false;
             console.error('Error update:', e);
-            console.log('response body:', e?.error);
             this.error = e?.error?.message ?? 'No se pudo crear la cuenta';
           }
         });
@@ -111,12 +105,6 @@ export class EditProfile {
       }
     });
   }
-
-  viewPassword() {
-    this.showPassword = !this.showPassword;
-  }
-
-
   cancel() {
     this.router.navigate(['/perfil']);
   }

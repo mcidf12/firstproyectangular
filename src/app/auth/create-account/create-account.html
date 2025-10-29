@@ -24,8 +24,8 @@
           </div>
 
           <div class="mb-3">
-            <label for="InputLastName1" class="form-label fw-semibold">Apellidos</label>
-            <input formControlName="lastName" type="text" class="form-control" id="InputLastName1" placeholder="Apellidos" >
+            <label for="InputlastName1" class="form-label fw-semibold">Apellidos</label>
+            <input formControlName="lastName" type="text" class="form-control" id="InputlastName1" placeholder="Apellidos" >
    
                 <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)"
                  class="mt-2 small text-danger">
@@ -35,6 +35,22 @@
                 </div>         
                 <div *ngIf="lastName.errors?.['pattern']">
                   Solo se aceptan letras
+                </div> 
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="InputTelefono1" class="form-label fw-semibold">Telefono</label>
+            <input formControlName="phone" type="text" class="form-control" id="InputTelefono1" placeholder="" >
+   
+                <div *ngIf="phone.invalid && (phone.dirty || phone.touched)"
+                 class="mt-2 small text-danger">
+
+                <div *ngIf="phone.errors?.['required']">
+                  Numero telefonico requerido
+                </div>         
+                <div *ngIf="phone.errors?.['pattern']">
+                  Solo se aceptan numeros
                 </div> 
             </div>
           </div>

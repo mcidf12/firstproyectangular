@@ -22,6 +22,7 @@ export class CreateAccount {
     this.createForm = this.fb.group({
       name: ['',[Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-Z ]*')]],
       lastName: ['',[Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-Z ]*')]],
+      phone: ['',[Validators.required, Validators.pattern('^[0-9]+$')]],
       email: ['',[Validators.required, Validators.email]],
       password: ['',[Validators.required, Validators.minLength(8)]],
     })
@@ -34,6 +35,10 @@ export class CreateAccount {
 
     get lastName(){
     return this.createForm.controls['lastName'];
+  }
+
+  get phone(){
+    return this.createForm.controls['phone'];
   }
 
   get email(){
@@ -51,6 +56,7 @@ export class CreateAccount {
     const payload = {
       name: this.createForm.value.name,
       last_name: this.createForm.value.lastName,
+      phone: this.createForm.value.phone,
       email: this.createForm.value.email,
       password: this.createForm.value.password,
     };
