@@ -16,8 +16,9 @@ import { LoginS } from '../../services/auth/login';
 export class Login {
   //uso de formularios reactivos
   loginForm!: FormGroup;
-  error = '';
-  showPassword = false;
+  error: string | null = null;
+  mensaje = '';
+  loading = false;
 
   constructor(private fb: FormBuilder, private router: Router, private api: LoginS) {
     this.loginForm = this.fb.group({
@@ -38,24 +39,45 @@ export class Login {
   login() {
     if (this.loginForm.invalid) { this.loginForm.markAllAsTouched(); return; }
 
+    this.loading = true;
+
     this.api.login(this.loginForm.value).subscribe({
       next: (res) => {
+        this.loading = false;
         const token = res?.token;
         if (token) {
           localStorage.setItem('authToken', token);
           console.log('Token usado en la request:', token);
-
         }
         this.router.navigateByUrl('/dashboard');
         this.loginForm.reset();
       },
       error: (e) => {
-        this.error = e?.error?.message ?? 'Error al iniciar sesión';
+        this.loading = false;
+        if (e?.status === 0) {
+          this.error = 'No se pudo conectar al servidor';
+        } else {
+          this.error = 'Error al iniciar sesión';
+        }
+
+        if (e?.status === 404) {
+          const ctrl = this.loginForm.get('email');
+          if (ctrl) ctrl.setErrors({ server: this.error });
+        }
+
+        if (e?.status === 404) {
+          const ctrl = this.loginForm.get('password');
+          if (ctrl) ctrl.setErrors({ server: this.error });
+        }
+
+        if (e?.status === 401) {
+          const ctrl = this.loginForm.get('password');
+          if (ctrl) ctrl.setErrors({ server: this.error });
+        }
       }
     });
   }
 
-  viewPassword() {
-    this.showPassword = !this.showPassword;
-  }
+
+
 }

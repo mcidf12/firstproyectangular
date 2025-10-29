@@ -34,4 +34,12 @@ export class Dashboard {
       }
     });
   }
+
+    contactSupport() {
+    const phone = '7121748293';
+    const text = encodeURIComponent('Hola, necesito ayuda.');
+    window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+  }
+
+
 }

@@ -7,7 +7,7 @@ import { ClientService } from '../../services/user/clientService';
 
 @Component({
   selector: 'app-client',
-  imports: [NavComponent, CurrencyPipe, NgIf],
+  imports: [NavComponent, CurrencyPipe, NgIf, ],
   templateUrl: './client.html',
   styleUrl: './client.css'
 })
@@ -32,5 +32,30 @@ export class Client implements OnInit {
       }
     });
   }
+
+  calcularTotalMensual(servicios: any): number {
+
+    if (!servicios) return 0;
+    let total = 0;
+
+    if (servicios.internet && servicios.internet.precio) {
+      total += Number(servicios.internet.precio);
+    }
+
+    if (servicios.camaras && servicios.camaras.precio) {
+      const precio = Number(servicios.camaras.precio) || 0;
+      const noCamaras = Number(servicios.camaras.canServicios) || 0;
+      total += precio * noCamaras;
+    }
+
+    if (servicios.telefonia) {
+      const precio = Number(servicios.telefonia.precio) || 0;
+      const lineas = Number(servicios.telefonia.lineas) || 0;
+      total += precio * lineas;
+    }
+
+    return total;
+  }
+
 
 }

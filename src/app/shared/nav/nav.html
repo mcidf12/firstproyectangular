@@ -1,17 +1,42 @@
 
-  <div class="px-3 py-3 border-bottom">
-    <div class="d-flex align-items-center gap-2">
-      <strong>Menu</strong>
-    </div>
-  </div>
+
+<div class="sidebar">
+  <!--<div class="menu-header">📋 Menu</div>-->
 
   <nav class="list-group list-group-flush">
-    <button routerLink="/dashboard" class="list-group-item list-group-item-action">🏠 Inicio</button>
-    <button routerLink="/estado-cuenta" class="list-group-item list-group-item-action">💳 Estado de cuenta</button>
-    <button routerLink="/cliente" class="list-group-item list-group-item-action">📄 Servicios</button>
-    <button routerLink="/formas-de-pago" class="list-group-item list-group-item-action">💲 Formas de pago</button>
-    <button routerLink="/visitas" class="list-group-item list-group-item-action"> Visitas</button>
+    <button routerLink="/dashboard" routerLinkActive="active" class="list-group-item list-group-item-action ">
+       <img src="assets/img/home.png" alt="" width="25" height="25">
+      Inicio
+    </button>
 
-    <button routerLink="/perfil" class="list-group-item list-group-item-action">👤 Perfil</button>
-    <button (click)="logout()" class="list-group-item list-group-item-action">⏻ Cerrar Sesión</button>
+    <button routerLink="/cliente" routerLinkActive="active" class="list-group-item list-group-item-action">
+      <img src="assets/img/wifi.png" alt="" width="25" height="25">
+      Servicios
+    </button>
+
+    <button routerLink="/estado-cuenta" routerLinkActive="active" class="list-group-item list-group-item-action">
+      <img src="assets/img/EstadoCuenta.png" alt="" width="25" height="25">
+      Estado de cuenta
+    </button>
+
+    <button routerLink="/formas-de-pago" routerLinkActive="active" class="list-group-item list-group-item-action">
+      <img src="assets/img/pagos.png" alt="" width="25" height="25">
+      Formas de pago
+    </button>
+
+    <button routerLink="/visitas" routerLinkActive="active" class="list-group-item list-group-item-action">
+      <img src="assets/img/visit.png" alt="" width="30" height="30">
+      Visitas
+    </button>
+
+    <button routerLink="/perfil" routerLinkActive="active" class="list-group-item list-group-item-action">
+      <img src="assets/img/usuario.png" alt="" width="25" height="25">
+      Perfil
+    </button>
+
+    <button (click)="logout()" routerLinkActive="active" class="list-group-item list-group-item-action logout">
+      <img src="assets/img/salir.png" alt="" width="20" height="20">
+      Cerrar Sesión
+    </button>
   </nav>
+</div>

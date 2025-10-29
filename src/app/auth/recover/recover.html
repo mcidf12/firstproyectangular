@@ -5,6 +5,7 @@
     <h3 class="text-center fw-bold mb-1">Recuperar contraseña</h3>
 
         <form [formGroup]="recoverForm" (ngSubmit)="recover()">
+          
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label fw-semibold">Ingresa tu correo electrónico para buscar tu cuenta.</label>
             <input formControlName="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="correo@dominio.com" aria-describedby="emailHelp">
@@ -18,6 +19,10 @@
                 <div *ngIf="email.errors?.['email']">
                   Email debe tener formato valido 
                 </div>
+
+                <div *ngIf="error" class="text-danger mb-4">{{ error }}</div>
+
+                
               </div>
           </div>
 
@@ -28,7 +33,9 @@
             </div>
 
           </div>
-          <button type="submit" class="btn btn-secondary btn-lg w-100">Recuperar</button>
+          <button type="submit" class="btn btn-secondary btn-lg w-100" [disabled]="loading">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+            Recuperar</button>
         </form>
   </div>
 </div>

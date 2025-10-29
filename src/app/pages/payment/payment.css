@@ -12,21 +12,8 @@
   padding: 18px;
   color: #fff;
 }
-.head-blue { background: linear-gradient(90deg,#2D9CDB,#2F80ED); }
-.head-green { background: linear-gradient(90deg,#00C853,#00E676); }
-.head-gold { background: linear-gradient(90deg,#FFB64D,#FF8A65); }
 
-/* Icon circle */
-.icon-circle {
-  width:58px;
-  height:58px;
-  border-radius:12px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background: rgba(255,255,255,0.12);
-  font-size:1.45rem;
-}
+.head-blue { background: linear-gradient(90deg,#493d79,#194a8b); }
 
 /* Card body */
 .card-body { padding: 20px; }
@@ -38,7 +25,7 @@
 .info-row { display:flex; align-items:center; justify-content:space-between; gap:10px; }
 
 /* Buttons */
-.btn-primary { background: linear-gradient(90deg,#2D9CDB,#2F80ED); border: none; }
+.btn-primary { background: linear-gradient(90deg,#263c47,#194b8b); border: none; }
 .btn-outline-secondary { border-radius: 8px; }
 
 /* Small responsive tweak */
