@@ -14,7 +14,7 @@ export class LoginS {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  private apiUrl = environment.apiUrl
+  private apiLocalUrl = environment.apiLocalUrl
 
   private getToken(): string | null {
     return localStorage.getItem('authToken');
@@ -29,7 +29,7 @@ export class LoginS {
   //Login post
   login(credentials: LoginRequest): Observable<any> {
     console.log(credentials);
-    return this.http.post<any>(`${this.apiUrl}/auth/login`, credentials);
+    return this.http.post<any>(`${this.apiLocalUrl}/auth/login`, credentials);
   }
 
   logout(): Observable<any> {
@@ -37,7 +37,7 @@ export class LoginS {
     //console.log('Token enviado (localStorage):', this.getToken());
     console.log('Headers que se enviarán:', headers.keys().map(k => `${k}: ${headers.get(k)}`));
 
-    return this.http.get(`${this.apiUrl}/auth/logout`, { headers });
+    return this.http.get(`${this.apiLocalUrl}/auth/logout`, { headers });
   }
 
   clearToken() {
@@ -45,14 +45,14 @@ export class LoginS {
   }
 
   register(data: RegisterRequest): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/usuarios`, data);
+    return this.http.post<any>(`${this.apiLocalUrl}/usuarios`, data);
   }
 
   sendPasswordReset(data: RecoverRequest): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/auth/recoverPassword`,data);
+    return this.http.post<any>(`${this.apiLocalUrl}/auth/recoverPassword`,data);
   }
   sendPasswordUpdate(data: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/auth/updatePassword`,data);
+    return this.http.put<any>(`${this.apiLocalUrl}/auth/updatePassword`,data);
   }
 
 

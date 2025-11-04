@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgIf } from '@angular/common'; 
+import { NgIf } from '@angular/common';
 import { FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { LoginS } from '../../services/auth/login';
@@ -18,47 +18,36 @@ export class CreateAccount {
   createForm!: FormGroup;
   error = '';
 
-   constructor(private fb: FormBuilder, private router:Router, private api: LoginS) {
+  constructor(private fb: FormBuilder, private router: Router, private api: LoginS) {
     this.createForm = this.fb.group({
-      name: ['',[Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-Z ]*')]],
-      lastName: ['',[Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-Z ]*')]],
-      phone: ['',[Validators.required, Validators.pattern('^[0-9]+$')]],
-      email: ['',[Validators.required, Validators.email]],
-      password: ['',[Validators.required, Validators.minLength(8)]],
+      cliente: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
     })
   }
 
 
-  get name(){
-    return this.createForm.controls['name'];
+  get cliente() {
+    return this.createForm.controls['cliente'];
   }
 
-    get lastName(){
-    return this.createForm.controls['lastName'];
-  }
-
-  get phone(){
-    return this.createForm.controls['phone'];
-  }
-
-  get email(){
+  get email() {
     return this.createForm.controls['email'];
   }
 
-  get password(){
+  get password() {
     return this.createForm.controls['password'];
   }
 
-  register(){
+  register() {
     if (this.createForm.invalid) { this.createForm.markAllAsTouched(); return; }
 
     //Formulario
     const payload = {
-      name: this.createForm.value.name,
-      last_name: this.createForm.value.lastName,
-      phone: this.createForm.value.phone,
+      cliente: this.createForm.value.cliente,
       email: this.createForm.value.email,
       password: this.createForm.value.password,
+
     };
 
     this.api.register(payload as any).subscribe({

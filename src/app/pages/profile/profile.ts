@@ -21,8 +21,8 @@ export class Profile {
     ngOnInit(): void {
       this, this.clientS.getAuthenticatedUser().subscribe({
         next: user => {
-          const id = user.id;
-          this.clientS.getclient(id).subscribe({
+          const cliente = user.cliente;
+          this.clientS.getclientNum(cliente).subscribe({
             next: res => this.data = res,
             error: err => console.log("Error cliente", err)
           });

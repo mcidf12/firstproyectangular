@@ -8,7 +8,7 @@ import { environment } from './routeApi';
   providedIn: 'root'
 })
 export class ClientService {
-  private apiUrl = environment.apiUrl
+  private apiLocalUrl = environment.apiLocalUrl
 
   constructor(private http: HttpClient) { }
 
@@ -21,17 +21,22 @@ export class ClientService {
 
   getclient(id: string): Observable<any> {
     const headers = this.getHeaders();
-    return this.http.get<any>(`${this.apiUrl}/usuarios/${id}`, { headers })
+    return this.http.get<any>(`${this.apiLocalUrl}/usuarios/${id}`, { headers })
+  }
+
+    getclientNum(cliente: string): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.get<any>(`${this.apiLocalUrl}/usuarios/${cliente}`, { headers })
   }
 
   getAuthenticatedUser(): Observable<any> {
     const headers = this.getHeaders();
-    return this.http.get<any>(`${this.apiUrl}/user`, { headers });
+    return this.http.get<any>(`${this.apiLocalUrl}/user`, { headers });
   }
 
   updateUser(id: string, data: any): Observable<any> {
     const headers = this.getHeaders();
-    return this.http.patch(`${this.apiUrl}/usuarios/${id}`, data, { headers });
+    return this.http.patch(`${this.apiLocalUrl}/usuarios/${id}`, data, { headers });
   }
 
 }

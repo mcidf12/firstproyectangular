@@ -7,7 +7,7 @@
 
         <form [formGroup]="createForm" (ngSubmit)="register()" >
 
-          <div class="mb-3">
+          <!--<div class="mb-3">
             <label for="InputName1" class="form-label fw-semibold">Nombre</label>
             <input formControlName="name" type="text" class="form-control" id="InputName1" placeholder="Nombre" >
 
@@ -37,23 +37,20 @@
                   Solo se aceptan letras
                 </div> 
             </div>
-          </div>
+          </div>-->
 
           <div class="mb-3">
-            <label for="InputTelefono1" class="form-label fw-semibold">Telefono</label>
-            <input formControlName="phone" type="text" class="form-control" id="InputTelefono1" placeholder="" >
+            <label for="InputCliente1" class="form-label fw-semibold">Numero de cliente</label>
+            <input formControlName="cliente" type="text" class="form-control" id="InputCliente1" placeholder="cliente" >
    
-                <div *ngIf="phone.invalid && (phone.dirty || phone.touched)"
+                <div *ngIf="cliente.invalid && (cliente.dirty || cliente.touched)"
                  class="mt-2 small text-danger">
 
-                <div *ngIf="phone.errors?.['required']">
-                  Numero telefonico requerido
-                </div>         
-                <div *ngIf="phone.errors?.['pattern']">
-                  Solo se aceptan numeros
+                <div *ngIf="cliente.errors?.['required']">
+                  Numero de cliente requerido
                 </div> 
             </div>
-          </div>
+          </div>          
 
           <div class="mb-3">
             <label for="InputEmail1" class="form-label fw-semibold">Email</label>

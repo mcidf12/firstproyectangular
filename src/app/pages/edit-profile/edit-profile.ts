@@ -42,14 +42,9 @@ export class EditProfile {
 
     this.clientS.getAuthenticatedUser().subscribe({
       next: user => {
-        const id = user.id;
-        this.clientS.getclient(id).subscribe({
+        const cliente = user.cliente;
+          this.clientS.getclientNum(cliente).subscribe({
           next: (userData) => {
-            const nombreCompleto = userData.cliente.nombre ?? '';
-            const partes = nombreCompleto.split(' ');
-            const nombre = partes[0] ?? '';
-            const apellido = partes.slice(1).join(' ') ?? '';
-
             this.updateForm.patchValue({
               name: userData.cliente.name ?? '',
               lastName: userData.cliente.last_name ?? '',
