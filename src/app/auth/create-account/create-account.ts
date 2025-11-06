@@ -56,7 +56,11 @@ export class CreateAccount {
         this.createForm.reset();
       },
       error: (e) => {
-        this.error = e?.error?.message ?? 'No se pudo crear la cuenta';
+        if (e?.status === 0) {
+          this.error = 'No se pudo conectar al servidor';
+        } else if (e?.status === 422) {
+          this.error = 'Este correo ya tiene una cuenta registrada.';
+        }
       }
     });
   }

@@ -4,5 +4,5 @@ export const environment = {
 
 
 export const env = {
-  apiUrl: 'https://dev.emenet.mx/api/'
+  apiUrl: 'https://dev.emenet.mx/api'
 };

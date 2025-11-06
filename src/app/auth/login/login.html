@@ -9,16 +9,16 @@
 
 
       <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label fw-semibold">Email</label>
-        <input formControlName="email" type="email" class="form-control" id="exampleInputEmail1"
-          placeholder="correo@dominio.com" aria-describedby="emailHelp">
+        <label for="exampleInputEmail1" class="form-label fw-semibold">Email o numero de cliente</label>
+        <input formControlName="usuario" type="text" class="form-control" id="exampleInputEmail1" placeholder=""
+          aria-describedby="emailHelp">
 
-        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="mt-2 small text-danger">
+        <div *ngIf="usuario.invalid && (usuario.dirty || usuario.touched)" class="mt-2 small text-danger">
 
-          <div *ngIf="email.errors?.['required']">
-            Email requerido
+          <div *ngIf="usuario.errors?.['required']">
+            campo requerido
           </div>
-          <div *ngIf="email.errors?.['email']">
+          <div *ngIf="usuario.errors?.['usuario']">
             Email debe tener formato valido
           </div>
         </div>
@@ -45,11 +45,12 @@
 
 
       </div>
+      <p *ngIf="error" class="text-danger mb-4">{{ error }}</p>
+
       <button type="submit" class="btn btn-secondary btn-lg w-100" [disabled]="loading">
         <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
         Iniciar sesion
       </button>
-      <!--<p *ngIf="error" class="text-danger mb-4">{{ error }}</p>-->
     </form>
       
   </div>

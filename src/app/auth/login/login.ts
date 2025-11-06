@@ -22,13 +22,13 @@ export class Login {
 
   constructor(private fb: FormBuilder, private router: Router, private api: LoginS) {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      usuario: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(8)]],
     })
   }
 
-  get email() {
-    return this.loginForm.controls['email'];
+  get usuario() {
+    return this.loginForm.controls['usuario'];
   }
 
   get password() {
@@ -40,8 +40,15 @@ export class Login {
     if (this.loginForm.invalid) { this.loginForm.markAllAsTouched(); return; }
 
     this.loading = true;
+    const raw = this.loginForm.value;
+    const usuario = raw.usuario;
+    const password = raw.password;
 
-    this.api.login(this.loginForm.value).subscribe({
+    const payload = usuario.includes('@')
+      ? { email: usuario, password }
+      : { cliente: usuario, password };
+
+    this.api.login(payload as any).subscribe({
       next: (res) => {
         this.loading = false;
         const token = res?.token;
@@ -54,25 +61,15 @@ export class Login {
       },
       error: (e) => {
         this.loading = false;
+
         if (e?.status === 0) {
           this.error = 'No se pudo conectar al servidor';
+        } else if (e?.status === 401) {
+          this.error = 'Credenciales inválidas';
+        } else if (e?.status === 404) {
+          this.error = 'Usuario no encontrado';
         } else {
           this.error = 'Error al iniciar sesión';
-        }
-
-        if (e?.status === 404) {
-          const ctrl = this.loginForm.get('email');
-          if (ctrl) ctrl.setErrors({ server: this.error });
-        }
-
-        if (e?.status === 404) {
-          const ctrl = this.loginForm.get('password');
-          if (ctrl) ctrl.setErrors({ server: this.error });
-        }
-
-        if (e?.status === 401) {
-          const ctrl = this.loginForm.get('password');
-          if (ctrl) ctrl.setErrors({ server: this.error });
         }
       }
     });

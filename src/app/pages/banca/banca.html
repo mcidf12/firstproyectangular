@@ -24,17 +24,12 @@
                   <div class="small text-muted">Estado</div>
                   <div>
                     <span class="badge"
-                      [class]="(data.cliente?.deuda?.total_due ?? 0) > 0 ? 'bg-danger' : 'bg-success'">
-                      {{ (data.cliente?.deuda?.total_due ?? 0) > 0 ? 'Suspendido' : 'Activo' }}
+                      [class]="(data.cliente?.deuda ?? 0) > 0 ? 'bg-danger' : 'bg-success'">
+                      {{ (data.cliente?.deuda ?? 0) > 0 ? 'Suspendido' : 'Activo' }}
                     </span>
 
                   </div>
                 </div>
-
-                <!--<div>
-                  <div class="small text-muted">Velocidad / paquete</div>
-                  <div>{{ data.cliente?.planInternet || '—' }}</div>
-                </div>-->
               </div>
             </div>
           </div>
@@ -48,9 +43,9 @@
                 <strong>Servicios</strong>
               </div>
               <div class="card-body">
-
+                <!--   && (data.servicios?.telefonia.lineas ?? 0) === 0    -->
                 <div
-                  *ngIf="(data.servicios?.camaras?.canServicios ?? 0) === 0 && (data.servicios?.telefonia.lineas ?? 0) === 0"
+                  *ngIf="(data.servicios?.camaras?.canServicios ?? 0) === 0 && (data.servicios?.telefonia?.lineas ?? 0) === 0"
                   class="text-center text-muted py-3">
                   <em>Sin servicios extra</em>
                 </div>
@@ -80,6 +75,7 @@
                   </div>
                 </div>
 
+              
               </div>
             </div>
           </div>
@@ -95,14 +91,15 @@
                   <div class="small text-muted">Saldo actual</div>
                   <div class="fs-4 fw-bold">
 
-                    {{ (data.cliente?.deuda?.total_due ?? 0) | currency:'MXN':'symbol':'1.0-0' }}
+                    {{ (data.cliente?.deuda ?? 0) | currency:'MXN':'symbol':'1.0-0' }}
+                    <!-- data.cliente?.deuda?.total_due ?? 0  -->
 
                   </div>
                 </div>
 
                 <div class="d-grid mt-3">
                   <button routerLink="/formas-de-pago" class="btn btn-primary btn-sm"
-                    *ngIf="(data.cliente?.deuda?.total_due ?? 0) > 0">
+                    *ngIf="(data.cliente?.deuda ?? 0) > 0">
                     Pagar ahora
                   </button>
                 </div>
@@ -153,7 +150,7 @@
                       <tr>
                         <th colspan="3" class="text-end">Total pendiente</th>
                         <th class="text-end">
-                          {{ (data?.cliente?.deuda?.total_due || 0) | currency:'MXN':'symbol':'1.0-0' }}
+                          {{ (data?.cliente?.deuda || 0) | currency:'MXN':'symbol':'1.0-0' }}
                         </th>
                       </tr>
                     </tfoot>

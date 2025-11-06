@@ -22,7 +22,7 @@ export class Profile {
       this, this.clientS.getAuthenticatedUser().subscribe({
         next: user => {
           const cliente = user.cliente;
-          this.clientS.getclientNum(cliente).subscribe({
+          this.clientS.getclientApi(cliente).subscribe({
             next: res => this.data = res,
             error: err => console.log("Error cliente", err)
           });

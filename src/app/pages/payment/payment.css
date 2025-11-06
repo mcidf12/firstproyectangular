@@ -13,7 +13,7 @@
   color: #fff;
 }
 
-.head-blue { background: linear-gradient(90deg,#493d79,#194a8b); }
+.head-blue { background: linear-gradient(90deg,#173bdf,#198edb); }
 
 /* Card body */
 .card-body { padding: 20px; }
@@ -25,7 +25,7 @@
 .info-row { display:flex; align-items:center; justify-content:space-between; gap:10px; }
 
 /* Buttons */
-.btn-primary { background: linear-gradient(90deg,#263c47,#194b8b); border: none; }
+.btn-primary { background: linear-gradient(90deg,#173bdf,#198edb); border: none; }
 .btn-outline-secondary { border-radius: 8px; }
 
 /* Small responsive tweak */
