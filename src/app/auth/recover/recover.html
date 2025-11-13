@@ -1,41 +1,46 @@
 <div class="auth-hero min-vh-100 d-flex flex-column align-items-center justify-content-start py-5">
-  <img src="assets/img/emenetLogo.png" alt="Logo" height="100" class="mb-3 opacity-75">
+  <img src="assets/img/emenetLogo.png" alt="Logo" height="100" class="mb-3 opacity-75" />
 
   <div class="auth-card shadow-lg p-4 p-sm-5">
     <h3 class="text-center fw-bold mb-1">Recuperar contraseña</h3>
 
-        <form [formGroup]="recoverForm" (ngSubmit)="recover()">
-          
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label fw-semibold">Ingresa tu correo electrónico para buscar tu cuenta.</label>
-            <input formControlName="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="correo@dominio.com" aria-describedby="emailHelp">
-              
-              <div *ngIf="email.invalid && (email.dirty || email.touched)"
-                class="mt-2 small text-danger">
+    <form [formGroup]="recoverForm" (ngSubmit)="recover()">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label fw-semibold"
+          >Ingresa tu correo electrónico para buscar tu cuenta.</label
+        >
+        <input
+          formControlName="email"
+          type="email"
+          class="form-control"
+          id="exampleInputEmail1"
+          placeholder="correo@dominio.com"
+          aria-describedby="emailHelp"
+        />
 
-                <div *ngIf="email.errors?.['required']">
-                  Email requerido
-                </div>
-                <div *ngIf="email.errors?.['email']">
-                  Email debe tener formato valido 
-                </div>
+        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="mt-2 small text-danger">
+          <div *ngIf="email.errors?.['required']">Email requerido</div>
+          <div *ngIf="email.errors?.['email']">Email debe tener formato valido</div>
 
-                <div *ngIf="error" class="text-danger mb-4">{{ error }}</div>
+          <div *ngIf="error" class="text-danger mb-4">{{ error }}</div>
+        </div>
+      </div>
 
-                
-              </div>
-          </div>
+      <div class="mb-3">
+        <div class="d-flex justify-content-between mb-4">
+          <a routerLink="/iniciar-sesion" class="text-muted text-decoration-none"
+            >Regresar a inicio de sesion</a
+          >
+        </div>
+      </div>
+      <button type="submit" class="btn btn-secondary btn-lg w-100" [disabled]="loading">
+        
+        <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+        Recuperar
+      </button>
 
-          <div class="mb-3">
-            
-            <div class="d-flex justify-content-between mb-4">
-              <a routerLink="/iniciar-sesion" class="text-muted text-decoration-none">Regresar a inicio de sesion</a>
-            </div>
 
-          </div>
-          <button type="submit" class="btn btn-secondary btn-lg w-100" [disabled]="loading">
-            <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
-            Recuperar</button>
-        </form>
+    </form>
+    <ngx-sonner-toaster richColors closeButton />
   </div>
 </div>

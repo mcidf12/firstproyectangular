@@ -5,8 +5,9 @@ export interface LoginRequest{
 }
 
 export interface RegisterRequest {
-  name: string;
-  last_name?: string; // opcional
+  //name: string;
+  //last_name?: string;
+  cliente: string;
   email: string;
   password: string;
 }

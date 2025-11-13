@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { ClientService } from '../../services/user/clientService';
 import { LoginS } from '../../services/auth/login';
+import { toast, NgxSonnerToaster } from 'ngx-sonner';
+
 
 @Component({
   selector: 'app-recover',
-  imports: [ReactiveFormsModule, NgIf, RouterLink],
+  imports: [ReactiveFormsModule, NgIf, RouterLink, NgxSonnerToaster],
   templateUrl: './recover.html',
   styleUrl: './recover.css'
 })
@@ -15,7 +16,6 @@ export class Recover {
   recoverForm!: FormGroup;
   loading = false;
   error = '';
-
   
 
   constructor(private fb: FormBuilder, private router: Router, private api: LoginS) {
@@ -41,13 +41,16 @@ export class Recover {
     this.api.sendPasswordReset(payload as any).subscribe({
       next: (res) => {
         this.loading = false;
+        toast.success('Correo de recuperación enviado correctamente');
         console.log(res);
       },
       error: (e) => {
         this.loading = false;
-        this.error = e?.error?.message ?? 'No se pudo enviar el correo';
+        toast.error('Error al enviar el correo');
       }
     });  
   }
+
+
 
 }

@@ -3,10 +3,11 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { LoginS } from '../../services/auth/login';
+import { toast, NgxSonnerToaster } from 'ngx-sonner';
 
-@Component({
+@Component({ 
   selector: 'app-response-recover',
-  imports: [ReactiveFormsModule, NgIf],
+  imports: [ReactiveFormsModule, NgIf, NgxSonnerToaster],
   templateUrl: './response-recover.html',
   styleUrl: './response-recover.css'
 })
@@ -27,7 +28,7 @@ export class ResponseRecover {
     this.recoverForm = this.fb.group({
       password: ['', [Validators.required, Validators.minLength(8)]],
       password_confirmation: ['', [Validators.required, Validators.minLength(8)]],
-    }, { Validators: this.passwordMatchValidator });
+    }, { validators: this.passwordMatchValidator });
 
     this.route.queryParamMap.subscribe(q => this.token = q.get('token'));
   }
@@ -35,15 +36,18 @@ export class ResponseRecover {
   passwordMatchValidator(group: FormGroup) {
     const pass = group.get('password')?.value;
     const confirm = group.get('password_confirmation')?.value;
-    return pass === confirm ? null : { passwordMissMatch: true };
+    if (pass && confirm && pass !== confirm) {
+    return { passwordMissMatch: true };
+  }
+  return null;
   }
 
   get password() {
-    return this.recoverForm.controls['password']!;
+    return this.recoverForm.controls['password'];
   }
 
   get passwordConfirmation() {
-    return this.recoverForm.controls['password_confirmation']!;
+    return this.recoverForm.controls['password_confirmation'];
   }
 
   recoverPassword() {
@@ -67,7 +71,8 @@ export class ResponseRecover {
       },
       error: (e) => {
         this.loading = false;
-        this.error = e?.error?.message ?? 'No se pudo actualizar la contraseña';
+        toast.error('No se pudo actualizar la contraseña')
+        //this.error = e?.error?.message ?? 'No se pudo actualizar la contraseña';
       }
     });
   }

@@ -1,96 +1,79 @@
 <div class="auth-hero min-vh-100 d-flex flex-column align-items-center justify-content-start py-5">
-  <img src="assets/img/emenetLogo.png" alt="Logo" height="100" class="mb-3 opacity-75">
+  <img src="assets/img/emenetLogo.png" alt="Logo" height="100" class="mb-3 opacity-75" />
 
   <div class="auth-card shadow-lg p-4 p-sm-5">
     <h4 class="text-center fw-bold mb-1">¡Bienvenido!</h4>
     <p class="text-center text-muted mb-4">Crear Cuenta</p>
 
-        <form [formGroup]="createForm" (ngSubmit)="register()" >
+    <form [formGroup]="createForm" (ngSubmit)="register()">
+      <div class="mb-3">
+        <label for="InputCliente1" class="form-label fw-semibold">Numero de cliente</label>
+        <input formControlName="cliente" type="text" class="form-control" id="InputCliente1" placeholder="cliente" />
 
-          <!--<div class="mb-3">
-            <label for="InputName1" class="form-label fw-semibold">Nombre</label>
-            <input formControlName="name" type="text" class="form-control" id="InputName1" placeholder="Nombre" >
+        <div *ngIf="cliente.invalid && (cliente.dirty || cliente.touched)" class="mt-2 small text-danger">
+          <div *ngIf="cliente.errors?.['required']">Numero de cliente requerido</div>
+        </div>
+      </div>
 
-            <div *ngIf="name.invalid && (name.dirty || name.touched)"
-                 class="mt-2 small text-danger">
+      <div class="mb-3">
+        <label for="InputEmail1" class="form-label fw-semibold">Email</label>
+        <input formControlName="email" type="email" class="form-control" id="InputEmail1"
+          placeholder="correo@dominio.com" aria-describedby="emailHelp" />
 
-                <div *ngIf="name.errors?.['required']">
-                  Nombre requerido
-                </div> 
-                <div *ngIf="name.errors?.['pattern']">
-                  Solo se aceptan letras
-                </div>             
-            </div>
+        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="mt-2 small text-danger">
+          <div *ngIf="email.errors?.['required']">Email requerido</div>
+          <div *ngIf="email.errors?.['email']">Email debe tener formato valido</div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Password</label>
+        <div class="input-group">
+          <input [type]="showPassword ? 'text' : 'password'" formControlName="password" class="form-control"
+            placeholder="Nueva contraseña (mín 8 caracteres)" />
+
+          <button type="button" class="btn btn-outline-secondary" (click)="viewPassword()">
+            <img [src]="showPassword ? 'assets/img/invisible.png' : 'assets/img/ojo.png'" alt="" width="24" height="24">
+          </button>
+        </div>
+        <div class="invalid-feedback d-block" *ngIf="password.errors && password.touched">
+          <div *ngIf="password?.errors?.['minlength']">La contraseña debe tener al menos 8 caracteres.
+          </div>
+          <div *ngIf="password?.errors?.['required']">La contraseña es requerida.</div>
+        </div>
+
+        <div class="form-text">
+          Recomnedaciones <br>
+          <ul>
+            <li>No usar palabras obvias o fácilmente deducibles</li>
+            <li>Combinar letras con caracterez</li>
+          </ul>
+        </div>
+
+
+        <div class="mb-3">
+          <label class="form-label">Confirmar Contraseña</label>
+          <input type="password" formControlName="password_confirmation" class="form-control"
+            placeholder="Repite la contraseña" />
+          <div class="invalid-feedback d-block"
+            *ngIf="(passwordConfirmation.touched || createForm.touched) && createForm.hasError('passwordMissMatch')">
+            Las contraseñas no coinciden.
+          </div>
+          <div class="invalid-feedback d-block"
+            *ngIf="passwordConfirmation.touched && passwordConfirmation?.errors?.['required']">
+            La contraseña es requerida.
           </div>
 
-          <div class="mb-3">
-            <label for="InputlastName1" class="form-label fw-semibold">Apellidos</label>
-            <input formControlName="lastName" type="text" class="form-control" id="InputlastName1" placeholder="Apellidos" >
-   
-                <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)"
-                 class="mt-2 small text-danger">
 
-                <div *ngIf="lastName.errors?.['required']">
-                  Nombre requerido
-                </div>         
-                <div *ngIf="lastName.errors?.['pattern']">
-                  Solo se aceptan letras
-                </div> 
-            </div>
-          </div>-->
+        </div>
 
-          <div class="mb-3">
-            <label for="InputCliente1" class="form-label fw-semibold">Numero de cliente</label>
-            <input formControlName="cliente" type="text" class="form-control" id="InputCliente1" placeholder="cliente" >
-   
-                <div *ngIf="cliente.invalid && (cliente.dirty || cliente.touched)"
-                 class="mt-2 small text-danger">
-
-                <div *ngIf="cliente.errors?.['required']">
-                  Numero de cliente requerido
-                </div> 
-            </div>
-          </div>          
-
-          <div class="mb-3">
-            <label for="InputEmail1" class="form-label fw-semibold">Email</label>
-            <input formControlName="email" type="email" class="form-control" id="InputEmail1" placeholder="correo@dominio.com" aria-describedby="emailHelp">
-              
-              <div *ngIf="email.invalid && (email.dirty || email.touched)"
-                class="mt-2 small text-danger">
-
-                <div *ngIf="email.errors?.['required']">
-                  Email requerido
-                </div>
-                <div *ngIf="email.errors?.['email']">
-                  Email debe tener formato valido 
-                </div>
-              </div>
-          </div>          
-
-          <div class="mb-3">
-            <label for="InputPassword1" class="form-label fw-semibold">Password</label>
-            <input formControlName="password" type="password" class="form-control" placeholder="••••••••" id="InputPassword1">
-            
-            <div *ngIf="password.invalid && (password.dirty || password.touched)"
-                 class="mt-2 small text-danger">
-
-                <div *ngIf="password.errors?.['required']">
-                  Password requerido
-                </div>     
-                <div *ngIf="password.errors?.['minlength']">
-                  Minimo 8 caracteres
-                </div>        
-            </div>
-
-            <div class="d-flex justify-content-between mb-4">
-              <a routerLink="/iniciar-sesion" class="text-muted text-decoration-none">¿Ya tienes cuenta?</a>
-            </div>
-
-          </div>
-          <p *ngIf="error" class="text-danger mb-4">{{ error }}</p>
-          <button type="submit" class="btn btn-secondary btn-lg w-100">Registrarse</button>
-          
-        </form>
+        <div class="d-flex justify-content-between mb-4">
+          <a routerLink="/iniciar-sesion" class="text-muted text-decoration-none">¿Ya tienes cuenta?</a>
+        </div>
+      </div>
+      <p *ngIf="error" class="text-danger mb-4">{{ error }}</p>
+      <button type="submit" class="btn btn-secondary btn-lg w-100">Registrarse</button>
+    </form>
+    <ngx-sonner-toaster richColors closeButton />
   </div>
 </div>

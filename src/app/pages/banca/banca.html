@@ -24,8 +24,8 @@
                   <div class="small text-muted">Estado</div>
                   <div>
                     <span class="badge"
-                      [class]="(data.cliente?.deuda ?? 0) > 0 ? 'bg-danger' : 'bg-success'">
-                      {{ (data.cliente?.deuda ?? 0) > 0 ? 'Suspendido' : 'Activo' }}
+                      [class]="data.cliente?.infoRed?.estado === 'Suspendido' ? 'bg-danger' : 'bg-success'">
+                      {{ data.cliente?.infoRed?.estado }}
                     </span>
 
                   </div>

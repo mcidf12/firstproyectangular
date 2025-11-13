@@ -3,11 +3,12 @@ import { NgIf } from '@angular/common';
 import { FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { LoginS } from '../../services/auth/login';
+import { NgxSonnerToaster, toast } from 'ngx-sonner';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf, RouterLink],
+  imports: [ReactiveFormsModule, NgIf, RouterLink, NgxSonnerToaster],
   templateUrl: './login.html',
   styleUrl: './login.css'
 })
@@ -52,10 +53,10 @@ export class Login {
       next: (res) => {
         this.loading = false;
         const token = res?.token;
-        if (token) {
+        /*if (token) {
           localStorage.setItem('authToken', token);
           console.log('Token usado en la request:', token);
-        }
+        }*/
         this.router.navigateByUrl('/dashboard');
         this.loginForm.reset();
       },
@@ -63,13 +64,13 @@ export class Login {
         this.loading = false;
 
         if (e?.status === 0) {
-          this.error = 'No se pudo conectar al servidor';
+          toast.error('No se pudo conectar al servidor');
         } else if (e?.status === 401) {
-          this.error = 'Credenciales inválidas';
+          toast.error('Credenciales inválidas');
         } else if (e?.status === 404) {
-          this.error = 'Usuario no encontrado';
+          toast.error('Usuario no encontrado');
         } else {
-          this.error = 'Error al iniciar sesión';
+          toast.error('Error al iniciar sesión');
         }
       }
     });
