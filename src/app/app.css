@@ -1,0 +1,60 @@
+/* ----- SIDEBAR GENERAL ----- */
+.sidebar-container {
+  width: 240px;
+  flex-shrink: 0;
+  padding: 12px;
+  background: #ffffff;
+  border-right: 1px solid #e5e7eb;
+  height: calc(100vh - 56px); /* ajusta si tu header es más grande */
+  overflow-y: auto;
+  transition: transform .3s ease-in-out;
+}
+
+/* Layout Windows */
+.app-wrapper {
+  display: flex;
+}
+
+/* MODO PC (>=768px) */
+@media (min-width: 768px) {
+  .sidebar-container {
+    transform: translateX(0);
+    position: sticky;
+    top: 56px;
+  }
+
+  .backdrop {
+    display: none !important;
+  }
+}
+
+/* MODO MÓVIL (<768px) */
+@media (max-width: 767px) {
+  .sidebar-container {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    height: calc(100vh - 56px);
+    background: #fff;
+    transform: translateX(-110%);
+    z-index: 2000;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  }
+
+  .sidebar-container.open {
+    transform: translateX(0);
+  }
+
+  .backdrop {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,.45);
+    z-index: 1990;
+  }
+}
+
+
+

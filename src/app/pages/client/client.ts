@@ -1,20 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { NavComponent } from '../../shared/nav/nav';
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, NgFor } from '@angular/common';
 import { NgIf } from '@angular/common';
 import { ClientService } from '../../services/user/clientService';
 
 
 @Component({
   selector: 'app-client',
-  imports: [NavComponent, CurrencyPipe, NgIf, ],
+  imports: [ CurrencyPipe, NgIf, NgFor],
   templateUrl: './client.html',
   styleUrl: './client.css'
 })
 
 export class Client implements OnInit {
   data: any;
+  showDetails = false;
 
+  
   constructor(private clientS: ClientService) { }
 
   ngOnInit(): void {
@@ -32,6 +33,8 @@ export class Client implements OnInit {
       }
     });
   }
+
+  toggleDetails() { this.showDetails = !this.showDetails; }
 
   calcularTotalMensual(servicios: any): number {
 
@@ -55,6 +58,12 @@ export class Client implements OnInit {
     }
 
     return total;
+  }
+
+    get latestPayments() {
+    const list = this.data?.servicios?.estadoCuenta || [];
+    // mostrar últimas 5 (o menos si no hay)
+    return list.slice(0, 5);
   }
 
 

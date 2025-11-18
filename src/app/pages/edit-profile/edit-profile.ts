@@ -3,10 +3,11 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClientService } from '../../services/user/clientService';
+import { NgxSonnerToaster, toast } from 'ngx-sonner';
 
 @Component({
   selector: 'app-edit-profile',
-  imports: [ReactiveFormsModule, NgIf],
+  imports: [ReactiveFormsModule, NgIf, NgxSonnerToaster],
   templateUrl: './edit-profile.html',
   styleUrl: './edit-profile.css'
 })
@@ -43,7 +44,7 @@ export class EditProfile {
     this.clientS.getAuthenticatedUser().subscribe({
       next: user => {
         const cliente = user.cliente;
-          this.clientS.getclientNum(cliente).subscribe({
+        this.clientS.getclientNum(cliente).subscribe({
           next: (userData) => {
             this.updateForm.patchValue({
               name: userData.cliente.name ?? '',
@@ -83,20 +84,23 @@ export class EditProfile {
         this.clientS.updateUser(id, payload as any).subscribe({
           next: (res) => {
             this.loading = false;
-            console.log('Perfil actualizado', res);
+            toast.success('Perfil actualizado');
             this.loadUserData();
-            this.router.navigate(['/perfil']);
+            setTimeout(() => {
+              this.router.navigateByUrl('/perfil');
+            }, 1500);
+
           },
           error: (e) => {
             this.loading = false;
-            console.error('Error update:', e);
-            this.error = e?.error?.message ?? 'No se pudo crear la cuenta';
+            toast.error('Error update:', e);
+            toast.error = e?.error?.message ?? 'No se pudo crear la cuenta';
           }
         });
       },
       error: err => {
         this.loading = false;
-        console.error('No se pudo obtener usuarios', err);
+        toast.error('No se pudo obtener usuarios', err);
       }
     });
   }

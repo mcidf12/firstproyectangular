@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
-
 import { RouterLink } from '@angular/router';
-import { NavComponent } from '../../shared/nav/nav';
 import { NgIf } from '@angular/common';
 import { ClientService } from '../../services/user/clientService';
+import { NgxSonnerToaster, toast } from "ngx-sonner";
 
 @Component({
   selector: 'app-dashboard',
-  imports: [RouterLink, NavComponent, NgIf],
+  imports: [RouterLink , NgIf, NgxSonnerToaster],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css'
 })
@@ -26,11 +25,11 @@ export class Dashboard {
         const cliente = user.cliente;
         this.clientS.getclientApi(cliente).subscribe({
           next: res => this.data = res,
-          error: err => console.log("Error cliente", err)
+          error: err => toast.error("Error cliente")
         });
       },
       error: err => {
-        console.log("Error al obtener los datos", err);
+        toast.error("Error al obtener los datos", err);
       }
     });
   }

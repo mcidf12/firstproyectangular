@@ -36,10 +36,9 @@
             <img [src]="showPassword ? 'assets/img/invisible.png' : 'assets/img/ojo.png'" alt="" width="24" height="24">
           </button>
         </div>
-        <div class="invalid-feedback d-block" *ngIf="password.errors && password.touched">
-          <div *ngIf="password?.errors?.['minlength']">La contraseña debe tener al menos 8 caracteres.
-          </div>
-          <div *ngIf="password?.errors?.['required']">La contraseña es requerida.</div>
+        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="mt-2 small text-danger">
+          <div *ngIf="password.errors?.['minlength']">La contraseña debe tener al menos 8 caracteres.</div>
+          <div *ngIf="password.errors?.['required']">La contraseña es requerida.</div>
         </div>
 
         <div class="form-text">
@@ -60,7 +59,7 @@
             Las contraseñas no coinciden.
           </div>
           <div class="invalid-feedback d-block"
-            *ngIf="passwordConfirmation.touched && passwordConfirmation?.errors?.['required']">
+            *ngIf="passwordConfirmation.touched && passwordConfirmation.errors?.['required']">
             La contraseña es requerida.
           </div>
 
@@ -74,6 +73,6 @@
       <p *ngIf="error" class="text-danger mb-4">{{ error }}</p>
       <button type="submit" class="btn btn-secondary btn-lg w-100">Registrarse</button>
     </form>
-    <ngx-sonner-toaster richColors closeButton />
+    <ngx-sonner-toaster richColors  position="top-center" />
   </div>
 </div>

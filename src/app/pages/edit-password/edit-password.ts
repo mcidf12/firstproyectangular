@@ -3,10 +3,11 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClientService } from '../../services/user/clientService';
+import { NgxSonnerToaster, toast } from 'ngx-sonner';
 
 @Component({
   selector: 'app-edit-password',
-  imports: [ReactiveFormsModule, NgIf],
+  imports: [ReactiveFormsModule, NgIf, NgxSonnerToaster],
   templateUrl: './edit-password.html',
   styleUrl: './edit-password.css'
 })
@@ -51,8 +52,10 @@ export class EditPassword {
         this.clientS.updateUser(id, payload as any).subscribe({
           next: (res) => {
             this.loading = false;
-            console.log('Contraseña actualizado', res);
-            this.router.navigate(['/perfil']);
+            toast.success('Comtraseña actualizado');
+            setTimeout(() => {
+              this.router.navigateByUrl('/perfil');
+            }, 1500);
           },
           error: (e) => {
             this.loading = false;

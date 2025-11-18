@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { NavComponent } from '../../shared/nav/nav';
 import { ClipboardModule } from 'ngx-clipboard';
-import { NgIf } from '@angular/common';
+import { NgxSonnerToaster, toast } from 'ngx-sonner';
 
 @Component({
   selector: 'app-payment',
-  imports: [NavComponent, ClipboardModule],
+  imports: [ ClipboardModule, NgxSonnerToaster],
   templateUrl: './payment.html',
   styleUrl: './payment.css'
 })
@@ -15,11 +14,11 @@ export class Payment {
   copy(dato: string) {
     navigator.clipboard.writeText(dato)
       .then(() => {
-        this.mensajeCopiado = true;
-        setTimeout(() => this.mensajeCopiado = false, 2000); // Oculta el mensaje en 2s
+        this.mensajeCopiado = true;        
+        toast.success("Datos copiados");
       })
       .catch(err => {
-        console.error('Error al copiar:', err);
+        toast.error('Error al copiar');
       });
   }
 

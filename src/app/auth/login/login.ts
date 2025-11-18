@@ -53,10 +53,10 @@ export class Login {
       next: (res) => {
         this.loading = false;
         const token = res?.token;
-        /*if (token) {
+        if (token) {
           localStorage.setItem('authToken', token);
-          console.log('Token usado en la request:', token);
-        }*/
+          //console.log('Token usado en la request:', token);
+        }
         this.router.navigateByUrl('/dashboard');
         this.loginForm.reset();
       },

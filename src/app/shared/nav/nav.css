@@ -1,7 +1,5 @@
 /* SIDEBAR */
 .sidebar {
-
-
   box-shadow: 0 6px 18px rgba(202, 48, 9, 0.06);
   border-radius: 12px;
   padding: 12px;
@@ -13,9 +11,11 @@
   gap: 6px;
   position: sticky;
   top: 0; 
-  height: 100vh; 
-  overflow-y: auto;
+  max-height: 100vh; 
+  overflow-y: hidden !important;
 }
+
+
 
 /*ajuste en */
 @media (max-width: 768px) {
@@ -56,3 +56,14 @@
 .logout {
   color: #d9534f;
 }
+
+/* Ocultar scrollbar pero permitir scroll */
+.sidebar {
+  scrollbar-width: none; /* Firefox */
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+}
+
+

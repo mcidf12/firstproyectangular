@@ -31,13 +31,13 @@ export class LoginS {
 
   //Login post
   login(credentials: LoginRequest): Observable<any> {
-    console.log(credentials);
+    //console.log(credentials);
     return this.http.post<any>(`${this.apiLocalUrl}/auth/login`, credentials);
   }
 
   logout(): Observable<any> {
     const headers = this.getHeaders();
-    console.log('Headers que se enviarán:', headers.keys().map(k => `${k}: ${headers.get(k)}`));
+    //console.log('Headers que se enviarán:', headers.keys().map(k => `${k}: ${headers.get(k)}`));
 
     return this.http.get(`${this.apiLocalUrl}/auth/logout`, { headers });
   }
@@ -62,7 +62,7 @@ export class LoginS {
   logoutAndRedirect() {
     this.logout().subscribe({
       next: () => {
-        console.log('Logout exitoso');
+        //console.log('Logout exitoso');
         this.clearToken();
         this.router.navigate(['/iniciar-sesion']);
       },
@@ -76,4 +76,6 @@ export class LoginS {
     });
   }
 }
+
+
 

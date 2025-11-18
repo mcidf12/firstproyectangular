@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LoginS } from '../../services/auth/login';
 import { NgIf } from '@angular/common';
@@ -13,7 +13,11 @@ import { NgIf } from '@angular/common';
 export class NavComponent {
   constructor(private auth: LoginS) { }
 
+  @Output() linkClick = new EventEmitter<void>();
+
+
   logout() {
     this.auth.logoutAndRedirect();
   }
 }
+ 

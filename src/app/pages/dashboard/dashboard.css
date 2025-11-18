@@ -22,16 +22,7 @@
   justify-content: space-between;
 }
 
-.avatar {
-  width: 68px;
-  height: 68px;
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  box-shadow: 0 6px 18px rgba(13,110,253,0.06);
-}
+
 
 .card .btn {
   border-radius: 8px;

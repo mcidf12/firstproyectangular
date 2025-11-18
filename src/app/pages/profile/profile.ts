@@ -7,7 +7,7 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
-  imports: [NavComponent, NgIf, RouterLink],
+  imports: [NgIf, RouterLink],
   templateUrl: './profile.html',
   styleUrl: './profile.css'
 })

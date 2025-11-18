@@ -66,7 +66,7 @@ export class CreateAccount {
         toast.success('Cuenta creada correctamente');
         setTimeout(() => {
           this.router.navigateByUrl('/iniciar-sesion');
-        }, 3000);
+        }, 2000);
         this.createForm.reset();
       },
       error: (e) => {
@@ -77,7 +77,7 @@ export class CreateAccount {
         } else if (e?.status === 422) {
           toast.error('Este correo ya tiene una cuenta registrada')
         } else if (e?.status === 404) {
-          toast.error('Usuario no encontrad')
+          toast.error('Cliente no encontrado')
         } else {
           toast.error('Error')
         }

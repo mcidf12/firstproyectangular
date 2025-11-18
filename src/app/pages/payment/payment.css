@@ -1,36 +1,112 @@
-/* Card base */
-.payment-card {
-  border-radius: 12px;
-  overflow: hidden;
-  background: #fff;
-  transition: transform .18s ease, box-shadow .18s ease;
-}
-.payment-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(16,24,40,0.08); }
+/* Layout */
+html, body { height: 100%; margin: 0; font-family: Inter, sans-serif; }
+.container-fluid, .row { height: 100%; }
+.row { display: flex; }
+.sidebar { height: 100%; background: #fff; box-shadow: 2px 0 6px rgba(0,0,0,0.05); padding: 1rem; }
+.content { flex: 1; background: #f5f6fa; padding: 1.5rem; overflow-y: auto; display: flex; flex-direction: column; }
 
-/* Header variants */
-.card-head {
-  padding: 18px;
+
+.heading { text-align:center; margin-bottom: 1.8rem; }
+.heading h2 { font-size: clamp(1.5rem, 2.4vw, 2rem); margin:0; letter-spacing:-0.02em; }
+.heading p { margin-top: .45rem; color: var(--muted); font-size: .95rem; }
+
+
+/* Grid tarjetas */
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr; 
+  align-items: start;
+}
+@media(min-width: 920px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+@media(min-width: 768px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media(min-width: 1200px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+
+/* Tarjetas */
+details.payment {
+    background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(250,250,252,0.96));
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  transition: transform .18s cubic-bezier(.2,.9,.2,1), box-shadow .18s ease;
+
+}
+
+.tag {
+  margin-left: auto;
+  font-weight:700; 
+  font-size:.78rem; 
+  padding:.28rem .55rem; 
+  border-radius:999px;
+  background: rgba(15,23,42,0.05); 
+  color:var(--text); 
+  border: 1px solid rgba(15,23,42,0.03);
+  box-shadow: 0 6px 18px rgba(11,18,32,0.03);
+}
+
+
+details summary {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+
+details .icon {
+  width:48px; height:48px; border-radius:12px; display:grid; place-items:center; color:#fff;
+  text-align: center;
+  font-size: 1.5rem;
+  background: linear-gradient(180deg, rgba(13, 66, 180, 0));
+}
+
+details .panel { 
+  margin-top: 0.75rem; 
+  font-size: 0.95rem; 
+  color: #000000; }
+
+
+
+.actions { 
+  display:flex; 
+  gap:.6rem;
+  margin-top:1rem; 
+  flex-wrap:wrap; 
+  }
+  
+.btn {
+  border: none; 
+  padding:.58rem .9rem; 
+  border-radius:12px; 
+  font-weight:700; 
+  font-size:.92rem;
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, rgba(33, 88, 240, 0.911));
   color: #fff;
 }
 
-.head-blue { background: linear-gradient(90deg,#173bdf,#198edb); }
+.whatsapp {
+  background: linear-gradient(90deg,#0e3cd1e0);
+  color:#fff;
+  padding:.7rem 1.2rem;
+  border-radius:12px;
+  border:none;
+  font-weight:800;
+}
 
-/* Card body */
-.card-body { padding: 20px; }
-.label { font-size: .75rem; color: #6b7280; }
-.value { font-weight: 700; font-size: 1rem; }
-.mono { font-family: SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace; }
 
-/* info-row layout */
-.info-row { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+details[open] { transform: translateY(-4px) scale(1.002); box-shadow: 0 30px 80px rgba(12,22,40,0.12); }
+details[open] .panel { background: linear-gradient(180deg, rgba(255,255,255,1), rgba(250,250,252,1)); }
 
-/* Buttons */
-.btn-primary { background: linear-gradient(90deg,#173bdf,#198edb); border: none; }
-.btn-outline-secondary { border-radius: 8px; }
 
-/* Small responsive tweak */
-@media (max-width: 767.98px) {
-  .icon-circle { width:48px; height:48px; font-size:1.1rem; }
-  .card-head { padding: 14px; }
-  .card-body { padding: 16px; }
+@media (max-width: 640px) {
+  .sidebar { display: drawer; }
+  .main { padding: 0.8rem; }
+  .page-header h1 { font-size: 1.25rem; }
+  .icon { width:40px; height:40px; }
+  .tag { font-size:0.72rem; padding:.2rem .45rem; }
 }
