@@ -15,7 +15,6 @@ export class LoginS {
   constructor(private http: HttpClient, private router: Router) { }
 
   private apiLocalUrl = environment.apiLocalUrl
-  private apiUrl = env.apiUrl
 
   private getToken(): string | null {
     return localStorage.getItem('authToken');
@@ -23,7 +22,6 @@ export class LoginS {
   getHeaders(): HttpHeaders {
     const token = this.getToken();
     let headers = new HttpHeaders().set('Accept', 'application/json');
-    //headers = headers.set('x-web-key','web_9825f8agd35dfd4bg15fsd3a94c947a28896d5fd58gjh0f251a38912a');
     if (token) headers = headers.set('Authorization', `Bearer ${token}`);
     return headers;
   }

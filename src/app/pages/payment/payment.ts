@@ -16,7 +16,7 @@ export class Payment {
       .then(() => {
         this.mensajeCopiado = true;        
         toast.success("Datos copiados");
-      })
+      }) 
       .catch(err => {
         toast.error('Error al copiar');
       });

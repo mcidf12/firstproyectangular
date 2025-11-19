@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { NgIf } from '@angular/common';
+import { NgIf, NgClass } from '@angular/common';
 import { ClientService } from '../../services/user/clientService';
 import { NgxSonnerToaster, toast } from "ngx-sonner";
 
 @Component({
   selector: 'app-dashboard',
-  imports: [RouterLink , NgIf, NgxSonnerToaster],
+  imports: [RouterLink, NgIf, NgxSonnerToaster, NgClass],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css'
 })

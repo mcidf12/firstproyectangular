@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CurrencyPipe, NgFor } from '@angular/common';
 import { NgIf } from '@angular/common';
 import { ClientService } from '../../services/user/clientService';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-client',
-  imports: [ CurrencyPipe, NgIf, NgFor],
+  imports: [CurrencyPipe, NgIf, NgFor, RouterLink, ],
   templateUrl: './client.html',
   styleUrl: './client.css'
 })
@@ -51,9 +52,9 @@ export class Client implements OnInit {
       total += precio * noCamaras;
     }
 
-    if (servicios.telefonia) {
-      const precio = Number(servicios.telefonia.precio) || 0;
-      const lineas = Number(servicios.telefonia.lineas) || 0;
+    if (servicios.telefono) {
+      const precio = Number(servicios.telefono.precio) || 0;
+      const lineas = Number(servicios.telefono.canServicios) || 0;
       total += precio * lineas;
     }
 
@@ -62,7 +63,6 @@ export class Client implements OnInit {
 
     get latestPayments() {
     const list = this.data?.servicios?.estadoCuenta || [];
-    // mostrar últimas 5 (o menos si no hay)
     return list.slice(0, 5);
   }
 

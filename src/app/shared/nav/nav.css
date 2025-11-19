@@ -16,8 +16,6 @@
 }
 
 
-
-/*ajuste en */
 @media (max-width: 768px) {
   .sidebar {
     position: relative;
@@ -27,7 +25,6 @@
   }
 }
 
-/* Estilo general para items */
 .list-group-item {
   display: flex;
   align-items: center;
@@ -43,7 +40,7 @@
 }
 
 .list-group-item:hover {
-  background: rgba(0, 123, 255, 0.08);
+  background: rgba(0, 123, 255, 0.089);
   transform: translateX(4px);
 }
 
@@ -57,13 +54,13 @@
   color: #d9534f;
 }
 
-/* Ocultar scrollbar pero permitir scroll */
+
 .sidebar {
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none; 
 }
 
 .sidebar::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Edge */
+  display: none; 
 }
 
 
