@@ -26,13 +26,19 @@
 
       <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label fw-semibold">Password</label>
-        <input formControlName="password" type="password" class="form-control" placeholder="••••••••"
-          id="exampleInputPassword1">
+        <div class="input-group">
+          <input [type]="showPassword ? 'text' : 'password'" formControlName="password" class="form-control"
+            placeholder="••••••••" />
+
+          <button type="button" class="btn btn-outline-secondary" (click)="viewPassword()">
+            <img [src]="showPassword ? 'assets/img/invisible.png' : 'assets/img/ojo.png'" alt="" width="24" height="24">
+          </button>
+        </div>
 
         <div *ngIf="password.invalid && (password.dirty || password.touched)" class="mt-2 small text-danger">
 
           <div *ngIf="password.errors?.['required']">
-            Password requerido 
+            Password requerido
           </div>
 
           <div *ngIf="error" class="text-danger mb-4">{{ error }}</div>
@@ -52,6 +58,6 @@
         Iniciar sesion
       </button>
     </form>
-      <ngx-sonner-toaster richColors closeButton position="top-center"/>
+      <ngx-sonner-toaster richColors closeButton position="top-center" />
   </div>
 </div>

@@ -63,7 +63,7 @@ export class CreateAccount {
 
     this.api.register(payload1 as any).subscribe({
       next: () => {
-        toast.success('Cuenta creada correctamente');
+        toast.success('Cuenta creada. Revisa tu correo para validar tu cuenta');
         setTimeout(() => {
           this.router.navigateByUrl('/iniciar-sesion');
         }, 2000);

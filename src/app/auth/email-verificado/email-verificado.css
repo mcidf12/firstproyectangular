@@ -1,0 +1,14 @@
+
+.auth-card{
+  width: min(560px, 92vw);
+  background: #fff;
+  border-radius: 28px;
+  border: 1px solid #e9e9f3;
+  position: relative;
+}
+
+.small-text {
+  font-size: 13px;
+  color: gray;
+  margin-top: 15px;
+}

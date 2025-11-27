@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 
-import { requireAuthGuard } from './auth/require-auth-guard';
-import { onlyGuestsGuard } from './auth/only-guests-guard';
+import { requireAuthGuard } from './guards/require-auth-guard';
+import { onlyGuestsGuard } from './guards/only-guests-guard';
 
 import { Login } from './auth/login/login';
 import { CreateAccount } from './auth/create-account/create-account';
@@ -16,6 +16,8 @@ import { Profile } from './pages/profile/profile';
 import { Visits } from './pages/visits/visits';
 import { EditProfile } from './pages/edit-profile/edit-profile';
 import { EditPassword } from './pages/edit-password/edit-password';
+import { EmailVerificado } from './auth/email-verificado/email-verificado';
+import { emailVerificadoGuard } from './guards/email-verificado-guard';
 
 
 export const routes: Routes = [
@@ -25,6 +27,7 @@ export const routes: Routes = [
   { path: 'crear-cuenta', component: CreateAccount, canActivate: [onlyGuestsGuard] },
   { path: 'recuperar-password', component: Recover, canActivate: [onlyGuestsGuard] },
   { path: 'response-password', component: ResponseRecover },
+  { path: 'email-verificado', component: EmailVerificado, canActivate: [emailVerificadoGuard] },
 
   // Requieren login
   { path: 'dashboard', component: Dashboard, canActivate: [requireAuthGuard] },

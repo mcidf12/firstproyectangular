@@ -28,21 +28,36 @@ export class App {
     '/response-password',
     '/edit-perfil',
     '/edit-password',
-    '/404'
+    '/email-verificado',
+    '/404',
+    '/'
   ];
 
   constructor(private router: Router) {
-    // Detectar cambios de ruta
+    //pagina de iniciar sesion sin sidebar (primera vez)
+    this.checkSidebar(window.location.pathname);
+
+    // Detectar cambios de ruta (usar urlAfterRedirects si está disponible)
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe((event: any) => {
-        this.checkSidebar(event.url);
+      .subscribe((event: NavigationEnd) => {
+        const rawUrl = (event as NavigationEnd).urlAfterRedirects ?? (event as NavigationEnd).url;
+        this.checkSidebar(rawUrl);
       });
   }
 
   checkSidebar(url: string) {
-    // si la ruta está en la lista, ocultamos el sidebar
-    this.showSidebar = !this.hiddenSidebarRoutes.includes(url);
+    // proteger contra valores nulos/indefinidos
+    if (!url) {
+      this.showSidebar = true;
+      return;
+    }
+
+    // cortar todo lo que venga despues de '?'
+    const cleanUrl = url.split('?')[0];
+
+    // validar exactamente contra la lista
+    this.showSidebar = !this.hiddenSidebarRoutes.includes(cleanUrl);
   }
 
   toggleSidebar() {

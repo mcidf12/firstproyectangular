@@ -20,6 +20,7 @@ export class Login {
   error: string | null = null;
   mensaje = '';
   loading = false;
+  showPassword = false;
 
   constructor(private fb: FormBuilder, private router: Router, private api: LoginS) {
     this.loginForm = this.fb.group({
@@ -69,6 +70,8 @@ export class Login {
           toast.error('Credenciales inválidas');
         } else if (e?.status === 404) {
           toast.error('Usuario no encontrado');
+        }  else if (e?.status === 403) {
+          toast.error('Correo no verificado');
         } else {
           toast.error('Error al iniciar sesión');
         }
@@ -77,5 +80,8 @@ export class Login {
   }
 
 
+  viewPassword() {
+    this.showPassword = !this.showPassword;
+  }
 
 }

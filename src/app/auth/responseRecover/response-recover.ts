@@ -66,7 +66,7 @@ export class ResponseRecover {
     this.api.sendPasswordUpdate(payload as any).subscribe({
       next: (res) => {
         this.loading = false;
-        console.log(res);
+        //console.log(res);
         this.router.navigate(['/iniciar-sesion']);
       },
       error: (e) => {
