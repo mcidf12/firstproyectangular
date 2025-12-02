@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NavComponent } from './shared/nav/nav';
 import { filter } from 'rxjs/operators';
 import { NgIf } from '@angular/common';
+import { NgxSonnerToaster } from 'ngx-sonner';
 
 
 

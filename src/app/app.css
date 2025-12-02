@@ -5,7 +5,7 @@
   padding: 12px;
   background: #ffffff;
   border-right: 1px solid #e5e7eb;
-  height: calc(100vh - 56px); /* ajusta si tu header es más grande */
+  height: calc(100vh - 56px); 
   overflow-y: auto;
   transition: transform .3s ease-in-out;
 }

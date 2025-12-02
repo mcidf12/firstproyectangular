@@ -17,7 +17,7 @@ export class LoginS {
   private apiLocalUrl = environment.apiLocalUrl
 
   private getToken(): string | null {
-    return localStorage.getItem('authToken');
+    return localStorage.getItem('authToken') || sessionStorage.getItem('authToken') ;
   }
   getHeaders(): HttpHeaders {
     const token = this.getToken();
@@ -40,10 +40,6 @@ export class LoginS {
     return this.http.get(`${this.apiLocalUrl}/auth/logout`, { headers });
   }
 
-  clearToken() {
-    localStorage.removeItem('authToken');
-  }
-
   register(data: RegisterRequest): Observable<any> {
     return this.http.post<any>(`${this.apiLocalUrl}/usuarios`, data);
   }
@@ -54,7 +50,6 @@ export class LoginS {
   sendPasswordUpdate(data: any): Observable<any> {
     return this.http.put<any>(`${this.apiLocalUrl}/auth/updatePassword`,data);
   }
-
 
 
   logoutAndRedirect() {
@@ -72,6 +67,13 @@ export class LoginS {
         }
       }
     });
+  }
+
+  clearToken() {
+    localStorage.removeItem('authToken');
+    sessionStorage.removeItem('authToken');
+    //borrar tambien al usuario
+     // localStorage.removeItem('savedUsuario');
   }
 }
 

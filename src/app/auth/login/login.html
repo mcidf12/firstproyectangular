@@ -11,10 +11,9 @@
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label fw-semibold">Email o numero de cliente</label>
         <input formControlName="usuario" type="text" class="form-control" id="exampleInputEmail1" placeholder=""
-          aria-describedby="emailHelp">
+          autocomplete="username" aria-describedby="emailHelp">
 
         <div *ngIf="usuario.invalid && (usuario.dirty || usuario.touched)" class="mt-2 small text-danger">
-
           <div *ngIf="usuario.errors?.['required']">
             campo requerido
           </div>
@@ -22,13 +21,15 @@
             Email debe tener formato valido
           </div>
         </div>
+
       </div>
 
       <div class="mb-3">
+
         <label for="exampleInputPassword1" class="form-label fw-semibold">Password</label>
         <div class="input-group">
           <input [type]="showPassword ? 'text' : 'password'" formControlName="password" class="form-control"
-            placeholder="••••••••" />
+            autocomplete="current-password" placeholder="••••••••" />
 
           <button type="button" class="btn btn-outline-secondary" (click)="viewPassword()">
             <img [src]="showPassword ? 'assets/img/invisible.png' : 'assets/img/ojo.png'" alt="" width="24" height="24">
@@ -36,21 +37,26 @@
         </div>
 
         <div *ngIf="password.invalid && (password.dirty || password.touched)" class="mt-2 small text-danger">
-
           <div *ngIf="password.errors?.['required']">
             Password requerido
           </div>
-
           <div *ngIf="error" class="text-danger mb-4">{{ error }}</div>
         </div>
+
+      </div>
+
+      <!-- checkbox "Recordar credenciales" -->
+          <div class="mb-3 form-check">
+            <input class="form-check-input" type="checkbox" id="rememberCheck" formControlName="remember" />
+            <label class="form-check-label text-muted" for="rememberCheck">
+              Recordar credenciales 
+            </label>
+          </div>
 
         <div class="d-flex justify-content-between mb-4">
           <a routerLink="/crear-cuenta" class="text-muted text-decoration-none">Crear cuenta</a>
           <a routerLink="/recuperar-password" class="text-muted text-decoration-none">¿Olvidaste tu contraseña?</a>
         </div>
-
-
-      </div>
       <p *ngIf="error" class="text-danger mb-4">{{ error }}</p>
 
       <button type="submit" class="btn btn-secondary btn-lg w-100" [disabled]="loading">

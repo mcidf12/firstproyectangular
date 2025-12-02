@@ -13,7 +13,7 @@ export const emailVerificadoGuard: CanActivateFn = (route, state) => {
   //si no hay token redirige a vista de inicio de sesion
   if(!token){
     router.navigate(['/iniciar-sesion']);
-    //toast.error("acceso denegado");
+    toast.error("acceso denegado");
     return false;
   }
 

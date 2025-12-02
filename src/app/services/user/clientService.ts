@@ -13,8 +13,14 @@ export class ClientService {
 
   constructor(private http: HttpClient) { }
 
-  getHeaders(): HttpHeaders {
-    const token = localStorage.getItem('authToken');
+  //obtener token de local o de sessionStorage
+  private getToken(): string | null {
+    return localStorage.getItem('authToken') || sessionStorage.getItem('authToken') ;
+  }
+
+  //obtencion de headers
+  getHeaders(): HttpHeaders {    
+    const token = this.getToken();
     let headers = new HttpHeaders().set('Accept', 'application/json');
     headers = headers.set('x-web-key','web_9825f8agd35dfd4bg15fsd3a94c947a28896d5fd58gjh0f251a38912a');
     if (token) headers = headers.set('Authorization', `Bearer ${token}`);
