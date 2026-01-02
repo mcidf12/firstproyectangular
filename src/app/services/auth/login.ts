@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { LoginRequest, RegisterRequest, RecoverRequest } from './loginRequest';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { env, environment } from '../user/routeApi';
+import { toast } from 'ngx-sonner';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ import { env, environment } from '../user/routeApi';
 
 //servicio crea un observable que escucha la api rest
 export class LoginS {
+  @Output() linkClick = new EventEmitter<void>();
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -26,7 +28,6 @@ export class LoginS {
     return headers;
   }
 
-
   //Login post
   login(credentials: LoginRequest): Observable<any> {
     //console.log(credentials);
@@ -36,7 +37,6 @@ export class LoginS {
   logout(): Observable<any> {
     const headers = this.getHeaders();
     //console.log('Headers que se enviarán:', headers.keys().map(k => `${k}: ${headers.get(k)}`));
-
     return this.http.get(`${this.apiLocalUrl}/auth/logout`, { headers });
   }
 
@@ -50,6 +50,8 @@ export class LoginS {
   sendPasswordUpdate(data: any): Observable<any> {
     return this.http.put<any>(`${this.apiLocalUrl}/auth/updatePassword`,data);
   }
+
+  
 
 
   logoutAndRedirect() {
@@ -69,9 +71,26 @@ export class LoginS {
     });
   }
 
+
+    goNavigate(ruta: string) {
+    const numero = localStorage.getItem('servicio_activo');
+
+    if (!numero){
+      toast.error('Seleeciona un servicio primero');
+      this.router.navigate(['/servicios']);
+      return;
+    }
+
+    this.router.navigate([ruta, numero]);
+    this.linkClick.emit();
+  }
+
+
   clearToken() {
     localStorage.removeItem('authToken');
     sessionStorage.removeItem('authToken');
+
+    localStorage.removeItem('servicio_activo');
     //borrar tambien al usuario
      // localStorage.removeItem('savedUsuario');
   }

@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import { ClientService } from '../../services/user/clientService';
 import { NgxSonnerToaster, toast } from 'ngx-sonner';
+import { LoginS } from '../../services/auth/login';
 
 @Component({
   selector: 'app-edit-profile',
@@ -15,51 +16,35 @@ export class EditProfile {
   updateForm!: FormGroup;
   showPassword = false;
   loading = false;
-  messageText = '';
-  error = '';
 
 
-  constructor(private fb: FormBuilder, private router: Router, private clientS: ClientService) {
+  constructor(private fb: FormBuilder, private router: Router, private clientS: ClientService, private auth: LoginS) {
   }
 
   ngOnInit(): void {
     this.updateForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-ZÁÉÍÓÚÑáéíóúñ ]*')]],
-      lastName: ['', [Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-ZÁÉÍÓÚÑáéíóúñ ]*')]],
-      phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.minLength(8)]]
     });
 
     this.loadUserData();
   }
 
-  get name() { return this.updateForm.controls['name']!; }
-  get lastName() { return this.updateForm.controls['lastName']!; }
-  get phone() { return this.updateForm.controls['phone']!; }
   get email() { return this.updateForm.controls['email']!; }
-
+  get password() { return this.updateForm.controls['password']!; }
 
   loadUserData() {
 
     this.clientS.getAuthenticatedUser().subscribe({
       next: user => {
-        const cliente = user.cliente;
-        this.clientS.getclientNum(cliente).subscribe({
-          next: (userData) => {
-            this.updateForm.patchValue({
-              name: userData.cliente.name ?? '',
-              lastName: userData.cliente.last_name ?? '',
-              phone: userData.cliente.telefono ?? '',
-              email: userData.cliente.correo ?? ''
-            });
-            console.log(userData)
-          },
-          error: (err) => {
-            console.error('Error al cargar datos del usuario', err);
-          }
+        this.updateForm.patchValue({
+          email: user.email ?? ''
         });
+        //console.log(user);
       },
-      error: err => console.error('No se pudo obtener usuario autenticado', err)
+      error: (err) => {
+        console.error('Error al cargar datos del usuario', err);
+      }
     });
   }
 
@@ -72,39 +57,48 @@ export class EditProfile {
     const raw = this.updateForm.value;
 
     const payload: any = {
-      name: raw.name,
-      last_name: raw.lastName,
-      phone: raw.phone,
-      email: raw.email
+      email: raw.email,
     };
+
+    if(raw.password && raw.password.length >= 8) {
+      payload.password = raw.password;
+    }
+
 
     this.clientS.getAuthenticatedUser().subscribe({
       next: user => {
         const id = user.id;
         this.clientS.updateUser(id, payload as any).subscribe({
-          next: (res) => {
+          next: () => {
             this.loading = false;
             toast.success('Perfil actualizado');
+            this.updateForm.get('password')?.reset();
+            
             this.loadUserData();
             setTimeout(() => {
-              this.router.navigateByUrl('/perfil');
+              this.auth.goNavigate('/perfil');
             }, 1500);
 
           },
           error: (e) => {
             this.loading = false;
             toast.error('Error update:', e);
-            toast.error = e?.error?.message ?? 'No se pudo crear la cuenta';
+            toast.error = e?.error?.message ?? 'No se pudo actualiza';
           }
         });
       },
       error: err => {
         this.loading = false;
-        toast.error('No se pudo obtener usuarios', err);
+        toast.error('No se pudo obtener el usuario', err);
       }
     });
   }
   cancel() {
-    this.router.navigate(['/perfil']);
+    this.auth.goNavigate('/perfil')
+  }
+
+
+  viewPassword() {
+    this.showPassword = !this.showPassword;
   }
 }

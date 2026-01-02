@@ -19,10 +19,12 @@ export class CreateAccount {
   createForm!: FormGroup;
   error = ('');
   showPassword = false;
+  loading = false;
+
 
   constructor(private fb: FormBuilder, private router: Router, private api: LoginS) {
     this.createForm = this.fb.group({
-      cliente: ['', [Validators.required]],
+      numero_cliente: ['', [Validators.required, Validators.maxLength(10), Validators.pattern(/^00\d{6}-[A-Z]$/i)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       password_confirmation: ['', [Validators.required, Validators.minLength(8)]],
@@ -39,23 +41,27 @@ export class CreateAccount {
   }
 
 
-  get cliente() { return this.createForm.controls['cliente']; }
-
+  get numero_cliente() { return this.createForm.controls['numero_cliente']; }
   get email() { return this.createForm.controls['email']; }
-
   get password() { return this.createForm.controls['password']; }
-
   get passwordConfirmation() { return this.createForm.controls['password_confirmation']; }
 
 
 
   register() {
+    if (this.loading) return;
+
     if (this.createForm.invalid) { this.createForm.markAllAsTouched(); return; }
+
+    this.loading = true;
 
     const raw = this.createForm.value;
 
+    //normalizar numero de cliente
+    const codigoNormalizado = raw.numero_cliente.trim().toUpperCase();
+
     const payload1: any = {
-      cliente: raw.cliente,
+      numero_cliente: codigoNormalizado,
       email: raw.email,
       password: raw.password,
       password_confirmation: raw.password_confirmation
@@ -64,19 +70,24 @@ export class CreateAccount {
     this.api.register(payload1 as any).subscribe({
       next: () => {
         toast.success('Cuenta creada. Revisa tu correo para validar tu cuenta');
+        this.createForm.reset();
         setTimeout(() => {
           this.router.navigateByUrl('/iniciar-sesion');
         }, 2000);
-        this.createForm.reset();
+        //
+        this.loading = false;
       },
       error: (e) => {
+        this.loading = false;
         if (e?.status === 0) {
           toast.error('No se pudo conectar al servido')
         } else if (e?.status === 409) {
           toast.error('Este cliente ya tiene una cuenta registrada')
         } else if (e?.status === 422) {
           toast.error('Este correo ya tiene una cuenta registrada')
-        } else if (e?.status === 404) {
+        } else if (e?.status === 403) {
+          toast.error('Este numero de cliente ha sido dado de baja')
+        }else if (e?.status === 404) {
           toast.error('Cliente no encontrado')
         } else {
           toast.error('Error')

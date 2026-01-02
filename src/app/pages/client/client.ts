@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CurrencyPipe, NgFor } from '@angular/common';
 import { NgIf } from '@angular/common';
 import { ClientService } from '../../services/user/clientService';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Route, Router, RouterLink } from '@angular/router';
+import { toast } from 'ngx-sonner';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -15,11 +17,13 @@ import { RouterLink } from '@angular/router';
 export class Client implements OnInit {
   data: any;
   showDetails = false;
+  loading = false;
+   private subs: Subscription[] = [];
 
   
-  constructor(private clientS: ClientService) { }
+  constructor(private clientS: ClientService, private route: ActivatedRoute, private router: Router) { }
 
-  ngOnInit(): void {
+  /*ngOnInit(): void {
     //this.clientS.getclient('1').subscribe({
     this, this.clientS.getAuthenticatedUser().subscribe({
       next: user => {
@@ -33,7 +37,65 @@ export class Client implements OnInit {
         console.log("Error al obtener los datos", err);
       }
     });
-  }
+  }*/
+
+    ngOnInit(): void {
+        const sub = this.route.paramMap.subscribe(params => {
+          const numero = params.get('numero_cliente');
+          if (numero) {
+            this.loadClientData(numero);
+          } else {
+            const userSub = this.clientS.getAuthenticatedUser().subscribe({
+              next: user => {
+                const cliente = user?.cliente;
+                if (!cliente) {
+                  toast.error('No se encontro infomarcion')
+                  return;
+                }
+                this.loadClientData(cliente);
+              },
+              error: err => {
+            console.error('Error obteniendo usuario autenticado', err);
+            toast.error('Error al obtener los datos del usuario');
+          }
+            });
+            this.subs.push(userSub);
+          }
+        });
+        this.subs.push(sub);
+        
+    }
+
+    loadClientData(numeroCliente: string) {
+        this.loading = true;
+        this.data = null;
+    
+        const sub = this.clientS.getClientePorNumero(numeroCliente).subscribe({
+          next: res => {
+            //console.log(res);
+            this.data = res,
+              this.loading = false;
+          },
+          error: (e) => {
+            this.loading = false;
+            console.error('Error en servicio', e);
+            if (e?.status === 0) {
+              toast.error('No se pudo conectar al servidor');
+            } else if (e?.status === 404) {
+              toast.error('Servicio no encontrado');
+            } else if (e?.status === 401) {
+              toast.error('No autorizado');
+              this.router.navigateByUrl('/iniciar-sesion');
+            } else if (e?.status === 403) {
+              toast.error('No autorizado para eliminar este servicio');
+            } else {
+              toast.error('Error inesperado');
+            }
+          }
+    
+        })
+    
+      }
 
   toggleDetails() { this.showDetails = !this.showDetails; }
 

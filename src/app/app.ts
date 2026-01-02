@@ -30,15 +30,16 @@ export class App {
     '/edit-perfil',
     '/edit-password',
     '/email-verificado',
+    '/servicios',
     '/404',
     '/'
   ];
 
   constructor(private router: Router) {
-    //pagina de iniciar sesion sin sidebar (primera vez)
+    //pagina de iniciar sesion sin sidebar
     this.checkSidebar(window.location.pathname);
 
-    // Detectar cambios de ruta (usar urlAfterRedirects si está disponible)
+    // Detectar cambios de ruta 
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {

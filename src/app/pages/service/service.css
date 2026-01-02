@@ -1,0 +1,93 @@
+.services-container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 1rem 0.5rem;
+}
+
+/* Inputs */
+.form-control {
+  border-radius: 0 12px 12px 0;
+  border-color: #dee2e6;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.15);
+}
+
+.input-group-text {
+  border-radius: 12px 0 0 12px;
+  background-color: #f8f9fa;
+  border-color: #dee2e6;
+}
+
+
+
+/* Card base */
+.service-card {
+  border-radius: 16px;
+  background: linear-gradient(180deg, #ffffff, #f9fafb);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hover elegante */
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Línea superior decorativa */
+.service-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  background: linear-gradient(90deg, #0d6efd, #20c997);
+}
+
+/* Título */
+.service-card h5 {
+  font-size: 1.05rem;
+}
+
+/* Badge principal */
+.status-badge {
+  font-size: 0.7rem;
+  padding: 0.45em 0.9em;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Badges secundarios */
+.badge {
+  font-weight: 500;
+}
+
+/* Botones */
+.service-card .btn {
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.service-card .btn-outline-primary:hover {
+  background-color: #0d6efd;
+  color: #fff;
+}
+
+.service-card .btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+
+@media (max-width: 575.98px) {
+  .services-container {
+    padding: 0.75rem 0.5rem;
+  }
+}

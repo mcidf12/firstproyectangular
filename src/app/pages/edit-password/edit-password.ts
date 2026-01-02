@@ -54,7 +54,7 @@ export class EditPassword {
             this.loading = false;
             toast.success('Comtraseña actualizado');
             setTimeout(() => {
-              this.router.navigateByUrl('/perfil');
+              this.goNavigate('/perfil');
             }, 1500);
           },
           error: (e) => {
@@ -74,10 +74,22 @@ export class EditPassword {
   viewPassword() {
     this.showPassword = !this.showPassword;
   }
-
+ 
 
   cancel() {
-    this.router.navigate(['/perfil']);
+    this.goNavigate('/perfil');
   }
 
+    goNavigate(ruta: string) {
+    const numero = localStorage.getItem('servicio_activo');
+
+    if (!numero){
+      toast.error('Seleeciona un servicio primero');
+      this.router.navigate(['/servicios']);
+      return;
+    }
+
+    this.router.navigate([ruta, numero]);
+    //this.linkClick.emit();
+  }
 }

@@ -6,61 +6,12 @@
                     <h4 class="mb-3">Editar perfil</h4>
 
                     <form [formGroup]="updateForm" (ngSubmit)="update()">
-                        <!-- Nombre -->
-                        <div class="mb-3">
-                            <label for="InputName1" class="form-label fw-semibold">Nombre</label>
-                            <input formControlName="name" type="text" class="form-control" id="InputName1">
-
-                            <div class="invalid-feedback" *ngIf="name.invalid && (name.dirty || name.touched)"
-                                class="mt-2 small text-danger">
-
-                                <div *ngIf="name.errors?.['required']">
-                                    Nombre requerido
-                                </div>
-                                <div *ngIf="name.errors?.['pattern']">
-                                    Solo se aceptan letras
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Apellido -->
-                        <div class="mb-3">
-                            <label for="InputLastName1" class="form-label fw-semibold">Apellidos</label>
-                            <input formControlName="lastName" type="text" class="form-control" id="InputLastName1">
-
-                            <div class="invalid-feedback"
-                                *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)"
-                                class="mt-2 small text-danger">
-
-                                <div *ngIf="lastName.errors?.['required']">
-                                    Apellidos requerido
-                                </div>
-                                <div *ngIf="lastName.errors?.['pattern']">
-                                    Solo se aceptan letras
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="InputTelefono1" class="form-label fw-semibold">Telefono</label>
-                            <input formControlName="phone" type="text" class="form-control" id="InputTelefono1">
-
-                            <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="mt-2 small text-danger">
-
-                                <div *ngIf="phone.errors?.['required']">
-                                    Numero telefonico requerido
-                                </div>
-                                <div *ngIf="phone.errors?.['pattern']">
-                                    Solo se aceptan numeros
-                                </div>
-                            </div>
-                        </div>
 
                         <!-- Correo -->
                         <div class="mb-3">
                             <label for="InputEmail1" class="form-label fw-semibold">Email</label>
                             <input formControlName="email" type="email" class="form-control" id="InputEmail1"
-                                 aria-describedby="emailHelp">
+                                 aria-describedby="emailHelp" placeholder="correo@dominio.com">
 
                             <div class="invalid-feedback" *ngIf="email.invalid && (email.dirty || email.touched)"
                                 class="mt-2 small text-danger">
@@ -71,6 +22,32 @@
                                 <div *ngIf="email.errors?.['email']">
                                     Email debe tener formato valido
                                 </div>
+                            </div>
+                        </div>
+
+                        <!-- Contraseña -->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Contraseña</label>
+                            <div class="input-group">
+                                <input [type]="showPassword ? 'text' : 'password'" formControlName="password"
+                                    class="form-control" placeholder="Nueva contraseña (mín 8 caracteres)" />
+
+                                <div *ngIf="password.invalid && (password.dirty || password.touched)"
+                                    class="mt-2 small text-danger">
+                                </div>
+
+                                <button type="button" class="btn btn-outline-secondary" (click)="viewPassword()">
+                                    <img [src]="showPassword ? 'assets/img/invisible.png' : 'assets/img/ojo.png'" alt=""
+                                        width="24" height="24">
+                                </button>
+                            </div>
+                            <small> <small> el campo vacio si no deseas cambiar la contraseña </small> </small>
+
+                            <div *ngIf="password.invalid && (password.dirty || password.touched)"
+                                class="mt-2 small text-danger">
+                                <div *ngIf="password.errors?.['minlength']">La contraseña debe tener al menos 8
+                                    caracteres.</div>
+                                <div *ngIf="password.errors?.['required']">La contraseña es requerida.</div>
                             </div>
                         </div>
 

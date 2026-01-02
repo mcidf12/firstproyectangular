@@ -9,7 +9,6 @@ import { Recover } from './auth/recover/recover';
 import { ResponseRecover } from './auth/responseRecover/response-recover';
 
 import { Dashboard } from './pages/dashboard/dashboard';
-import { Banca } from './pages/banca/banca';
 import { Client } from './pages/client/client';
 import { Payment } from './pages/payment/payment';
 import { Profile } from './pages/profile/profile';
@@ -18,28 +17,30 @@ import { EditProfile } from './pages/edit-profile/edit-profile';
 import { EditPassword } from './pages/edit-password/edit-password';
 import { EmailVerificado } from './auth/email-verificado/email-verificado';
 import { emailVerificadoGuard } from './guards/email-verificado-guard';
+import { Service } from './pages/service/service';
+import { serviceAccessGuard } from './guards/service-access-guard';
 
 
 export const routes: Routes = [
-    {path:'',redirectTo:'/iniciar-sesion', pathMatch:'full' },    //si no coinicide con ninguna ruta regresa al inicio de sesion
-    
-  { path: 'iniciar-sesion', component: Login, canActivate: [onlyGuestsGuard] },
-  { path: 'crear-cuenta', component: CreateAccount, canActivate: [onlyGuestsGuard] },
-  { path: 'recuperar-password', component: Recover, canActivate: [onlyGuestsGuard] },
-  { path: 'response-password', component: ResponseRecover },
+  { path: '', redirectTo: '/iniciar-sesion', pathMatch: 'full' },    //si no coinicide con ninguna ruta regresa al inicio de sesion
+
+  { path: 'iniciar-sesion', component: Login },
+  { path: 'crear-cuenta', component: CreateAccount },
+  { path: 'recuperar-password', component: Recover },
+  { path: 'response-password', component: ResponseRecover},
   { path: 'email-verificado', component: EmailVerificado, canActivate: [emailVerificadoGuard] },
 
-  // Requieren login
-  { path: 'dashboard', component: Dashboard, canActivate: [requireAuthGuard] },
-  { path: 'estado-cuenta', component: Banca, canActivate: [requireAuthGuard] },
-  { path: 'cliente', component: Client, canActivate: [requireAuthGuard] },
+  // Requieren login   
+  { path: 'dashboard/:numero_cliente', component: Dashboard, canActivate: [requireAuthGuard, serviceAccessGuard] },
+  { path: 'servicios', component: Service, canActivate: [requireAuthGuard] },
+  { path: 'estadoCuenta/:numero_cliente', component: Client, canActivate: [requireAuthGuard] },
   { path: 'formas-de-pago', component: Payment, canActivate: [requireAuthGuard] },
-  { path: 'perfil', component: Profile, canActivate: [requireAuthGuard] },
+  { path: 'perfil/:numero_cliente', component: Profile, canActivate: [requireAuthGuard] },
   { path: 'visitas', component: Visits, canActivate: [requireAuthGuard] },
   { path: 'edit-perfil', component: EditProfile, canActivate: [requireAuthGuard] },
   { path: 'edit-password', component: EditPassword, canActivate: [requireAuthGuard] },
 
   
   { path: '**', redirectTo: '/iniciar-sesion' }
-    
+
 ];

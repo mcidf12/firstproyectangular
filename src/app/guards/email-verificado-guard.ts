@@ -11,24 +11,26 @@ export const emailVerificadoGuard: CanActivateFn = (route, state) => {
   const token = route.queryParams['token'];
 
   //si no hay token redirige a vista de inicio de sesion
-  if(!token){
+  if (!token) {
     router.navigate(['/iniciar-sesion']);
-    toast.error("acceso denegado");
+    setTimeout(() => toast.warning('Acceso denegado'), 0);
     return false;
   }
 
   // Validar el token 
-  return http.post<{valid: boolean}>('http://localhost:8000/api/verify-token', { token })
+  return http.post<{ valid: boolean }>('http://localhost:8000/api/verify-token', { token })
     .pipe(
       map(response => {
         if (response.valid) {
           return true;
         } else {
-          router.navigate(['/']);          
+          setTimeout(() => toast.warning('Acceso denegado'), 0);
+          router.navigate(['/']);
           return false;
         }
       }),
       catchError(() => {
+        setTimeout(() => toast.warning('Acceso denegado'), 0);
         router.navigate(['/']);
         return of(false);
       })

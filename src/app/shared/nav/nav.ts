@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { LoginS } from '../../services/auth/login';
-import { NgIf } from '@angular/common';
+import { toast } from 'ngx-sonner';
 
 @Component({
   selector: 'app-nav',
@@ -11,7 +11,8 @@ import { NgIf } from '@angular/common';
   styleUrl: './nav.css'
 })
 export class NavComponent {
-  constructor(private auth: LoginS) { }
+  servicios: any[] = [];
+  constructor(private auth: LoginS, private router: Router) { }
 
   @Output() linkClick = new EventEmitter<void>();
 
@@ -19,5 +20,22 @@ export class NavComponent {
   logout() {
     this.auth.logoutAndRedirect();
   }
+
+  goDashboard(){
+    this.auth.goNavigate('/dashboard')
+  }
+ 
+  goEstadoCuenta(){
+    this.auth.goNavigate('/estadoCuenta')
+  }
+ 
+  goPerfil(){
+    this.auth.goNavigate('/perfil')
+  }
+ 
+
+
+
+
 }
  

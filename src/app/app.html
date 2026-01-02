@@ -1,28 +1,21 @@
 <div class="d-flex flex-column min-vh-100">
 
-   <app-header (toggleSidebar)="toggleSidebar()"></app-header>
+  <app-header (toggleSidebar)="toggleSidebar()"></app-header>
 
   <div class="app-wrapper flex-grow-1">
 
     <!--RUTAS PERMITIDAS -->
-    <aside 
-      class="sidebar-container"
-      *ngIf="showSidebar"
-      [class.open]="sidebarOpen"
-    >
+    <aside class="sidebar-container" *ngIf="showSidebar" [class.open]="sidebarOpen">
       <app-nav (linkClick)="closeSidebar()"></app-nav>
     </aside>
 
     <!-- Backdrop SOLO si hay sidebar -->
-    <div 
-      class="backdrop"
-      *ngIf="showSidebar && sidebarOpen"
-      (click)="closeSidebar()"
-    ></div>
+    <div class="backdrop" *ngIf="showSidebar && sidebarOpen" (click)="closeSidebar()"></div>
 
     <!-- Contenido -->
     <main class="flex-grow-1">
       <router-outlet></router-outlet>
+
     </main>
 
   </div>
@@ -30,5 +23,3 @@
   <app-footer class="mt-auto"></app-footer>
 
 </div>
-
-

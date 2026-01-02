@@ -77,7 +77,6 @@ export class ResponseRecover {
     });
   }
 
-
   viewPassword() {
     this.showPassword = !this.showPassword;
   }

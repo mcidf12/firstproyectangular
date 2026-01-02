@@ -8,10 +8,12 @@
     <form [formGroup]="createForm" (ngSubmit)="register()">
       <div class="mb-3">
         <label for="InputCliente1" class="form-label fw-semibold">Numero de cliente</label>
-        <input formControlName="cliente" type="text" class="form-control" id="InputCliente1" placeholder="cliente" />
+        <input formControlName="numero_cliente" type="text" class="form-control" id="InputCliente1" placeholder="cliente 00XXXXXX-X" />
 
-        <div *ngIf="cliente.invalid && (cliente.dirty || cliente.touched)" class="mt-2 small text-danger">
-          <div *ngIf="cliente.errors?.['required']">Numero de cliente requerido</div>
+        <div *ngIf="numero_cliente.invalid && (numero_cliente.dirty || numero_cliente.touched)" class="mt-2 small text-danger">
+          <div *ngIf="numero_cliente.errors?.['required']">Numero de cliente requerido</div>
+          <div *ngIf="numero_cliente.errors?.['maxlength']">Numero de cliente no debe exceder 10 caracteres</div>
+          <div *ngIf="numero_cliente.errors?.['pattern']">Formato invalido.</div>
         </div>
       </div>
 
@@ -71,7 +73,9 @@
         </div>
       </div>
       <p *ngIf="error" class="text-danger mb-4">{{ error }}</p>
-      <button type="submit" class="btn btn-secondary btn-lg w-100">Registrarse</button>
+      <button type="submit" class="btn btn-secondary btn-lg w-100" [disabled]="loading || createForm.invalid">
+        {{ loading ? 'Cargando...' : 'Registrarse' }}
+      </button>
     </form>
     <ngx-sonner-toaster richColors  position="top-center" />
   </div>

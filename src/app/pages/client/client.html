@@ -16,13 +16,13 @@
                                                 <div class="d-flex justify-content-between align-items-start">
                                                     <div>
                                                         <div class="text-muted small">Internet</div>
-                                                        <div class="kpi">{{ (data.cliente?.nombrePlan || 0) }} </div>
+                                                        <div class="kpi">{{ (data?.cliente?.cliente?.nombrePlan || 0) }} </div>
                                                     </div>
 
                                                     <div class="text-end">
                                                         <div class="service-meta">Precio</div>
                                                         <div class="price">
-                                                            {{ (data.servicios?.internet?.precio || 0) |
+                                                            {{ (data.cliente?.servicios?.internet?.precio || 0) |
                                                             currency:'MXN':'symbol':'1.0-0' }}/mes
                                                         </div>
                                                     </div>
@@ -33,7 +33,7 @@
                                 </div>
 
                                 <div class="col-12 col-md-6 col-lg-4"
-                                    *ngIf="(data.servicios?.camaras?.canServicios ?? 0) > 0">
+                                    *ngIf="(data.cliente?.servicios?.camaras?.canServicios ?? 0) > 0">
                                     <div class="card service-card h-100 border-0 rounded-4 bg-soft shadow-sm">
                                         <div class="card-body d-flex gap-3 align-items-center">
 
@@ -43,14 +43,14 @@
 
                                                         <div class="text-muted small">Cámaras</div>
                                                         <div class="kpi fs-5">{{
-                                                            data.servicios?.camaras?.canServicios
+                                                            data.cliente?.servicios?.camaras?.canServicios
                                                             || 0
                                                             }} servicio(s)</div>
                                                     </div>
                                                     <div class="text-end">
                                                         <div class="service-meta">Costo</div>
                                                         <div class="price">
-                                                            {{ (data.servicios?.camaras?.precio || 0) |
+                                                            {{ (data.cliente?.servicios?.camaras?.precio || 0) |
                                                             currency:'MXN':'symbol':'1.0-0' }}/mes
                                                         </div>
                                                     </div>
@@ -64,7 +64,7 @@
 
 
                                 <div class="col-12 col-md-6 col-lg-4"
-                                    *ngIf="(data.servicios?.telefono?.canServicios ?? 0) > 0">
+                                    *ngIf="(data.cliente?.servicios?.telefono?.canServicios ?? 0) > 0">
                                     <div class="card service-card h-100 border-0 rounded-4 bg-soft shadow-sm">
                                         <div class="card-body d-flex gap-3 align-items-center">
 
@@ -72,7 +72,7 @@
                                                 <div class="d-flex justify-content-between align-items-start">
                                                     <div>
                                                         <div class="text-muted small">Telefonía</div>
-                                                        <div class="kpi fs-5">{{ data.servicios?.telefono?.canServicios
+                                                        <div class="kpi fs-5">{{ data.cliente?.servicios?.telefono?.canServicios
                                                             || 0
                                                             }}
                                                             línea(s)</div>
@@ -81,7 +81,7 @@
                                                     <div class="text-end">
                                                         <div class="service-meta">Tarifa</div>
                                                         <div class="price">
-                                                            {{ (data.servicios?.telefono?.precio || 0) |
+                                                            {{ (data.cliente?.servicios?.telefono?.precio || 0) |
                                                             currency:'MXN':'symbol':'1.0-0' }}/mes
                                                         </div>
                                                     </div>
@@ -103,27 +103,27 @@
                             <section class="summary-card">
                                 <div class="summary-left">
                                     <div class="label">Velocidad</div>
-                                    <div class="value">{{ data.cliente?.planInternet || 0 }} <span
+                                    <div class="value">{{ data.cliente?.cliente?.planInternet || 0 }} <span
                                             class="unit">Mbps</span></div>
                                     <div class="sub">Plan contratado</div>
                                 </div>
 
                                 <div class="summary-center">
                                     <div class="label">Total mensual</div>
-                                    <div class="value">{{ calcularTotalMensual(data.servicios) |
+                                    <div class="value">{{ calcularTotalMensual(data.cliente.servicios) |
                                         currency:'MXN':'symbol':'1.0-0' }}</div>
-                                    <div class="sub muted" *ngIf="(data.servicios?.camaras?.canServicios ?? 0) > 0 || (data.servicios?.telefono?.canServicios ?? 0) > 0">Incluye servicios activos</div>
+                                    <div class="sub muted" *ngIf="(data.cliente?.servicios?.camaras?.canServicios ?? 0) > 0 || (data.cliente?.servicios?.telefono?.canServicios ?? 0) > 0">Incluye servicios activos</div>
                                 </div>
 
-                                <div class="summary-right">
+                                <div class="summary-right" *ngIf="(data.cliente?.cliente?.clasificacion) !== 'BAJA'">
                                     <div class="balance">
                                         <div class="label small">Saldo pendiente</div>
-                                        <div class="balance-value">{{ (data.cliente?.deuda ?? 0) |
+                                        <div class="balance-value">{{ (data.cliente?.cliente?.deuda ?? 0) |
                                             currency:'MXN':'symbol':'1.0-0' }}</div>
                                     </div>
                                     <div class="d-grid mt-2">
                                         <button class="btn btn-secondary btn-sm w-100"
-                                            *ngIf="(data.cliente?.deuda ?? 0) > 0" routerLink="/formas-de-pago">Pagar
+                                            *ngIf="(data.cliente?.cliente?.deuda ?? 0) > 0" routerLink="/formas-de-pago">Pagar
                                             ahora</button>
                                     </div>
                                 </div>
@@ -148,9 +148,9 @@
                                             <th class="text-end" style="width: 160px;">Importe</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody> 
 
-                                        <tr *ngFor="let item of data?.servicios?.estadoCuenta">
+                                        <tr *ngFor="let item of data?.cliente?.servicios?.estadoCuenta">
                                             <td><code>{{ item?.VENTA }}</code></td>
                                             <td>{{ item?.fechaEmision }}</td>
                                             <td>{{ item?.mensualidad }}</td>
@@ -159,17 +159,17 @@
                                             </td>
                                         </tr>
 
-                                        <tr *ngIf="!data?.servicios?.estadoCuenta?.length">
+                                        <tr *ngIf="!data?.cliente?.servicios?.estadoCuenta?.length">
                                             <td colspan="4" class="text-center text-muted py-4">Sin
                                                 movimientos</td>
                                         </tr>
                                     </tbody>
 
-                                    <tfoot class="table-light">
+                                    <tfoot class="table-light" *ngIf="(data.cliente?.cliente?.clasificacion) !== 'BAJA'">
                                         <tr>
-                                            <th colspan="3" class="text-end">Total pendiente</th>
-                                            <th class="text-end">
-                                                {{ (data?.cliente?.deuda || 0) |
+                                            <th colspan="3" class="text-end" >Total pendiente</th>
+                                            <th class="text-end" >
+                                                {{ (data?.cliente?.cliente?.deuda || 0) |
                                                 currency:'MXN':'symbol':'1.0-0' }}
                                             </th>
                                         </tr>

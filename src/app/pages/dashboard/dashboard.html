@@ -3,23 +3,22 @@
 
 
     <main class="col-12 col-md-9 col-lg-12 px-3 px-lg-4 py-4 bg-light">
-
-      <div *ngIf="data else cargando" class="mb-4">
+      <!--  *ngIf="data else cargando"-->
+      <div *ngIf="data" class="mb-4">
 
         <!-- Tarjeta principal -->
         <div class="card shadow-sm">
           <div class="card-header bg-white d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center gap-3">
-              <!--<div class="avatar rounded-circle bg-primary text-white d-flex align-items-center justify-content-center"
-                style="width:48px; height:48px; font-size:1.1rem;">
-                {{ data.cliente?.nombre?.charAt(0) || 'C' }}
-              </div>-->
+
               <div>
-                <h5 class="mb-0">{{ data.cliente?.nombre }}</h5>
-                <small class="text-muted">Cliente: <strong>{{ data.cliente?.cliente }}</strong></small>
-                <br> <small class="text-muted">Servicio: </small> <small class="badge rounded-pill d-inline-flex align-items-center gap-1 px-3 py-1" [ngClass]="{'bg-success': data.cliente?.infoRed?.estado?.toLowerCase() === 'activo',
-                    'bg-danger': data.cliente?.infoRed?.estado?.toLowerCase() === 'suspendido'
-                    }">{{ data.cliente?.infoRed?.estado }} </small>
+                <h5 class="mb-0">{{ data.cliente?.cliente?.nombre }}</h5>
+                <small class="text-muted">Cliente: <strong>{{ data.numero_cliente }}</strong></small>
+                <br> <small class="text-muted">Servicio: </small> <small
+                  class="badge rounded-pill d-inline-flex align-items-center gap-1 px-3 py-1" [ngClass]="{'bg-success': data.cliente?.cliente?.infoRed?.estado?.toLowerCase() === 'activo',
+                    'bg-danger': data.cliente?.cliente?.infoRed?.estado?.toLowerCase() === 'suspendido',
+                    'bg-secondary': !data.cliente?.cliente?.infoRed?.estado
+                    }">{{ data.cliente?.cliente?.infoRed?.estado || 'Cancelado' }} </small>
               </div>
             </div>
 
@@ -39,21 +38,22 @@
                 <div class="mb-3">
                   <div class="fw-semibold">Dirección</div>
                   <div class="text-muted">
-                    {{ data?.cliente?.direccion }}<br>
-                    {{ data?.cliente?.colonia }}, {{ data?.cliente?.municipio }}, {{ data.cliente?.estado }}<br>
-                    {{ data?.cliente?.pais }}
+                    {{ data?.cliente?.cliente?.direccion }}<br>
+                    {{ data?.cliente?.cliente?.colonia }}, {{ data?.cliente?.cliente?.municipio }}, {{
+                    data.cliente?.cliente?.estado }}<br>
+                    {{ data?.cliente?.cliente?.pais }}
                   </div>
                 </div>
 
                 <div class="row gy-2">
                   <div class="col-12 col-md-6">
                     <div class="fw-semibold">Correo</div>
-                    <div class="text-muted">{{ data.cliente?.correo || '—' }}</div>
+                    <div class="text-muted">{{ data.cliente?.cliente?.correo || '—' }}</div>
                   </div>
 
                   <div class="col-12 col-md-6">
                     <div class="fw-semibold">Teléfono</div>
-                    <div class="text-muted">{{ data.cliente?.telefono || '—' }}</div>
+                    <div class="text-muted">{{ data.cliente?.cliente?.telefono || '—' }}</div>
                   </div>
                 </div>
               </div>
@@ -68,7 +68,8 @@
               <div class="card-body d-flex flex-column gap-2">
                 <div class="d-flex gap-2 flex-wrap">
                   <!--<button routerLink="/estado-cuenta" class="btn btn-outline-primary btn-sm">Ver estado de cuenta</button>-->
-                  <button routerLink="/cliente" class="btn btn-outline-primary btn-sm">Ver servicios</button>
+                  <button class="btn btn-outline-primary btn-sm" (click)="goEstadoCuenta()">Ver vestado de
+                    cuenta</button>
                   <button routerLink="/visitas" class="btn btn-outline-primary btn-sm">Ver visitas</button>
                   <a href="https://emenet.mx/test-velocidad" target="_blank" class="btn btn-outline-dark btn-sm">Probar
                     velocidad</a>
@@ -87,6 +88,21 @@
                 </div>
               </div>
             </div>
+
+
+            <div class="card subcard shadow-sm">
+              <div class="card-header bg-white">
+                <strong>Test de velocidad</strong>
+              </div>
+              <div class="card-body">
+                <div class="mb-3">
+                  <iframe width="100%" height="650px" frameborder="0"
+                    src="https://iptvtel.speedtestcustom.com"></iframe>
+                </div>
+              </div>
+            </div>
+
+
           </div>
         </div>
       </div>
@@ -96,12 +112,36 @@
           class="position-fixed top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center bg-light bg-opacity-75"
           style="z-index: 1050;">
           <img src="assets/img/emenetLogo.png" alt="Logo EMENET" width="240" class="mb-3 pulse-animation">
-          <p class="mt-3 text-muted">Cargando datos del cliente...</p>
+          <p class="mt-3 text-muted">Cargando datos del cliente?.cliente...</p>
         </div>
       </ng-template>
-      
+
     </main>
     <ngx-sonner-toaster richColors position="top-center" />
+
+  </div>
+</div>
+
+
+<!-- SERVICIO BAJA -->
+<div class="modal-backdrop-custom" *ngIf="mostrarMensaje">
+  <div class="modal-card">
+    <button class="close-btn" (click)="cerrarModal()">✕</button>
+
+    <h4 class="text fw-bold">Servicio cancelado</h4>
+    <p class="mt-2">
+      Tu servicio <strong class="text-danger">{{ data.numero_cliente }}</strong> se encuentra dado de baja.
+    </p>
+    <p class="text-muted">
+      Para continuar disfrutando de internet, es necesario contratar nuevamente.
+    </p>
+
+    <div class="d-flex gap-5 center-content">
+      <button class="btn btn-secondary mt-3" (click)="irAContratar()">
+        Contratar servicio
+      </button>
+      <button class="btn btn-secondary mt-3" (click)="contactSupport()">Soporte whatsapp</button>
+    </div>
 
   </div>
 </div>

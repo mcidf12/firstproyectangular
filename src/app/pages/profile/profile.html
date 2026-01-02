@@ -19,12 +19,12 @@
                     <div class="flex-fill">
                       <h4 class="mb-1 profile-name">{{ data?.cliente?.nombre || '—' }}</h4>
                       <div class="text-muted small">
-                        Cliente: <strong>{{ data?.cliente?.cliente || '—' }}</strong>
+                        Cliente: <strong>{{ data?.numero_cliente }}</strong>
                       </div>
                       <div class="mt-2">
                         <span class="badge bg-primary me-1">{{ data?.cliente?.nombrePlan || '—' }}</span>
-                        <span class="badge bg-light text-dark" *ngIf="data.cliente?.planInternet">{{
-                          data.cliente?.planInternet }}</span>
+                        <!--<span class="badge bg-light text-dark" *ngIf="data.cliente?.planInternet">{{
+                          data.cliente?.planInternet }}</span>-->
                       </div>
                     </div>
 
@@ -55,7 +55,7 @@
 
                   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <button routerLink="/edit-perfil" class="btn btn-secondary">Editar perfil</button>
-                    <button routerLink="/edit-password" class="btn btn-outline-secondary btn-sm">Cambiar contraseña</button>
+                    <!--<button routerLink="/edit-password" class="btn btn-outline-secondary btn-sm">Cambiar contraseña</button>-->
                   </div>
                 </div>
               </div>
