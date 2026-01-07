@@ -45,7 +45,7 @@ export class Service implements OnInit, OnDestroy {
         this.cliente = data?.cliente ?? [];
 
         this.loading = false;
-        console.log(data);
+        //console.log(data);
       },
       error: (e) => {
         this.loading = false;

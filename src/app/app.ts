@@ -6,8 +6,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NavComponent } from './shared/nav/nav';
 import { filter } from 'rxjs/operators';
 import { NgIf } from '@angular/common';
-import { NgxSonnerToaster } from 'ngx-sonner';
-
 
 
 @Component({
@@ -22,6 +20,9 @@ export class App {
   sidebarOpen = false;
   showSidebar = true;
 
+  headerOpen = false;
+  showheader = true;
+
   hiddenSidebarRoutes = [
     '/iniciar-sesion',
     '/crear-cuenta',
@@ -31,13 +32,14 @@ export class App {
     '/edit-password',
     '/email-verificado',
     '/servicios',
-    '/404',
+    '/404', 
     '/'
   ];
 
   constructor(private router: Router) {
     //pagina de iniciar sesion sin sidebar
     this.checkSidebar(window.location.pathname);
+    this.checkheader(window.location.pathname);
 
     // Detectar cambios de ruta 
     this.router.events
@@ -45,6 +47,8 @@ export class App {
       .subscribe((event: NavigationEnd) => {
         const rawUrl = (event as NavigationEnd).urlAfterRedirects ?? (event as NavigationEnd).url;
         this.checkSidebar(rawUrl);
+        this.checkheader(rawUrl);
+
       });
   }
 
@@ -54,7 +58,6 @@ export class App {
       this.showSidebar = true;
       return;
     }
-
     // cortar todo lo que venga despues de '?'
     const cleanUrl = url.split('?')[0];
 
@@ -68,5 +71,26 @@ export class App {
 
   closeSidebar() {
     this.sidebarOpen = false;
+  }
+
+  checkheader(url: string) {
+    // proteger contra valores nulos/indefinidos
+    if (!url) {
+      this.showheader = true;
+      return;
+    }
+    // cortar todo lo que venga despues de '?'
+    const cleanUrl = url.split('?')[0];
+
+    // validar exactamente contra la lista
+    this.showheader = !this.hiddenSidebarRoutes.includes(cleanUrl);
+  }
+
+  toggleheader() {
+    this.headerOpen = !this.headerOpen;
+  }
+
+  closeheader() {
+    this.headerOpen = false;
   }
 }

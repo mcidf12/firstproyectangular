@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 
 import { requireAuthGuard } from './guards/require-auth-guard';
-import { onlyGuestsGuard } from './guards/only-guests-guard';
 
 import { Login } from './auth/login/login';
 import { CreateAccount } from './auth/create-account/create-account';
@@ -14,11 +13,11 @@ import { Payment } from './pages/payment/payment';
 import { Profile } from './pages/profile/profile';
 import { Visits } from './pages/visits/visits';
 import { EditProfile } from './pages/edit-profile/edit-profile';
-import { EditPassword } from './pages/edit-password/edit-password';
 import { EmailVerificado } from './auth/email-verificado/email-verificado';
 import { emailVerificadoGuard } from './guards/email-verificado-guard';
 import { Service } from './pages/service/service';
 import { serviceAccessGuard } from './guards/service-access-guard';
+import { Notification } from './pages/notification/notification';
 
 
 export const routes: Routes = [
@@ -38,7 +37,7 @@ export const routes: Routes = [
   { path: 'perfil/:numero_cliente', component: Profile, canActivate: [requireAuthGuard] },
   { path: 'visitas', component: Visits, canActivate: [requireAuthGuard] },
   { path: 'edit-perfil', component: EditProfile, canActivate: [requireAuthGuard] },
-  { path: 'edit-password', component: EditPassword, canActivate: [requireAuthGuard] },
+  { path: 'notificaciones/:numero_cliente', component: Notification, canActivate: [requireAuthGuard] },
 
   
   { path: '**', redirectTo: '/iniciar-sesion' }

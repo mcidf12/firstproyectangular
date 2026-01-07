@@ -24,6 +24,10 @@ export class NavComponent {
   goDashboard(){
     this.auth.goNavigate('/dashboard')
   }
+
+  goNotification(){
+    this.auth.goNavigate('/notificaciones')
+  }
  
   goEstadoCuenta(){
     this.auth.goNavigate('/estadoCuenta')
@@ -32,10 +36,6 @@ export class NavComponent {
   goPerfil(){
     this.auth.goNavigate('/perfil')
   }
- 
-
-
-
 
 }
  
