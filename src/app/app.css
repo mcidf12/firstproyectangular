@@ -12,7 +12,7 @@
 
 /* Layout Windows */
 .app-wrapper {
-  display: flex;
+  display: flex; 
 }
 
 /* MODO PC (>=768px) */

@@ -1,11 +1,9 @@
-import { CurrencyPipe, NgClass, NgFor, NgIf } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { toast } from 'ngx-sonner';
 import { ClientService } from '../../services/user/clientService';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { NgForm } from '@angular/forms';
 
 interface Noti {
   title: string;
@@ -16,7 +14,7 @@ interface Noti {
 
 @Component({
   selector: 'app-notification',
-  imports: [NgClass, NgIf, NgFor, CurrencyPipe],
+  imports: [NgClass, NgIf, NgFor],
   templateUrl: './notification.html',
   styleUrl: './notification.css'
 })

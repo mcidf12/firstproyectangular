@@ -18,6 +18,7 @@ import { emailVerificadoGuard } from './guards/email-verificado-guard';
 import { Service } from './pages/service/service';
 import { serviceAccessGuard } from './guards/service-access-guard';
 import { Notification } from './pages/notification/notification';
+import { Form } from './pages/form/form';
 
 
 export const routes: Routes = [
@@ -28,6 +29,8 @@ export const routes: Routes = [
   { path: 'recuperar-password', component: Recover },
   { path: 'response-password', component: ResponseRecover},
   { path: 'email-verificado', component: EmailVerificado, canActivate: [emailVerificadoGuard] },
+
+  { path: 'formulario', component: Form},
 
   // Requieren login   
   { path: 'dashboard/:numero_cliente', component: Dashboard, canActivate: [requireAuthGuard, serviceAccessGuard] },

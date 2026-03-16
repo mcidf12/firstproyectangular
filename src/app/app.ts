@@ -32,6 +32,7 @@ export class App {
     '/edit-password',
     '/email-verificado',
     '/servicios',
+    '/formulario',
     '/404', 
     '/'
   ];
@@ -84,10 +85,6 @@ export class App {
 
     // validar exactamente contra la lista
     this.showheader = !this.hiddenSidebarRoutes.includes(cleanUrl);
-  }
-
-  toggleheader() {
-    this.headerOpen = !this.headerOpen;
   }
 
   closeheader() {

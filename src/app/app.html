@@ -1,6 +1,6 @@
 <div class="d-flex flex-column min-vh-100">
 
-  <div class="app-header">
+  <div class="app-header" *ngIf="showheader" [class.open]="headerOpen">
   <app-header (toggleSidebar)="toggleSidebar()" ></app-header>
   </div>
 

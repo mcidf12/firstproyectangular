@@ -28,18 +28,6 @@ export class ClientService {
   }
 
   //peticiones para usuarios
-  //Buscar por id url localhost
-  getclient(id: string): Observable<any> {
-    const headers = this.getHeaders();
-    return this.http.get<any>(`${this.apiLocalUrl}/usuarios/${id}`, { headers })
-  }
-
-
-  //Buscar por cliente url localhost
-  getclientNum(cliente: string): Observable<any> {
-    const headers = this.getHeaders();
-    return this.http.get<any>(`${this.apiLocalUrl}/usuarios/${cliente}`, { headers })
-  }
 
   getclientApi(cliente: string): Observable<any> {
     const headers = this.getHeaders();
@@ -88,7 +76,6 @@ export class ClientService {
     const headers = this.getHeaders();
     return this.http.get<{has_access: boolean, servicio?: any}>(`${this.apiLocalUrl}/verify-access-service/${cliente}`, { headers });
   }
-
 
 
 }
