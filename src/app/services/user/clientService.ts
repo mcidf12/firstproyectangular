@@ -28,7 +28,6 @@ export class ClientService {
   }
 
   //peticiones para usuarios
-
   getclientApi(cliente: string): Observable<any> {
     const headers = this.getHeaders();
     return this.http.get<any>(`${this.apiUrl}/clientesV2/${cliente}`, { headers })
@@ -76,6 +75,5 @@ export class ClientService {
     const headers = this.getHeaders();
     return this.http.get<{has_access: boolean, servicio?: any}>(`${this.apiLocalUrl}/verify-access-service/${cliente}`, { headers });
   }
-
 
 }
