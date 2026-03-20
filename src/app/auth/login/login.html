@@ -32,13 +32,19 @@
         <label for="exampleInputPassword1" class="form-label fw-semibold">Password</label>
         <div class="input-glow-wrapper">
           <div class="input-group">
-            <input [type]="showPassword ? 'text' : 'password'" formControlName="password" class="form-control input-glow"
-              autocomplete="current-password" placeholder="••••••••" />
-            <button type="button" class="btn btn-outline-secondary" (click)="viewPassword()">
-              <img [src]="showPassword ? 'assets/img/invisible.png' : 'assets/img/ojo.png'" alt="" width="24" height="24">
+            <input [type]="showPassword ? 'text' : 'password'" formControlName="password"
+              class="form-control input-glow" autocomplete="current-password" placeholder="••••••••" />
+            <button type="button" class="btn-eye-toggle" [class.revealed]="showPassword" (click)="viewPassword()" title="Mostrar/ocultar contraseña">
+              <span class="eye-icon-wrap">
+                <img [src]="showPassword ? 'assets/img/invisible.png' : 'assets/img/ojo.png'" alt="toggle" width="20" height="20">
+              </span>
             </button>
+
           </div>
         </div>
+        <p>
+
+        </p>
 
         <div *ngIf="password.invalid && (password.dirty || password.touched)" class="mt-2 small text-danger">
           <div *ngIf="password.errors?.['required']">
