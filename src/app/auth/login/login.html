@@ -10,8 +10,10 @@
 
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label fw-semibold">Email o numero de cliente</label>
-        <input formControlName="usuario" type="text" class="form-control" id="exampleInputEmail1"
-          placeholder="correo@dominio.com" aria-describedby="emailHelp">
+        <div class="input-glow-wrapper">
+          <input formControlName="usuario" type="text" class="form-control input-glow" id="exampleInputEmail1"
+            placeholder="correo@dominio.com" aria-describedby="emailHelp">
+        </div>
 
         <div *ngIf="usuario.invalid && (usuario.dirty || usuario.touched)" class="mt-2 small text-danger">
           <div *ngIf="usuario.errors?.['required']">
@@ -22,18 +24,20 @@
           </div>
         </div>
 
+
       </div>
 
       <div class="mb-3">
 
         <label for="exampleInputPassword1" class="form-label fw-semibold">Password</label>
-        <div class="input-group">
-          <input [type]="showPassword ? 'text' : 'password'" formControlName="password" class="form-control"
-            autocomplete="current-password" placeholder="••••••••" />
-
-          <button type="button" class="btn btn-outline-secondary" (click)="viewPassword()">
-            <img [src]="showPassword ? 'assets/img/invisible.png' : 'assets/img/ojo.png'" alt="" width="24" height="24">
-          </button>
+        <div class="input-glow-wrapper">
+          <div class="input-group">
+            <input [type]="showPassword ? 'text' : 'password'" formControlName="password" class="form-control input-glow"
+              autocomplete="current-password" placeholder="••••••••" />
+            <button type="button" class="btn btn-outline-secondary" (click)="viewPassword()">
+              <img [src]="showPassword ? 'assets/img/invisible.png' : 'assets/img/ojo.png'" alt="" width="24" height="24">
+            </button>
+          </div>
         </div>
 
         <div *ngIf="password.invalid && (password.dirty || password.touched)" class="mt-2 small text-danger">

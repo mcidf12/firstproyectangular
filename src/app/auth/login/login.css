@@ -114,3 +114,74 @@ form {
 .btn-water:active:not(:disabled) {
   transform: scale(0.97);
 }
+
+/* ══════════════════════════════════════════
+   ─── Inputs con borde brillante animado ───
+   ══════════════════════════════════════════ */
+
+/* Wrapper: necesario para el ::before posicionado */
+.input-glow-wrapper {
+  position: relative;
+  border-radius: 8px;
+}
+
+/* El "rayo de luz" que gira alrededor del borde */
+.input-glow-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: -2px;                  /* sobresale 2px del input */
+  border-radius: 10px;
+  background: conic-gradient(
+    from var(--angle, 0deg),
+    transparent 0%,
+    transparent 30%,
+    #a78bfa 45%,
+    #6c63d4 50%,
+    #c4b5fd 55%,
+    transparent 70%,
+    transparent 100%
+  );
+  /* Oculto por defecto */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+  /* Animar variable CSS --angle */
+  animation: none;
+}
+
+/* Activar al hacer focus en cualquier input dentro del wrapper */
+.input-glow-wrapper:focus-within::before {
+  opacity: 1;
+  animation: spin-border 2s linear infinite;
+}
+
+/* El input tapa el interior del ::before, dejando solo el borde brillante */
+.input-glow-wrapper .form-control,
+.input-glow-wrapper .input-group {
+  position: relative;
+  z-index: 1;
+}
+
+/* Quitar el outline nativo de Bootstrap y poner el nuestro */
+.input-glow-wrapper .form-control:focus {
+  outline: none;
+  border-color: #e2e8f0;
+  box-shadow: none;
+}
+
+/* Botón ojo: también z-index 1 para que quede encima */
+.input-glow-wrapper .btn-outline-secondary {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Keyframe: --angle va de 0 a 360 ─── */
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes spin-border {
+  to { --angle: 360deg; }
+}
