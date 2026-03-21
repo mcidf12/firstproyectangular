@@ -34,17 +34,17 @@
           <div class="input-group">
             <input [type]="showPassword ? 'text' : 'password'" formControlName="password"
               class="form-control input-glow" autocomplete="current-password" placeholder="••••••••" />
-            <button type="button" class="btn-eye-toggle" [class.revealed]="showPassword" (click)="viewPassword()" title="Mostrar/ocultar contraseña">
+            <button type="button" class="btn-eye-toggle" [class.revealed]="showPassword" (click)="viewPassword()"
+              title="Mostrar/ocultar contraseña">
               <span class="eye-icon-wrap">
-                <img [src]="showPassword ? 'assets/img/invisible.png' : 'assets/img/ojo.png'" alt="toggle" width="20" height="20">
+                <img [src]="showPassword ? 'assets/img/invisible.png' : 'assets/img/ojo.png'" alt="toggle" width="20"
+                  height="20">
               </span>
             </button>
 
           </div>
         </div>
-        <p>
 
-        </p>
 
         <div *ngIf="password.invalid && (password.dirty || password.touched)" class="mt-2 small text-danger">
           <div *ngIf="password.errors?.['required']">
@@ -55,8 +55,8 @@
 
       </div>
       <div class="d-flex justify-content-between mb-4">
-        <a routerLink="/crear-cuenta" class="text-muted text-decoration-none">Crear cuenta</a>
-        <a routerLink="/recuperar-password" class="text-muted text-decoration-none">¿Olvidaste tu contraseña?</a>
+        <a routerLink="/crear-cuenta" class="link-subtle">Crear cuenta</a>
+        <a routerLink="/recuperar-password" class="link-subtle">¿Olvidaste tu contraseña?</a>
       </div>
       <p *ngIf="error" class="text-danger mb-4">{{ error }}</p>
 
