@@ -1,10 +1,3 @@
-:host {
-  /* CAMBIA AQUÍ EL COLOR DE LOS ENLACES (Apartado solicitado) */
-  --link-color: #6366f1;
-  /* Un violeta más brillante */
-  --link-hover-color: #4f46e5;
-}
-
 form {
   margin: 20px;
 }
@@ -19,7 +12,7 @@ form {
     linear-gradient(to bottom,
       #3472de 0%,
       #3b82fb 20%,
-      rgba(196, 181, 253, 0.35) 50%,
+      rgba(181, 227, 253, 0.35) 50%,
       transparent 70%) border-box;
   position: relative;
 }
@@ -66,7 +59,7 @@ form {
   left: -5%;
   width: 110%;
   height: 120%;
-  background: linear-gradient(160deg, #3b82f6 0%, #4f46e5 100%);
+  background: linear-gradient(160deg, #0f172a 0%, #0f172a 100%);
   border-radius: 50% 50% 0 0 / 20% 20% 0 0;
   transition: bottom 0.6s cubic-bezier(0.33, 1, 0.68, 1);
   z-index: 0;
@@ -142,9 +135,9 @@ form {
   background: conic-gradient(from var(--angle, 0deg),
       transparent 0%,
       transparent 30%,
-      #a78bfa 45%,
-      #6c63d4 50%,
-      #c4b5fd 55%,
+      #3472de 45%,
+      #0055ff 50%,
+
       transparent 70%,
       transparent 100%);
   /* Oculto por defecto */
@@ -221,9 +214,9 @@ form {
 
 /* Hover: fondo violeta suave + borde acorde */
 .btn-eye-toggle:hover {
-  background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);
-  border-color: #a78bfa;
-  box-shadow: inset 0 0 14px rgba(108, 99, 212, 0.15);
+  background: linear-gradient(135deg, #ede9fe 0%, #ffffff 100%);
+
+  box-shadow: inset 0 0 14px rgb(242, 247, 255);
 }
 
 /* Click: micro-compresión */
@@ -233,8 +226,8 @@ form {
 
 /* Estado "contraseña visible": acento más intenso */
 .btn-eye-toggle.revealed {
-  background: linear-gradient(135deg, #ede9fe 0%, #c4b5fd 100%);
-  border-color: #8b5cf6;
+  background: linear-gradient(135deg, #ede9fe 0%, #ffffff 100%);
+
 }
 
 /* ─── Wrapper del ícono ─── */
@@ -290,11 +283,11 @@ form {
 }
 
 /* ══════════════════════════════════════════
-   ─── Enlaces: Crear cuenta / Olvido ───
+   ─── Enlaces: Crear cuenta ───
    ══════════════════════════════════════════ */
 
 .link-subtle {
-  color: #3472df !important;
+  color: #0f172a !important;
   text-decoration: none !important;
   font-size: 0.85rem;
   font-weight: 500;
@@ -302,5 +295,5 @@ form {
 }
 
 .link-subtle:hover {
-  color: var(--link-hover-color) !important;
+  color: #3472df !important;
 }
