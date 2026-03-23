@@ -24,7 +24,7 @@ export class CreateAccount {
 
   constructor(private fb: FormBuilder, private router: Router, private api: LoginS) {
     this.createForm = this.fb.group({
-      numero_cliente: ['', [Validators.required, Validators.maxLength(10), Validators.pattern(/^00\d{6}-[A-Z]$/i)]],
+      numero_cliente: ['', [Validators.required, Validators.maxLength(6)]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       password_confirmation: ['', [Validators.required, Validators.minLength(8)]],
     }, { validators: this.passwordMatchValidator });
