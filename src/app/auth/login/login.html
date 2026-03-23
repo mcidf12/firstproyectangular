@@ -1,60 +1,82 @@
-<div class="auth-hero min-vh-100 d-flex flex-column align-items-center justify-content-start py-5">
-  <img src="assets/img/emenetLogo.png" alt="Logo" height="100" class="mb-3 opacity-75">
+<div class="login-layout">
+  <!-- Panel izquierdo con la imagen (visible solo en pantallas grandes) -->
+  <aside class="login-sidebar">
+    <img src="assets/img/login/emenet.webp" alt="Emenet Comunicaciones" class="sidebar-image">
+  </aside>
 
-  <div class="auth-card shadow-lg p-4 p-sm-5">
-    <h3 class="text-center fw-bold mb-1">¡Bienvenido!</h3>
-    <p class="text-center text-muted mb-4">Inicia sesión para continuar</p>
+  <!-- Panel derecho con el formulario -->
+  <main class="login-main flex-column">
+    
+    <!-- Logo -->
+    <div class="text-center mb-4 mt-n4">
+      <img src="assets/img/emenetLogo.png" alt="Emenet Logo" height="70">
+    </div>
 
-    <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <div class="auth-card shadow-lg p-4 p-sm-5">
+      <h3 class="text-center fw-bold mb-1">¡Bienvenido!</h3>
+      <p class="text-center text-muted mb-4">Inicia sesión para continuar</p>
 
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
 
-      <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label fw-semibold">Email o numero de cliente</label>
-        <input formControlName="usuario" type="text" class="form-control" id="exampleInputEmail1" placeholder="correo@dominio.com"
-           aria-describedby="emailHelp">
-
-        <div *ngIf="usuario.invalid && (usuario.dirty || usuario.touched)" class="mt-2 small text-danger">
-          <div *ngIf="usuario.errors?.['required']">
-            campo requerido
+        <!-- Campo: Email o número de cliente -->
+        <div class="mb-4">
+          <label for="inputUsuario" class="form-label fw-semibold">Numero de cliente</label>
+          <div class="input-glow-wrapper">
+            <input id="inputUsuario" type="text" formControlName="usuario" class="form-control input-glow"
+              placeholder="#####">
           </div>
-          <div *ngIf="usuario.errors?.['usuario']">
-            Email debe tener formato valido
+          <div *ngIf="usuario.invalid && (usuario.dirty || usuario.touched)" class="mt-2 text-danger small">
+            <span *ngIf="usuario.errors?.['required']">El campo es requerido.</span>
+            <span *ngIf="usuario.errors?.['maxLength']">El número de cliente es demasaido largo.</span>
           </div>
         </div>
 
-      </div>
+        <!-- Campo: Password -->
+        <div class="mb-4">
+          <label for="inputPassword" class="form-label fw-semibold">Password</label>
+          <div class="input-glow-wrapper">
+            <div class="input-group">
+              <input id="inputPassword" [type]="showPassword ? 'text' : 'password'" formControlName="password"
+                class="form-control input-glow border-end-0" autocomplete="current-password" placeholder="••••••••" />
+              <button type="button" class="btn-eye-toggle" [class.revealed]="showPassword" (click)="viewPassword()"
+                title="Mostrar/ocultar contraseña" aria-label="Alternar visibilidad de contraseña">
+                <div class="eye-icon-wrap">
+                  <img [src]="showPassword ? 'assets/img/invisible.png' : 'assets/img/ojo.png'" alt="toggle" width="20"
+                    height="20">
+                </div>
+              </button>
+            </div>
+          </div>
+          <div *ngIf="password.invalid && (password.dirty || password.touched)" class="mt-2 text-danger small">
+            <span *ngIf="password.errors?.['required']">El password es requerido.</span>
+          </div>
+        </div>
 
-      <div class="mb-3">
+        <!-- Enlaces: Crear cuenta y Recuperar password -->
+        <div class="d-flex justify-content-between align-items-center mb-5">
+          <a routerLink="/crear-cuenta" class="link-subtle">Crear cuenta</a>
+          <a routerLink="/recuperar-password" class="link-subtle">¿Olvidaste tu contraseña?</a>
+        </div>
 
-        <label for="exampleInputPassword1" class="form-label fw-semibold">Password</label>
-        <div class="input-group">
-          <input [type]="showPassword ? 'text' : 'password'" formControlName="password" class="form-control"
-            autocomplete="current-password" placeholder="••••••••" />
+        <!-- Mensaje de error global -->
+        <div *ngIf="error" class="alert alert-danger mb-4 py-2 small text-center">
+          {{ error }}
+        </div>
 
-          <button type="button" class="btn btn-outline-secondary" (click)="viewPassword()">
-            <img [src]="showPassword ? 'assets/img/invisible.png' : 'assets/img/ojo.png'" alt="" width="24" height="24">
+        <!-- Botón Iniciar Sesión -->
+        <div class="btn-water-wrapper">
+          <button type="submit" class="btn-water" [disabled]="loading" [class.loading]="loading">
+            <span class="water-fill"></span>
+            <span class="btn-water-content">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+              <span>{{ loading ? 'INICIANDO...' : 'INICIAR SESIÓN' }}</span>
+            </span>
           </button>
         </div>
 
-        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="mt-2 small text-danger">
-          <div *ngIf="password.errors?.['required']">
-            Password requerido
-          </div>
-          <div *ngIf="error" class="text-danger mb-4">{{ error }}</div>
-        </div>
+      </form>
 
-      </div>
-        <div class="d-flex justify-content-between mb-4">
-          <a routerLink="/crear-cuenta" class="text-muted text-decoration-none">Crear cuenta</a>
-          <a routerLink="/recuperar-password" class="text-muted text-decoration-none">¿Olvidaste tu contraseña?</a>
-        </div>
-      <p *ngIf="error" class="text-danger mb-4">{{ error }}</p>
-
-      <button type="submit" class="btn btn-secondary btn-lg w-100" [disabled]="loading">
-        <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
-        Iniciar sesion
-      </button>
-    </form>
-      <ngx-sonner-toaster richColors position="top-center" />
-  </div>
+      <ngx-sonner-toaster richColors position="top-center"></ngx-sonner-toaster>
+    </div>
+  </main>
 </div>
