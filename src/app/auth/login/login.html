@@ -20,14 +20,14 @@
 
         <!-- Campo: Email o número de cliente -->
         <div class="mb-4">
-          <label for="inputUsuario" class="form-label fw-semibold">Email o numero de cliente</label>
+          <label for="inputUsuario" class="form-label fw-semibold">Numero de cliente</label>
           <div class="input-glow-wrapper">
             <input id="inputUsuario" type="text" formControlName="usuario" class="form-control input-glow"
-              placeholder="correo@dominio.com">
+              placeholder="#####">
           </div>
           <div *ngIf="usuario.invalid && (usuario.dirty || usuario.touched)" class="mt-2 text-danger small">
             <span *ngIf="usuario.errors?.['required']">El campo es requerido.</span>
-            <span *ngIf="usuario.errors?.['usuario']">El email debe tener un formato válido.</span>
+            <span *ngIf="usuario.errors?.['maxLength']">El número de cliente es demasaido largo.</span>
           </div>
         </div>
 

@@ -25,7 +25,6 @@ export class CreateAccount {
   constructor(private fb: FormBuilder, private router: Router, private api: LoginS) {
     this.createForm = this.fb.group({
       numero_cliente: ['', [Validators.required, Validators.maxLength(10), Validators.pattern(/^00\d{6}-[A-Z]$/i)]],
-      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       password_confirmation: ['', [Validators.required, Validators.minLength(8)]],
     }, { validators: this.passwordMatchValidator });
@@ -42,7 +41,6 @@ export class CreateAccount {
 
 
   get numero_cliente() { return this.createForm.controls['numero_cliente']; }
-  get email() { return this.createForm.controls['email']; }
   get password() { return this.createForm.controls['password']; }
   get passwordConfirmation() { return this.createForm.controls['password_confirmation']; }
 

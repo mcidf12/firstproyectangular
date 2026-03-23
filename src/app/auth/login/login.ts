@@ -23,7 +23,7 @@ export class Login {
 
   constructor(private fb: FormBuilder, private router: Router, private api: LoginS) {
     this.loginForm = this.fb.group({
-      usuario:['', [Validators.required]],
+      usuario:['', [Validators.required, Validators.maxLength(6)]],
       password: ['', [Validators.required, Validators.minLength(8)]],
     })
   }
@@ -51,9 +51,7 @@ export class Login {
     const { usuario, password } = this.loginForm.value;
 
 
-    const payload = usuario.includes('@')
-      ? { email: usuario, password }
-      : { cliente: usuario, password };
+    const payload = { cliente: usuario, password };
 
     this.api.login(payload as any).subscribe({
       next: (res) => {
@@ -61,7 +59,6 @@ export class Login {
         const token = res?.token;
         if (token) {
           localStorage.setItem('authToken', token);
-          //console.log('Token almacenado en localStorage', token);
         }
 
         sessionStorage.setItem('authToken', res.token); 

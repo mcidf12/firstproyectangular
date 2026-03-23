@@ -18,17 +18,6 @@
       </div>
 
       <div class="mb-3">
-        <label for="InputEmail1" class="form-label fw-semibold">Email</label>
-        <input formControlName="email" type="email" class="form-control" id="InputEmail1"
-          placeholder="correo@dominio.com" aria-describedby="emailHelp" />
-
-        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="mt-2 small text-danger">
-          <div *ngIf="email.errors?.['required']">Email requerido</div>
-          <div *ngIf="email.errors?.['email']">Email debe tener formato valido</div>
-        </div>
-      </div>
-
-      <div class="mb-3">
         <label class="form-label fw-semibold">Password</label>
         <div class="input-group">
           <input [type]="showPassword ? 'text' : 'password'" formControlName="password" class="form-control"
