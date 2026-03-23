@@ -1,30 +1,41 @@
-form {
-  margin: 20px;
+/* ==========================================================================
+   Estructura Principal (Split Screen)
+   ========================================================================== */
+
+.login-layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #ffffff;
 }
 
+/* ==========================================================================
+   Tarjeta de Autenticación
+   ========================================================================== */
+
 .auth-card {
-  width: min(560px, 92vw);
-  border-radius: 50px;
-  border: 5px solid transparent;
-  /* Interior blanco + borde degradado solo en la parte superior */
+  width: 100%;
+  max-width: 480px;
+  /* Tamaño ajustado para parecerse al diseño */
+  border-radius: 40px;
+  border: 4px solid transparent;
+  /* Interior blanco + borde degradado azul claro */
   background:
     linear-gradient(#fff, #fff) padding-box,
-    linear-gradient(to bottom,
-      #3472de 0%,
-      #3b82fb 20%,
-      rgba(181, 227, 253, 0.35) 50%,
-      transparent 70%) border-box;
+    linear-gradient(to right bottom, #3472de 0%, #3b82fb 30%, rgba(181, 227, 253, 0.4) 60%, transparent 80%) border-box;
   position: relative;
 }
 
-/* ─── Wrapper centrado del botón ─── */
+/* ==========================================================================
+   Botón con Efecto de Agua
+   ========================================================================== */
+
 .btn-water-wrapper {
   display: flex;
   justify-content: center;
-  margin-top: 4px;
+  margin-top: 1rem;
 }
 
-/* ─── Botón con efecto de llenado de agua ─── */
 .btn-water {
   position: relative;
   display: inline-flex;
@@ -52,7 +63,6 @@ form {
   font-family: inherit;
 }
 
-/* La "ola" que sube desde abajo */
 .btn-water .water-fill {
   position: absolute;
   bottom: -110%;
@@ -65,21 +75,17 @@ form {
   z-index: 0;
 }
 
-/* Hover: el agua sube y cubre el botón */
 .btn-water:hover:not(:disabled) .water-fill,
-.btn-water:focus-visible:not(:disabled) .water-fill {
-  bottom: -5%;
-  border-radius: 0;
-}
-
-/* Estado de carga */
+.btn-water:focus-visible:not(:disabled) .water-fill,
 .btn-water.loading .water-fill {
   bottom: -5%;
   border-radius: 0;
+}
+
+.btn-water.loading .water-fill {
   background: linear-gradient(160deg, #4a5568 0%, #2d3748 100%);
 }
 
-/* Texto/spinner siempre encima */
 .btn-water-content {
   position: relative;
   z-index: 1;
@@ -89,20 +95,17 @@ form {
   transition: color 0.45s ease;
 }
 
-/* Texto blanco cuando hay agua */
 .btn-water:hover:not(:disabled) .btn-water-content,
 .btn-water:focus-visible:not(:disabled) .btn-water-content,
 .btn-water.loading .btn-water-content {
   color: #ffffff;
 }
 
-/* Sombra al hacer hover */
 .btn-water:hover:not(:disabled) {
   border-color: #2d3748;
   box-shadow: 0 8px 28px rgba(45, 55, 72, 0.22);
 }
 
-/* Deshabilitado */
 .btn-water:disabled {
   cursor: not-allowed;
   opacity: 0.5;
@@ -110,71 +113,55 @@ form {
   color: #a0aec0;
 }
 
-/* Micro-compresión al hacer click */
 .btn-water:active:not(:disabled) {
   transform: scale(0.97);
 }
 
-/* ══════════════════════════════════════════
-   ─── Inputs con borde brillante animado ───
-   ══════════════════════════════════════════ */
+/* ==========================================================================
+   Inputs con Borde Brillante (Glow)
+   ========================================================================== */
 
-/* Wrapper: necesario para el ::before posicionado */
 .input-glow-wrapper {
   position: relative;
   border-radius: 8px;
+  background: #fff;
 }
 
-/* El "rayo de luz" que gira alrededor del borde */
 .input-glow-wrapper::before {
   content: '';
   position: absolute;
   inset: -2px;
-  /* sobresale 2px del input */
   border-radius: 10px;
   background: conic-gradient(from var(--angle, 0deg),
       transparent 0%,
       transparent 30%,
       #3472de 45%,
       #0055ff 50%,
-
       transparent 70%,
       transparent 100%);
-  /* Oculto por defecto */
   opacity: 0;
   transition: opacity 0.3s ease;
   z-index: 0;
-  /* Animar variable CSS --angle */
-  animation: none;
-}
-
-/* Activar al hacer focus en cualquier input dentro del wrapper */
-.input-glow-wrapper:focus-within::before {
-  opacity: 1;
   animation: spin-border 2s linear infinite;
 }
 
-/* El input tapa el interior del ::before, dejando solo el borde brillante */
+.input-glow-wrapper:focus-within::before {
+  opacity: 1;
+}
+
 .input-glow-wrapper .form-control,
 .input-glow-wrapper .input-group {
   position: relative;
   z-index: 1;
+  background: #fff;
 }
 
-/* Quitar el outline nativo de Bootstrap y poner el nuestro */
 .input-glow-wrapper .form-control:focus {
   outline: none;
   border-color: #e2e8f0;
   box-shadow: none;
 }
 
-/* Botón ojo: también z-index 1 para que quede encima */
-.input-glow-wrapper .btn-outline-secondary {
-  position: relative;
-  z-index: 1;
-}
-
-/* ─── Keyframe: --angle va de 0 a 360 ─── */
 @property --angle {
   syntax: '<angle>';
   initial-value: 0deg;
@@ -187,12 +174,11 @@ form {
   }
 }
 
-/* ══════════════════════════════════════════
-   ─── Botón ojo: mostrar / ocultar password ───
-   ══════════════════════════════════════════ */
+/* ==========================================================================
+   Botón Ojo (Mostrar/Ocultar Contraseña)
+   ========================================================================== */
 
 .btn-eye-toggle {
-  /* Dimensiones y posición dentro del input-group */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -204,62 +190,42 @@ form {
   background: #fafafa;
   cursor: pointer;
   outline: none;
-  /* Transiciones suaves */
-  transition:
-    background 0.25s ease,
-    border-color 0.25s ease,
-    box-shadow 0.25s ease,
-    transform 0.12s ease;
+  transition: all 0.25s ease;
 }
 
-/* Hover: fondo violeta suave + borde acorde */
-.btn-eye-toggle:hover {
+.btn-eye-toggle:hover,
+.btn-eye-toggle.revealed {
   background: linear-gradient(135deg, #ede9fe 0%, #ffffff 100%);
-
   box-shadow: inset 0 0 14px rgb(242, 247, 255);
 }
 
-/* Click: micro-compresión */
 .btn-eye-toggle:active {
   transform: scale(0.88);
 }
 
-/* Estado "contraseña visible": acento más intenso */
-.btn-eye-toggle.revealed {
-  background: linear-gradient(135deg, #ede9fe 0%, #ffffff 100%);
-
-}
-
-/* ─── Wrapper del ícono ─── */
 .eye-icon-wrap {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition:
-    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
-    filter 0.3s ease;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
 }
 
-/* Imagen apagada por defecto */
 .eye-icon-wrap img {
   display: block;
   filter: grayscale(50%) opacity(0.65);
-  transition: filter 0.3s ease, transform 0.3s ease;
+  transition: all 0.3s ease;
 }
 
-/* Hover: el ícono cobra vida y se escala */
 .btn-eye-toggle:hover .eye-icon-wrap img {
   filter: grayscale(0%) opacity(1);
   transform: scale(1.2);
 }
 
-/* Estado revealed: ícono con brillo violeta */
 .btn-eye-toggle.revealed .eye-icon-wrap img {
   filter: grayscale(0%) opacity(1) drop-shadow(0 0 5px #ffffff) drop-shadow(0 0 2px #ffffff);
   transform: scale(1.1);
 }
 
-/* Animación de "pop" al cambiar de estado */
 @keyframes eye-pop {
   0% {
     transform: scale(1);
@@ -282,9 +248,9 @@ form {
   animation: eye-pop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-/* ══════════════════════════════════════════
-   ─── Enlaces: Crear cuenta ───
-   ══════════════════════════════════════════ */
+/* ==========================================================================
+   Enlaces: Crear cuenta / Olvidaste
+   ========================================================================== */
 
 .link-subtle {
   color: #0f172a !important;
