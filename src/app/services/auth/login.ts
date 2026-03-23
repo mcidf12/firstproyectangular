@@ -1,9 +1,9 @@
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { LoginRequest, RegisterRequest, RecoverRequest } from './loginRequest';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { env, environment } from '../user/routeApi';
+import { environment } from '../user/routeApi';
 import { toast } from 'ngx-sonner';
 
 @Injectable({

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { env, environment } from './routeApi';
+import { environment } from './routeApi';
 
 
 @Injectable({
@@ -9,7 +9,6 @@ import { env, environment } from './routeApi';
 })
 export class ClientService {
   private apiLocalUrl = environment.apiLocalUrl
-  private apiUrl = env.apiUrl
 
   constructor(private http: HttpClient) { }
 
@@ -22,17 +21,11 @@ export class ClientService {
   getHeaders(): HttpHeaders {
     const token = this.getToken();
     let headers = new HttpHeaders().set('Accept', 'application/json');
-    headers = headers.set('x-web-key', 'web_9825f8agd35dfd4bg15fsd3a94c947a28896d5fd58gjh0f251a38912a');
     if (token) headers = headers.set('Authorization', `Bearer ${token}`);
     return headers;
   }
 
   //peticiones para usuarios
-  getclientApi(cliente: string): Observable<any> {
-    const headers = this.getHeaders();
-    return this.http.get<any>(`${this.apiUrl}/clientesV2/${cliente}`, { headers })
-  }
-
   getAuthenticatedUser(): Observable<any> {
     const headers = this.getHeaders();
     return this.http.get<any>(`${this.apiLocalUrl}/user`, { headers });
@@ -41,11 +34,6 @@ export class ClientService {
   updateUser(id: string, data: any): Observable<any> {
     const headers = this.getHeaders();
     return this.http.patch(`${this.apiLocalUrl}/usuarios/${id}`, data, { headers });
-  }
-
-  getCliente(): Observable<any> {
-    const headers = this.getHeaders();
-    return this.http.get<any>(`${this.apiLocalUrl}/user`, { headers });
   }
 
   //peticiones para servicios

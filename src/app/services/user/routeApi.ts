@@ -1,9 +1,3 @@
 export const environment = {
-  apiLocalUrl: 'http://localhost:8000/api'
-  //apiLocalUrl: 'http://192.168.110.24:8085/api'
-};
-
-
-export const env = {
-  apiUrl: 'https://dev.emenet.mx/api'
+  apiLocalUrl: 'http://localhost:8000/api',
 };
