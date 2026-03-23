@@ -4,7 +4,7 @@
 
 .login-layout {
   display: flex;
-  height: 100vh;
+  height: 100dvh; /* dvh respeta el espacio visible real de la pantalla en móviles */
   width: 100%;
   background-color: #ffffff;
   overflow: hidden; /* Evita que la página completa y la imagen hagan scroll */
@@ -29,10 +29,18 @@
   flex: 1;
   display: flex;
   align-items: center;      /* Centrado horizontal */
-  justify-content: center;  /* Centrado vertical */
-  padding: 2rem;
+  justify-content: flex-start; /* Subimos el contenido hacia arriba en móvil */
+  padding: 1rem;
+  padding-top: 12vh;        /* Empujamos ligeramente hacia abajo desde la parte alta superior */
   background-color: #ffffff;
   overflow-y: auto;         /* Si la pantalla es muy pequeña, solo el formulario hará scroll */
+}
+
+@media (min-width: 768px) {
+  .login-main {
+    padding: 2rem;
+    justify-content: center; /* En escritorio lo volvemos a centrar en medio */
+  }
 }
 
 @media (min-width: 900px) {
@@ -50,8 +58,8 @@
 .auth-card {
   width: 100%;
   max-width: 500px;
-  border-radius: 50px;
-  border: 5px solid transparent;
+  border-radius: 35px; /* Radio menos agresivo en móviles para no comerse el padding en las esquinas */
+  border: 4px solid transparent;
   /* Interior blanco + borde degradado solo en la parte superior */
   background:
     linear-gradient(#fff, #fff) padding-box,
@@ -59,8 +67,15 @@
       #3472de 0%,
       #3b82fb 20%,
       rgba(181, 227, 253, 0.35) 50%,
-      transparent 70%) border-box;
+      transparent 80%) border-box;
   position: relative;
+}
+
+@media (min-width: 768px) {
+  .auth-card {
+    border-radius: 50px;
+    border-width: 5px;
+  }
 }
 
 /* ==========================================================================
