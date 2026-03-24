@@ -31,22 +31,16 @@
   flex: 1;
   display: flex;
   align-items: center;
-  /* Centrado horizontal */
-  justify-content: flex-start;
-  /* Subimos el contenido hacia arriba en móvil */
-  padding: 1rem;
-  padding-top: 12vh;
-  /* Empujamos ligeramente hacia abajo desde la parte alta superior */
+  justify-content: flex-start; /* Alineado al inicio para evitar cortes arriba */
+  padding: 2rem 1rem;
   background-color: #ffffff;
   overflow-y: auto;
-  /* Si la pantalla es muy pequeña, solo el formulario hará scroll */
 }
 
 @media (min-width: 768px) {
   .login-main {
     padding: 2rem;
-    justify-content: center;
-    /* En escritorio lo volvemos a centrar en medio */
+    justify-content: flex-start;
   }
 }
 

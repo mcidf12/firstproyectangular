@@ -3,7 +3,13 @@
   <!-- Panel izquierdo con el formulario -->
   <main class="login-main flex-column">
 
-    <div class="auth-card shadow-lg p-4 p-sm-5">
+    <div class="w-100 my-auto d-flex flex-column align-items-center">
+      <!-- Logo (solo móvil) -->
+      <div class="text-center mb-4 mt-n2 d-md-none">
+        <img src="assets/img/emenetLogo.png" alt="Emenet Logo" height="70">
+      </div>
+
+      <div class="auth-card shadow-lg p-4 p-sm-5 w-100">
       <h3 class="text-center fw-bold mb-1">¡Bienvenido!</h3>
       <p class="text-center text-muted mb-4">Crear Cuenta</p>
 
@@ -104,6 +110,8 @@
       </form>
 
       <ngx-sonner-toaster richColors position="top-center"></ngx-sonner-toaster>
+    </div>
+    
     </div>
   </main>
 
