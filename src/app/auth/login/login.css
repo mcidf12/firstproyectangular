@@ -4,10 +4,12 @@
 
 .login-layout {
   display: flex;
-  height: 100dvh; /* dvh respeta el espacio visible real de la pantalla en móviles */
+  height: 100dvh;
+  /* dvh respeta el espacio visible real de la pantalla en móviles */
   width: 100%;
   background-color: #ffffff;
-  overflow: hidden; /* Evita que la página completa y la imagen hagan scroll */
+  overflow: hidden;
+  /* Evita que la página completa y la imagen hagan scroll */
 }
 
 .login-sidebar {
@@ -28,18 +30,23 @@
 .login-main {
   flex: 1;
   display: flex;
-  align-items: center;      /* Centrado horizontal */
-  justify-content: flex-start; /* Subimos el contenido hacia arriba en móvil */
+  align-items: center;
+  /* Centrado horizontal */
+  justify-content: flex-start;
+  /* Subimos el contenido hacia arriba en móvil */
   padding: 1rem;
-  padding-top: 12vh;        /* Empujamos ligeramente hacia abajo desde la parte alta superior */
+  padding-top: 12vh;
+  /* Empujamos ligeramente hacia abajo desde la parte alta superior */
   background-color: #ffffff;
-  overflow-y: auto;         /* Si la pantalla es muy pequeña, solo el formulario hará scroll */
+  overflow-y: auto;
+  /* Si la pantalla es muy pequeña, solo el formulario hará scroll */
 }
 
 @media (min-width: 768px) {
   .login-main {
     padding: 2rem;
-    justify-content: center; /* En escritorio lo volvemos a centrar en medio */
+    justify-content: center;
+    /* En escritorio lo volvemos a centrar en medio */
   }
 }
 
@@ -58,7 +65,8 @@
 .auth-card {
   width: 100%;
   max-width: 500px;
-  border-radius: 35px; /* Radio menos agresivo en móviles para no comerse el padding en las esquinas */
+  border-radius: 35px;
+  /* Radio menos agresivo en móviles para no comerse el padding en las esquinas */
   border: 4px solid transparent;
   /* Interior blanco + borde degradado solo en la parte superior */
   background:
