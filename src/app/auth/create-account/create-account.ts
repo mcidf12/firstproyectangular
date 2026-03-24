@@ -20,6 +20,7 @@ export class CreateAccount {
   error = ('');
   showPassword = false;
   loading = false;
+  isFlipping = false;
 
 
   constructor(private fb: FormBuilder, private router: Router, private api: LoginS) {
@@ -100,6 +101,13 @@ export class CreateAccount {
 
   viewPassword() {
     this.showPassword = !this.showPassword;
+  }
+
+  goToUrl(url: string) {
+    this.isFlipping = true;
+    setTimeout(() => {
+      this.router.navigateByUrl(url);
+    }, 550); // Tiempo óptimo para evitar trabas en el DOM
   }
 
 }

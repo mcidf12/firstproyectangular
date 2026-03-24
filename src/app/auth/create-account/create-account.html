@@ -1,4 +1,4 @@
-<div class="login-layout">
+<div class="login-layout flip-in" [class.flip-out]="isFlipping">
 
   <!-- Panel izquierdo con el formulario -->
   <main class="login-main flex-column">
@@ -10,108 +10,108 @@
       </div>
 
       <div class="auth-card shadow-lg p-4 p-sm-5 w-100">
-      <h3 class="text-center fw-bold mb-1">¡Bienvenido!</h3>
-      <p class="text-center text-muted mb-4">Crear Cuenta</p>
+        <h3 class="text-center fw-bold mb-1">¡Bienvenido!</h3>
+        <p class="text-center text-muted mb-4">Crear Cuenta</p>
 
-      <form [formGroup]="createForm" (ngSubmit)="register()">
+        <form [formGroup]="createForm" (ngSubmit)="register()">
 
-        <!-- Campo: Numero de cliente -->
-        <div class="mb-4">
-          <label for="InputCliente1" class="form-label fw-semibold">Numero de cliente</label>
-          <div class="input-glow-wrapper">
-            <input id="InputCliente1" type="text" formControlName="numero_cliente" class="form-control input-glow"
-              placeholder="######">
-          </div>
-          <div *ngIf="numero_cliente.invalid && (numero_cliente.dirty || numero_cliente.touched)"
-            class="mt-2 text-danger small">
-            <span *ngIf="numero_cliente.errors?.['required']">Numero de cliente requerido.</span>
-            <span *ngIf="numero_cliente.errors?.['maxlength']">Numero de cliente no debe exceder 6 caracteres.</span>
-            <span *ngIf="numero_cliente.errors?.['pattern']">Formato invalido.</span>
-          </div>
-        </div>
-
-        <!-- Campo: Password -->
-        <div class="mb-4">
-          <label for="inputPassword" class="form-label fw-semibold">Password</label>
-          <div class="input-glow-wrapper">
-            <div class="input-group">
-              <input id="inputPassword" [type]="showPassword ? 'text' : 'password'" formControlName="password"
-                class="form-control input-glow border-end-0" autocomplete="new-password"
-                placeholder="Contraseña (mín 8 caracteres)" />
-              <button type="button" class="btn-eye-toggle" [class.revealed]="showPassword" (click)="viewPassword()"
-                title="Mostrar/ocultar contraseña" aria-label="Alternar visibilidad de contraseña">
-                <div class="eye-icon-wrap">
-                  <img [src]="showPassword ? 'assets/img/invisible.png' : 'assets/img/ojo.png'" alt="toggle" width="20"
-                    height="20">
-                </div>
-              </button>
+          <!-- Campo: Numero de cliente -->
+          <div class="mb-4">
+            <label for="InputCliente1" class="form-label fw-semibold">Numero de cliente</label>
+            <div class="input-glow-wrapper">
+              <input id="InputCliente1" type="text" formControlName="numero_cliente" class="form-control input-glow"
+                placeholder="######">
+            </div>
+            <div *ngIf="numero_cliente.invalid && (numero_cliente.dirty || numero_cliente.touched)"
+              class="mt-2 text-danger small">
+              <span *ngIf="numero_cliente.errors?.['required']">Numero de cliente requerido.</span>
+              <span *ngIf="numero_cliente.errors?.['maxlength']">Numero de cliente no debe exceder 6 caracteres.</span>
+              <span *ngIf="numero_cliente.errors?.['pattern']">Formato invalido.</span>
             </div>
           </div>
-          <div *ngIf="password.invalid && (password.dirty || password.touched)" class="mt-2 text-danger small">
-            <span *ngIf="password.errors?.['required']">La contraseña es requerida.</span>
-            <span *ngIf="password.errors?.['minlength']">La contraseña debe tener al menos 8 caracteres.</span>
-          </div>
-          <div class="form-text small mt-1 text-muted">
-            Recomendaciones:<br>
-            - No usar palabras obvias o fácilmente deducibles.<br>
-            - Combinar letras con caracteres.
-          </div>
-        </div>
 
-
-        <!-- Campo: Confirmar Contraseña -->
-        <div class="mb-4">
-          <label for="inputPasswordConfirm" class="form-label fw-semibold">Confirmar Contraseña</label>
-          <div class="input-glow-wrapper">
-            <div class="input-group">
-              <input id="inputPasswordConfirm" [type]="showPassword ? 'text' : 'password'"
-                formControlName="password_confirmation" class="form-control input-glow border-end-0"
-                autocomplete="new-password" placeholder="Repite la contraseña" />
-              <button type="button" class="btn-eye-toggle" [class.revealed]="showPassword" (click)="viewPassword()"
-                title="Mostrar/ocultar contraseña" aria-label="Alternar visibilidad de contraseña">
-                <div class="eye-icon-wrap">
-                  <img [src]="showPassword ? 'assets/img/invisible.png' : 'assets/img/ojo.png'" alt="toggle" width="20"
-                    height="20">
-                </div>
-              </button>
+          <!-- Campo: Password -->
+          <div class="mb-4">
+            <label for="inputPassword" class="form-label fw-semibold">Password</label>
+            <div class="input-glow-wrapper">
+              <div class="input-group">
+                <input id="inputPassword" [type]="showPassword ? 'text' : 'password'" formControlName="password"
+                  class="form-control input-glow border-end-0" autocomplete="new-password"
+                  placeholder="Contraseña (mín 8 caracteres)" />
+                <button type="button" class="btn-eye-toggle" [class.revealed]="showPassword" (click)="viewPassword()"
+                  title="Mostrar/ocultar contraseña" aria-label="Alternar visibilidad de contraseña">
+                  <div class="eye-icon-wrap">
+                    <img [src]="showPassword ? 'assets/img/invisible.png' : 'assets/img/ojo.png'" alt="toggle"
+                      width="20" height="20">
+                  </div>
+                </button>
+              </div>
+            </div>
+            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="mt-2 text-danger small">
+              <span *ngIf="password.errors?.['required']">La contraseña es requerida.</span>
+              <span *ngIf="password.errors?.['minlength']">La contraseña debe tener al menos 8 caracteres.</span>
+            </div>
+            <div class="form-text small mt-1 text-muted">
+              Recomendaciones:<br>
+              - No usar palabras obvias o fácilmente deducibles.<br>
+              - Combinar letras con caracteres.
             </div>
           </div>
-          <div *ngIf="(passwordConfirmation.touched || createForm.touched) && createForm.hasError('passwordMissMatch')"
-            class="mt-2 text-danger small">
-            Las contraseñas no coinciden.
+
+
+          <!-- Campo: Confirmar Contraseña -->
+          <div class="mb-4">
+            <label for="inputPasswordConfirm" class="form-label fw-semibold">Confirmar Contraseña</label>
+            <div class="input-glow-wrapper">
+              <div class="input-group">
+                <input id="inputPasswordConfirm" [type]="showPassword ? 'text' : 'password'"
+                  formControlName="password_confirmation" class="form-control input-glow border-end-0"
+                  autocomplete="new-password" placeholder="Repite la contraseña" />
+                <button type="button" class="btn-eye-toggle" [class.revealed]="showPassword" (click)="viewPassword()"
+                  title="Mostrar/ocultar contraseña" aria-label="Alternar visibilidad de contraseña">
+                  <div class="eye-icon-wrap">
+                    <img [src]="showPassword ? 'assets/img/invisible.png' : 'assets/img/ojo.png'" alt="toggle"
+                      width="20" height="20">
+                  </div>
+                </button>
+              </div>
+            </div>
+            <div
+              *ngIf="(passwordConfirmation.touched || createForm.touched) && createForm.hasError('passwordMissMatch')"
+              class="mt-2 text-danger small">
+              Las contraseñas no coinciden.
+            </div>
+            <div *ngIf="passwordConfirmation.touched && passwordConfirmation.errors?.['required']"
+              class="mt-2 text-danger small">
+              La contraseña es requerida.
+            </div>
           </div>
-          <div *ngIf="passwordConfirmation.touched && passwordConfirmation.errors?.['required']"
-            class="mt-2 text-danger small">
-            La contraseña es requerida.
+
+          <!-- Enlaces: Ya tienes cuenta -->
+          <div class="d-flex justify-content-center align-items-center mb-4">
+            <a href="javascript:void(0)" (click)="goToUrl('/iniciar-sesion')" class="link-subtle">¿Ya tienes cuenta?</a>
           </div>
-        </div>
 
-        <!-- Enlaces: Ya tienes cuenta -->
-        <div class="d-flex justify-content-center align-items-center mb-4">
-          <a routerLink="/iniciar-sesion" class="link-subtle">¿Ya tienes cuenta?</a>
-        </div>
+          <!-- Mensaje de error global -->
+          <div *ngIf="error" class="alert alert-danger mb-4 py-2 small text-center">
+            {{ error }}
+          </div>
+          <!-- Botón Registrarse -->
+          <div class="btn-water-wrapper">
+            <button type="submit" class="btn-water" [disabled]="loading" [class.loading]="loading">
+              <span class="water-fill"></span>
+              <span class="btn-water-content">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+                <span>{{ loading ? 'CARGANDO...' : 'REGISTRARSE' }}</span>
+              </span>
+            </button>
+          </div>
 
-        <!-- Mensaje de error global -->
-        <div *ngIf="error" class="alert alert-danger mb-4 py-2 small text-center">
-          {{ error }}
-        </div>
+        </form>
 
-        <!-- Botón Registrarse -->
-        <div class="btn-water-wrapper">
-          <button type="submit" class="btn-water" [disabled]="loading" [class.loading]="loading">
-            <span class="water-fill"></span>
-            <span class="btn-water-content">
-              <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
-              <span>{{ loading ? 'CARGANDO...' : 'REGISTRARSE' }}</span>
-            </span>
-          </button>
-        </div>
+        <ngx-sonner-toaster richColors position="top-center"></ngx-sonner-toaster>
+      </div>
 
-      </form>
-
-      <ngx-sonner-toaster richColors position="top-center"></ngx-sonner-toaster>
-    </div>
-    
     </div>
   </main>
 
@@ -123,5 +123,4 @@
     </div>
     <img src="assets/img/crear/emenet.webp" alt="Emenet Comunicaciones" class="sidebar-image">
   </aside>
-
 </div>
