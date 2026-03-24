@@ -339,17 +339,32 @@
 }
 
 @keyframes flipScreenIn {
-  0%   { transform: rotateY(-90deg) scale(0.92); opacity: 0; }
-  100% { transform: rotateY(0deg) scale(1); opacity: 1; }
+  0% {
+    transform: rotateY(-90deg) scale(0.92);
+    opacity: 0;
+  }
+
+  100% {
+    transform: rotateY(0deg) scale(1);
+    opacity: 1;
+  }
 }
 
 @keyframes flipScreenOut {
-  0%   { transform: rotateY(0deg) scale(1); opacity: 1; }
-  100% { transform: rotateY(90deg) scale(0.92); opacity: 0; }
+  0% {
+    transform: rotateY(0deg) scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: rotateY(90deg) scale(0.92);
+    opacity: 0;
+  }
 }
+
 /* ==========================================================================
    Efecto Cruzado (Slide Animation)
-   ========================================================================== */
+   ========================================================================== 
 .slide-in-right {
   animation: slideInRight 0.45s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
@@ -404,4 +419,4 @@
   100% {
     transform: translateX(-100%);
   }
-}
+}*/
