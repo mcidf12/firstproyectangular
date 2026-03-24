@@ -1,16 +1,7 @@
 <div class="login-layout">
-  <!-- Panel izquierdo con la imagen (visible solo en pantallas grandes) -->
-  <aside class="login-sidebar">
-    <img src="assets/img/login/emenet.webp" alt="Emenet Comunicaciones" class="sidebar-image">
-  </aside>
 
-  <!-- Panel derecho con el formulario -->
+  <!-- Panel izquierdo con el formulario -->
   <main class="login-main flex-column">
-
-    <!-- Logo -->
-    <div class="text-center mb-4 mt-n4">
-      <img src="assets/img/emenetLogo.png" alt="Emenet Logo" height="70">
-    </div>
 
     <div class="auth-card shadow-lg p-4 p-sm-5">
       <h3 class="text-center fw-bold mb-1">¡Bienvenido!</h3>
@@ -60,6 +51,7 @@
             - Combinar letras con caracteres.
           </div>
         </div>
+
 
         <!-- Campo: Confirmar Contraseña -->
         <div class="mb-4">
@@ -111,8 +103,17 @@
 
       </form>
 
-
       <ngx-sonner-toaster richColors position="top-center"></ngx-sonner-toaster>
     </div>
   </main>
+
+  <!-- Panel derecho con la imagen (visible solo en pantallas grandes) -->
+  <aside class="login-sidebar position-relative">
+    <div class="position-absolute w-100 top-0 d-flex justify-content-center pt-5" style="z-index: 10;">
+      <!-- Logo -->
+      <img src="assets/img/emenetLogo.png" alt="Emenet Logo" height="90">
+    </div>
+    <img src="assets/img/crear/emenet.webp" alt="Emenet Comunicaciones" class="sidebar-image">
+  </aside>
+
 </div>
