@@ -12,7 +12,9 @@
 
         <div *ngIf="numero_cliente.invalid && (numero_cliente.dirty || numero_cliente.touched)" class="mt-2 small text-danger">
           <div *ngIf="numero_cliente.errors?.['required']">Numero de cliente requerido</div>
+
           <div *ngIf="numero_cliente.errors?.['maxlength']">Numero de cliente no debe exceder 6 caracteres</div>
+          
           <div *ngIf="numero_cliente.errors?.['pattern']">Formato invalido.</div>
         </div>
       </div>
